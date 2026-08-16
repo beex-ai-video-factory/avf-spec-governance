@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-04 Event Integration",
+  "change_id": "CP-005",
+  "domain_specific_rationale": "Standardizing the event envelope with trace_id, span_id, correlation_id, and lowercase dotted regex resolves the catalog-to-schema conflict.",
+  "evidence_citations": "02_contracts/event-envelope.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry & Dotted Naming",
+  "residual_risk": "Event producers must adhere to avf.* naming format.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

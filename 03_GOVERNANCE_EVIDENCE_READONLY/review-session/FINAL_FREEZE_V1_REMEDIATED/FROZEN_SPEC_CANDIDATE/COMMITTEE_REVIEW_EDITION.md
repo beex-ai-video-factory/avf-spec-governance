@@ -1,0 +1,4 @@
+# AI VIDEO FACTORY — SPECIFICATION EDITION
+## Edition: v1.0.0 (Remediated Freeze Candidate)
+**STATUS:** REMEDIATED_CANDIDATE_FOR_FREEZE
+**BASELINE_VERSION:** 1.0.0-remediated-rc1

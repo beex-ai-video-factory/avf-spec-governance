@@ -1,0 +1,669 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avf.internal/schemas/v1/domain-entities.schema.json",
+  "title": "AVF Canonical Domain Entities",
+  "description": "Synthesized specification candidate v1.0.0 conforming to CP-001, CP-003, CP-004, CP-011",
+  "type": "object",
+  "$defs": {
+    "UUID": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F-]{36}$"
+    },
+    "ISODateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "SHA256Hash": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "Score": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0
+    },
+    "EntityVersion": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "Project": {
+      "type": "object",
+      "required": [
+        "project_id",
+        "title",
+        "status",
+        "entity_version",
+        "created_at",
+        "updated_at"
+      ],
+      "properties": {
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "DRAFT",
+            "ACTIVE",
+            "COMPLETED",
+            "ARCHIVED"
+          ]
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        },
+        "created_at": {
+          "$ref": "#/$defs/ISODateTime"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/ISODateTime"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Scene": {
+      "type": "object",
+      "required": [
+        "scene_id",
+        "project_id",
+        "sequence_number",
+        "title",
+        "entity_version"
+      ],
+      "properties": {
+        "scene_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "sequence_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "type": "string"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Shot": {
+      "type": "object",
+      "required": [
+        "shot_id",
+        "scene_id",
+        "sequence_number",
+        "active_version_id",
+        "entity_version"
+      ],
+      "properties": {
+        "shot_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "scene_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "sequence_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "active_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ShotVersion": {
+      "type": "object",
+      "required": [
+        "shot_version_id",
+        "shot_id",
+        "version_number",
+        "prompt_version_id",
+        "status",
+        "entity_version"
+      ],
+      "properties": {
+        "shot_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "shot_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "prompt_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "character_anchor_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          }
+        },
+        "style_anchor_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "GENERATING",
+            "QC_IN_PROGRESS",
+            "ACCEPTED",
+            "REJECTED"
+          ]
+        },
+        "active_take_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Character": {
+      "type": "object",
+      "required": [
+        "character_id",
+        "project_id",
+        "name",
+        "entity_version"
+      ],
+      "properties": {
+        "character_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "active_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CharacterVersion": {
+      "type": "object",
+      "required": [
+        "character_version_id",
+        "character_id",
+        "version_number",
+        "face_embedding_hash",
+        "entity_version"
+      ],
+      "properties": {
+        "character_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "character_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reference_asset_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/UUID"
+          }
+        },
+        "face_embedding_hash": {
+          "$ref": "#/$defs/SHA256Hash"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StyleProfile": {
+      "type": "object",
+      "required": [
+        "style_profile_id",
+        "project_id",
+        "name",
+        "entity_version"
+      ],
+      "properties": {
+        "style_profile_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "active_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "StyleVersion": {
+      "type": "object",
+      "required": [
+        "style_version_id",
+        "style_profile_id",
+        "version_number",
+        "style_descriptor_hash",
+        "entity_version"
+      ],
+      "properties": {
+        "style_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "style_profile_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "lora_weights_uri": {
+          "type": "string"
+        },
+        "style_descriptor_hash": {
+          "$ref": "#/$defs/SHA256Hash"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Asset": {
+      "type": "object",
+      "required": [
+        "asset_id",
+        "project_id",
+        "asset_type",
+        "entity_version"
+      ],
+      "properties": {
+        "asset_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "asset_type": {
+          "type": "string",
+          "enum": [
+            "IMAGE",
+            "VIDEO",
+            "AUDIO",
+            "LORA_WEIGHTS",
+            "LIPSYNC_MODEL"
+          ]
+        },
+        "active_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AssetVersion": {
+      "type": "object",
+      "required": [
+        "asset_version_id",
+        "asset_id",
+        "storage_uri",
+        "sha256_checksum",
+        "byte_size",
+        "entity_version"
+      ],
+      "properties": {
+        "asset_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "asset_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "version_number": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "storage_uri": {
+          "type": "string",
+          "format": "uri"
+        },
+        "sha256_checksum": {
+          "$ref": "#/$defs/SHA256Hash"
+        },
+        "byte_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "perceptual_hash": {
+          "type": "string"
+        },
+        "mime_type": {
+          "type": "string"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PromptVersion": {
+      "type": "object",
+      "required": [
+        "prompt_version_id",
+        "shot_id",
+        "raw_prompt",
+        "compiled_prompt",
+        "prompt_ast_hash",
+        "entity_version"
+      ],
+      "properties": {
+        "prompt_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "shot_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "raw_prompt": {
+          "type": "string"
+        },
+        "compiled_prompt": {
+          "type": "string"
+        },
+        "negative_prompt": {
+          "type": "string"
+        },
+        "prompt_ast_hash": {
+          "$ref": "#/$defs/SHA256Hash"
+        },
+        "target_provider": {
+          "type": "string"
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "GenerationJob": {
+      "type": "object",
+      "required": [
+        "job_id",
+        "shot_version_id",
+        "provider_id",
+        "idempotency_key",
+        "status",
+        "estimated_cost_usd",
+        "entity_version",
+        "attempt_index"
+      ],
+      "properties": {
+        "job_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "shot_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "provider_id": {
+          "type": "string"
+        },
+        "idempotency_key": {
+          "$ref": "#/$defs/SHA256Hash"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "QUEUED",
+            "RESERVED",
+            "RUNNING",
+            "COMPLETED",
+            "FAILED",
+            "RECONCILED"
+          ]
+        },
+        "estimated_cost_usd": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "actual_cost_usd": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "lease_worker_id": {
+          "type": "string"
+        },
+        "lease_expires_at": {
+          "$ref": "#/$defs/ISODateTime"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        },
+        "attempt_index": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "Take": {
+      "type": "object",
+      "required": [
+        "take_id",
+        "generation_job_id",
+        "media_asset_version_id",
+        "raw_media_sha256",
+        "status",
+        "entity_version"
+      ],
+      "properties": {
+        "take_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "generation_job_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "media_asset_version_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "raw_media_sha256": {
+          "$ref": "#/$defs/SHA256Hash"
+        },
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "resolution": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "RAW_INGESTED",
+            "QC_PENDING",
+            "ACCEPTED",
+            "REJECTED",
+            "SUPERSEDED"
+          ]
+        },
+        "qc_result_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "QCResult": {
+      "type": "object",
+      "required": [
+        "qc_result_id",
+        "take_id",
+        "overall_score",
+        "passed",
+        "visual_score",
+        "temporal_score",
+        "prompt_adherence_score",
+        "entity_version"
+      ],
+      "properties": {
+        "qc_result_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "take_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "overall_score": {
+          "$ref": "#/$defs/Score"
+        },
+        "visual_score": {
+          "$ref": "#/$defs/Score"
+        },
+        "temporal_score": {
+          "$ref": "#/$defs/Score"
+        },
+        "audio_sync_score": {
+          "$ref": "#/$defs/Score"
+        },
+        "prompt_adherence_score": {
+          "$ref": "#/$defs/Score"
+        },
+        "passed": {
+          "type": "boolean"
+        },
+        "defect_tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "remediation_action": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "RETRY_JITTER_SEED",
+            "ADJUST_GUIDANCE",
+            "MANUAL_REVIEW"
+          ]
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkflowRun": {
+      "type": "object",
+      "required": [
+        "workflow_run_id",
+        "project_id",
+        "status",
+        "entity_version"
+      ],
+      "properties": {
+        "workflow_run_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "IDLE",
+            "RUNNING",
+            "WAITING_HUMAN_APPROVAL",
+            "OVERRIDDEN_BY_OPERATOR",
+            "COMPLETED",
+            "FAILED",
+            "ABORTED"
+          ]
+        },
+        "current_step": {
+          "type": "string"
+        },
+        "error_envelope": {
+          "type": "object"
+        },
+        "entity_version": {
+          "$ref": "#/$defs/EntityVersion"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CostUsageRecord": {
+      "type": "object",
+      "required": [
+        "usage_id",
+        "project_id",
+        "job_id",
+        "provider_id",
+        "cost_usd",
+        "settled",
+        "timestamp_utc"
+      ],
+      "properties": {
+        "usage_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "project_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "job_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "provider_id": {
+          "type": "string"
+        },
+        "cost_usd": {
+          "type": "number",
+          "minimum": 0.0
+        },
+        "settled": {
+          "type": "boolean"
+        },
+        "reservation_id": {
+          "$ref": "#/$defs/UUID"
+        },
+        "timestamp_utc": {
+          "$ref": "#/$defs/ISODateTime"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

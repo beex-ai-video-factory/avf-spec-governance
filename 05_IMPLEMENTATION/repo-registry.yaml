@@ -1,0 +1,206 @@
+version: "1.0.0"
+project: "AI Video Factory"
+total_repos: 15
+status: "INITIALIZED_READY_FOR_IMPLEMENTATION"
+
+repos:
+  - repo_id: "R01"
+    name: "R01_contracts"
+    display_name: "Contracts & Typed Schemas"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md"
+    primary_contracts:
+      - "02_contracts/domain-entities.schema.json"
+      - "02_contracts/event-envelope.schema.json"
+      - "02_contracts/provider-request.schema.json"
+      - "02_contracts/provider-result.schema.json"
+      - "02_contracts/browser-command.schema.json"
+      - "02_contracts/flow-execution-result.schema.json"
+    dependencies: []
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R14", "R15"]
+    status: "NOT_STARTED"
+    gate_predecessors: []
+    expected_artifact: "npm/ts contract package with JSON schemas, generated TS types, and validation test fixtures"
+
+  - repo_id: "R02"
+    name: "R02_core_state"
+    display_name: "Core State & Persistence Engine"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+      - "event-envelope.schema.json"
+    dependencies: ["R01", "R14"]
+    forbidden_dependencies: ["R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R15"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01"]
+    expected_artifact: "PostgreSQL schema migrations, Prisma/Drizzle models, State Machine transition engine, Idempotency store"
+
+  - repo_id: "R03"
+    name: "R03_creative"
+    display_name: "Creative & Script Generation Engine"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R03_CREATIVE.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+    dependencies: ["R01", "R02", "R14"]
+    forbidden_dependencies: ["R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R15", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R02"]
+    expected_artifact: "LLM-assisted story/scene decomposition service with validation gates"
+
+  - repo_id: "R04"
+    name: "R04_assets_continuity"
+    display_name: "Assets & Character Continuity Service"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R04_ASSETS_CONTINUITY.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+    dependencies: ["R01", "R02", "R14"]
+    forbidden_dependencies: ["R03", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R15", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R02"]
+    expected_artifact: "Asset catalog, character reference management, continuity token injection"
+
+  - repo_id: "R05"
+    name: "R05_prompt_compiler"
+    display_name: "Provider-Aware Prompt Compiler"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R05_PROMPT_COMPILER.md"
+    primary_contracts:
+      - "provider-request.schema.json"
+      - "domain-entities.schema.json"
+    dependencies: ["R01", "R02", "R04", "R14"]
+    forbidden_dependencies: ["R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R15", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R04"]
+    expected_artifact: "Prompt compiler template engine with dialect transformations and safety guards"
+
+  - repo_id: "R06"
+    name: "R06_workflow"
+    display_name: "Temporal Workflow Orchestrator"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+      - "event-envelope.schema.json"
+      - "provider-request.schema.json"
+    dependencies: ["R01", "R02", "R03", "R04", "R05", "R07", "R08", "R11", "R12", "R14"]
+    forbidden_dependencies: ["R09", "R10", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R02", "R07", "R08"]
+    expected_artifact: "Temporal workflow definitions (SingleShot, MultiShot, RenderPipeline), retry policies, activities"
+
+  - repo_id: "R07"
+    name: "R07_provider_sdk"
+    display_name: "Provider Neutral SDK & FakeProvider"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R07_PROVIDER_SDK.md"
+    primary_contracts:
+      - "provider-request.schema.json"
+      - "provider-result.schema.json"
+    dependencies: ["R01", "R14"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R08", "R09", "R10", "R11", "R12", "R13", "R15", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01"]
+    expected_artifact: "VideoProvider interface, capability matrix parser, error normalizer, FakeVideoProvider mock implementation"
+
+  - repo_id: "R08"
+    name: "R08_google_flow_adapter"
+    display_name: "Google Flow Provider Adapter"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md"
+    primary_contracts:
+      - "provider-request.schema.json"
+      - "provider-result.schema.json"
+      - "browser-command.schema.json"
+      - "flow-execution-result.schema.json"
+    dependencies: ["R01", "R07", "R14"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R07"]
+    expected_artifact: "Google Flow adapter implementing VideoProvider with FlowExecutionPort abstraction"
+
+  - repo_id: "R09"
+    name: "R09_browser_worker"
+    display_name: "Track A Browser Automation Worker"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md"
+    primary_contracts:
+      - "browser-command.schema.json"
+      - "flow-execution-result.schema.json"
+    dependencies: ["R01", "R14"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R07", "R08", "R10", "R11", "R12", "R13", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R08"]
+    expected_artifact: "Playwright/CDP browser worker implementing 10-operation FlowExecutionPort with multi-tier selector safety"
+
+  - repo_id: "R10"
+    name: "R10_flowkit_bridge"
+    display_name: "Track B Direct FlowKit Bridge"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R10_FLOWKIT_BRIDGE.md"
+    primary_contracts:
+      - "browser-command.schema.json"
+      - "flow-execution-result.schema.json"
+    dependencies: ["R01", "R14"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R11", "R12", "R13", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R08"]
+    expected_artifact: "Direct HTTP/WebSocket protocol client implementing 10-operation FlowExecutionPort"
+
+  - repo_id: "R11"
+    name: "R11_qc"
+    display_name: "Quality Control & Validation Service"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R11_QC.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+    dependencies: ["R01", "R14"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R12", "R13", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01"]
+    expected_artifact: "Technical QC (FFprobe container & stream analyzer) + Semantic QC (LLM/Vision assessment) module"
+
+  - repo_id: "R12"
+    name: "R12_media"
+    display_name: "Media Processing & Assembly Service"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R12_MEDIA.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+    dependencies: ["R01", "R14"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R13", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01"]
+    expected_artifact: "FFmpeg stitching, audio overlay, transcoding, packaging service"
+
+  - repo_id: "R13"
+    name: "R13_operator_console"
+    display_name: "Human-in-the-Loop Operator Console"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R13_OPERATOR_CONSOLE.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+      - "event-envelope.schema.json"
+    dependencies: ["R01", "R02", "R06", "R14"]
+    forbidden_dependencies: ["R03", "R04", "R05", "R07", "R08", "R09", "R10", "R11", "R12", "R15", "Direct DB", "Worker Internals"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R02", "R06"]
+    expected_artifact: "Operator UI web application for human approval gates, generation inspection, error triage"
+
+  - repo_id: "R14"
+    name: "R14_platform_observability"
+    display_name: "Observability, Telemetry & Security"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md"
+    primary_contracts:
+      - "event-envelope.schema.json"
+    dependencies: ["R01"]
+    forbidden_dependencies: ["R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R15", "Direct DB"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01"]
+    expected_artifact: "OpenTelemetry instrumentation library, log redaction sanitizer, Prometheus metrics exporter"
+
+  - repo_id: "R15"
+    name: "R15_integration_harness"
+    display_name: "End-to-End Integration & Scenario Test Harness"
+    frozen_blueprint_path: "01_FROZEN_RELEASE/v1.0.0/FROZEN_SPEC_CANDIDATE/03_repo_blueprints/R15_INTEGRATION_HARNESS.md"
+    primary_contracts:
+      - "domain-entities.schema.json"
+      - "event-envelope.schema.json"
+      - "provider-request.schema.json"
+      - "provider-result.schema.json"
+      - "browser-command.schema.json"
+      - "flow-execution-result.schema.json"
+    dependencies: ["R01", "R02", "R03", "R04", "R05", "R06", "R07", "R08", "R09", "R10", "R11", "R12", "R13", "R14"]
+    forbidden_dependencies: ["Direct Production DB Mutation"]
+    status: "NOT_STARTED"
+    gate_predecessors: ["R01", "R02", "R06", "R07", "R08"]
+    expected_artifact: "Comprehensive E2E simulation harness, chaos/fault-injection tests, offline scenario runner"

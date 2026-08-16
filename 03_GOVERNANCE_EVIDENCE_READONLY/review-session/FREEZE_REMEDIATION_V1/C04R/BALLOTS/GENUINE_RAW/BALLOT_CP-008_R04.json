@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-008",
+  "proposal_title": "Idempotency Key Specification & Deterministic Construction",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Contracts perspective, defining a deterministic idempotency key derivation formula SHA256(shot_version_id + prompt_version_id + provider_id + attempt_index + parameters_hash) and enforcing idempotency_key (minLength: 16) as a mandatory property in domain-entities.schema.json#//GenerationJob and provider-request.schema.json eliminates race conditions and duplicate submissions at the contract interface boundary. Standardizing this requirement across API requests and database entities guarantees idempotency invariants (INV-008) without relying on vendor-specific deduplication logic.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 303, 330-333 (GenerationJob idempotency_key property and required constraint)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/provider-request.schema.json:lines 12, 59-62 (ProviderRequest idempotency_key property and required constraint)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 39-41 (Section 11: Idempotency & Concurrency)"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State), CAP-03 (Provider Abstraction), and CAP-12 (Autonomous Error Recovery).",
+  "residual_risk": "Inconsistent hashing of parameters_hash due to non-canonical JSON key ordering could cause unintended idempotency mismatches. Mitigated by mandating RFC 8785 canonical JSON sorting before SHA256 computation.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

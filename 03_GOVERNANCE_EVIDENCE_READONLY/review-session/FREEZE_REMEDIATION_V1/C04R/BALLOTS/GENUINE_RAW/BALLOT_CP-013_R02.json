@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-013",
+  "proposal_title": "Two-Stage Automated QC Pipeline & Verification Metrics",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "Separating QC into Stage 1 (deterministic container validation via FFprobe: codec, moov atom, framerate, duration) and Stage 2 (visual/continuity evaluation) is an essential architectural reliability pattern. Rejecting corrupted, truncated, or incompatible video streams immediately in Stage 1 saves expensive GPU/model inference resources and avoids propagating poison media payloads into downstream transcoding and assembly pipelines. The structured QC scoring schema enables deterministic workflow retry decisions without human intervention.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R11_QC.md:lines 8-26",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 25-27, 39-41",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 8-26"
+  ],
+  "capability_impact": "Preserves CAP-07 (Quality Control Pipeline) and CAP-12 (Fault Isolation and Quality Gating), ensuring output reliability across automated batches.",
+  "residual_risk": "QC worker throughput bottlenecks during high-volume batch runs. Mitigated by horizontal scaling of stateless R11 QC workers and isolated processing queues for Stage 1 vs Stage 2.",
+  "timestamp": "2026-08-15T21:29:45+07:00"
+}

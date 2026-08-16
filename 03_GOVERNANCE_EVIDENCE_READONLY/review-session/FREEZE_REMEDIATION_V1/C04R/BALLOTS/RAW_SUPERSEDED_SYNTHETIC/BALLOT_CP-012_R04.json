@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-06 Assets & Continuity",
+  "change_id": "CP-012",
+  "domain_specific_rationale": "Asset continuity tracking enforces character reference embedding consistency across scene cuts.",
+  "evidence_citations": "03_repo_blueprints/R04_ASSETS_CONTINUITY.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Asset Versioning & Character/Style Continuity Scoring Invariants",
+  "residual_risk": "Continuity embeddings must be indexed.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

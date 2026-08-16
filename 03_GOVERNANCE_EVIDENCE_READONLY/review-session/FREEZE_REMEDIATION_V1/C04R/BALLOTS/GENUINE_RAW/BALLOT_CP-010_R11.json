@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-010",
+  "proposal_title": "Complete 15-Repository Acyclic Dependency DAG & Forbidden Matrix",
+  "voter_role": "R11",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As Platform Specialist, maintaining a strictly acyclic dependency graph across the 15 polyrepo services is vital for CI/CD parallelization, modular builds, container containerization, and blast-radius containment. The prior specification lacked explicit cross-cutting layer definitions for R14 (Platform Observability) and R15 (Integration Harness), leading to ambiguous import boundaries and potential circular references. CP-010 establishes a clear 6-tier architectural layering model (Layer 0 Contracts through Layer 5 Workflow/Console) along with an explicit Allowed vs Forbidden matrix for every repository. It codifies platform-level invariants prohibiting direct database access from peripheral services, enforcing FlowExecutionPort isolation, and mathematically proving that the dependency graph is 100% acyclic.",
+  "evidence_citations": [
+    "04_integration/DEPENDENCY_GRAPH.md:L7-L22 (Architectural Layers Layer 0 to Layer 5 + Cross-Cutting R14/R15)",
+    "04_integration/DEPENDENCY_GRAPH.md:L24-L43 (15-Repository Complete Dependency & Forbidden Import Matrix)",
+    "04_integration/DEPENDENCY_GRAPH.md:L46-L50 (Architectural invariants: Acyclic DAG, Database Encapsulation, Port Isolation)",
+    "03_repo_blueprints/R01_CONTRACTS.md through R15_INTEGRATION_HARNESS.md:Sections 7 & 8 (Explicit Allowed and Forbidden Dependencies per blueprint)"
+  ],
+  "capability_impact": "Enforces polyrepo architectural boundaries and independent deployability across all 15 repositories, securing CAP-04, CAP-14, and platform build isolation.",
+  "residual_risk": "Implementation agents might introduce indirect transitively bundled libraries that violate layer boundaries. Mitigated by CI static dependency analysis and import linters configured against DEPENDENCY_GRAPH.md.",
+  "timestamp": "2026-08-15T21:29:30+07:00"
+}

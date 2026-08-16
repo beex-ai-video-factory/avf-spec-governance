@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-005",
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry Distributed Tracing & Topic Naming",
+  "voter_role": "R14",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "Standardizing the event envelope to include explicit OpenTelemetry trace propagation headers (trace_id, span_id), correlation context (correlation_id, workflow_run_id, aggregate_id, aggregate_version), and strict lowercase dotted event naming (^avf\\.[a-z0-9_-]+(\\.[a-z0-9_-]+)+$) is essential for cross-service distributed tracing across all asynchronous event boundaries in AVF. It guarantees seamless trace context propagation from ingestion through workflow, execution, QC, and media processing without trace fragmentation or dropped correlation context.",
+  "evidence_citations": "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:L13-16,L48-50,L74; 02_contracts/event-envelope.schema.json; 02_contracts/CONTRACTS_OVERVIEW.md; 04_integration/COMMAND_EVENT_CATALOG.md; review-session/FREEZE_REMEDIATION_V1/C03R/SOL_04_EVENT_ENVELOPE_STANDARDS.md",
+  "capability_impact": "Preserves and strengthens CAP-14 (Platform Observability) and CAP-04 (Event-Driven Integration) by ensuring standard W3C/OTel distributed trace propagation and consistent metric tagging.",
+  "residual_risk": "Ingesting high-throughput events into OpenTelemetry collectors requires proper sampling policies and collector buffer sizing to prevent telemetry pipeline congestion or dropped spans. Mitigate with bounded in-memory buffering and dropped-span metrics in R14 SDK.",
+  "timestamp": "2026-08-15T21:28:00+07:00"
+}

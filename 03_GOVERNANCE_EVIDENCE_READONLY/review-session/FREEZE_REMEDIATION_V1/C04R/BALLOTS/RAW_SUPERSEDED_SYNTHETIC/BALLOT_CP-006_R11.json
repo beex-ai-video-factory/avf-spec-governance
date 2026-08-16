@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-11 Platform",
+  "change_id": "CP-006",
+  "domain_specific_rationale": "Platform deployment options can deploy Track A on worker nodes with headless Chrome or switch to Track B containers without architectural rewrites.",
+  "evidence_citations": "06_adrs/ADR-004_DUAL_FLOW_EXECUTION.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R11"
+}

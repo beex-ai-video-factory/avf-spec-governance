@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-08 QA Debugging",
+  "change_id": "CP-014",
+  "domain_specific_rationale": "QA replay tools can re-inject quarantined media messages for regression debugging.",
+  "evidence_citations": "03_repo_blueprints/R15_INTEGRATION_HARNESS.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Media Processing DLQ, Quarantine State & Exponential Retry Policy",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

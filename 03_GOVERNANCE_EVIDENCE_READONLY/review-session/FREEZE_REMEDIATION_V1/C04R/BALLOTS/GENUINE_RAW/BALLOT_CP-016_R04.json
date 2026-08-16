@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-016",
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Contracts Architecture and DDD perspective, CP-016 formally ratifies the deletion of track_mode from the canonical GenerationJob entity schema in domain-entities.schema.json. The execution track (e.g. Track A Playwright vs Track A Extension vs Track B FlowKit) is an operational worker dispatch concern, not an intrinsic domain entity attribute. Embedding worker dispatch modes inside canonical domain entities creates leaky abstractions and schema coupling. Removing track_mode restores contract purity and adheres to clean architecture principles.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 294-390 (GenerationJob schema definition without track_mode)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 7-17 (Section 1: Contract Inventory)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/API_COMPATIBILITY_POLICY.md:lines 7-14"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State) and CAP-18 (Track A / Track B Port Equivalence).",
+  "residual_risk": "Legacy services attempting to persist track_mode will fail JSON schema validation under additionalProperties: false. Mitigated by updating all client contracts and integration test fixtures.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

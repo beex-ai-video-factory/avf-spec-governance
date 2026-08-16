@@ -1,0 +1,69 @@
+version: "1.0.0"
+project: "AI Video Factory"
+
+critical_path_sequence:
+  - step: 1
+    gate: "GATE_0_CONTRACTS"
+    target_repo: "R01_contracts"
+    prerequisites: []
+    validation: "JSON Schema validation, type generation, positive/negative fixture suite passes"
+
+  - step: 2
+    gate: "GATE_1_CORE_STATE"
+    target_repo: "R02_core_state"
+    prerequisites: ["GATE_0_CONTRACTS"]
+    validation: "Database migrations apply cleanly, entity CRUD passes, state transitions assert invariants"
+
+  - step: 3
+    gate: "GATE_2_PROVIDER_SDK_MOCK"
+    target_repo: "R07_provider_sdk"
+    prerequisites: ["GATE_0_CONTRACTS"]
+    validation: "VideoProvider interface defined, FakeVideoProvider mock handles simulated generation cycles"
+
+  - step: 4
+    gate: "GATE_3_WORKFLOW_SINGLE_SHOT"
+    target_repo: "R06_workflow"
+    prerequisites: ["GATE_1_CORE_STATE", "GATE_2_PROVIDER_SDK_MOCK"]
+    validation: "Temporal single-shot workflow executes deterministically against FakeVideoProvider"
+
+  - step: 5
+    gate: "GATE_4_GOOGLE_FLOW_ADAPTER"
+    target_repo: "R08_google_flow_adapter"
+    prerequisites: ["GATE_0_CONTRACTS", "GATE_2_PROVIDER_SDK_MOCK"]
+    validation: "FlowExecutionPort abstraction validates against mocked port"
+
+  - step: 6
+    gate: "GATE_5_FLOW_EXECUTION_TRACKS"
+    target_repos: ["R09_browser_worker", "R10_flowkit_bridge"]
+    prerequisites: ["GATE_4_GOOGLE_FLOW_ADAPTER"]
+    validation: "Phase-0 benchmark comparative run executes Track A and Track B against 10-operation port"
+
+  - step: 7
+    gate: "GATE_6_MEDIA_PIPELINE"
+    target_repos: ["R11_qc", "R12_media"]
+    prerequisites: ["GATE_0_CONTRACTS"]
+    validation: "Technical QC and FFmpeg assembly pipeline functional"
+
+  - step: 8
+    gate: "GATE_7_CREATIVE_PROMPTING"
+    target_repos: ["R03_creative", "R04_assets_continuity", "R05_prompt_compiler"]
+    prerequisites: ["GATE_1_CORE_STATE"]
+    validation: "Multi-shot scene decomposition and prompt compilation with dialect safety"
+
+  - step: 9
+    gate: "GATE_8_OPERATOR_CONSOLE"
+    target_repo: "R13_operator_console"
+    prerequisites: ["GATE_1_CORE_STATE", "GATE_3_WORKFLOW_SINGLE_SHOT"]
+    validation: "Operator UI allows human review, approval/rejection, DLQ replay"
+
+  - step: 10
+    gate: "GATE_9_E2E_INTEGRATION"
+    target_repo: "R15_integration_harness"
+    prerequisites: ["GATE_0_CONTRACTS", "GATE_1_CORE_STATE", "GATE_3_WORKFLOW_SINGLE_SHOT", "GATE_5_FLOW_EXECUTION_TRACKS", "GATE_6_MEDIA_PIPELINE", "GATE_7_CREATIVE_PROMPTING", "GATE_8_OPERATOR_CONSOLE"]
+    validation: "End-to-end multi-shot video generation executes completely in local dev environment"
+
+cross_cutting_layers:
+  observability:
+    repo: "R14_platform_observability"
+    prerequisite: "GATE_0_CONTRACTS"
+    integration: "Can be integrated across all repos continuously"

@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-022",
+  "proposal_title": "JSON Schema Root Packaging & Fragment Entrypoint Documentation",
+  "voter_role": "R10",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As the Developer Experience Architect with mandatory signoff authority, schema usability, CLI tooling ergonomics, and deterministic automated validation are fundamental responsibilities. Packaging domain-entities.schema.json as a definitions bundle without documenting root validation semantics caused immediate developer and agent confusion (TECH-017 / M05), as standard validator tools (ajv validate, jsonschema, pydantic) fail when instances of specific aggregates (Project, ShotVersion, GenerationJob) are validated directly against the un-fragmented schema root. CP-022 resolves this DX barrier by formally specifying fragment entrypoint syntax (#/$defs/Project, #/$defs/ShotVersion, #/$defs/Take, etc.) and root packaging behavior in 02_contracts/CONTRACTS_OVERVIEW.md, while documenting exact CLI, Node.js, and Python code snippets for multi-schema fragment resolution. This ensures zero friction for developers writing integration test fixtures and autonomous agents building domain validation layers.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 15-55",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/04_integration/TEST_STRATEGY.md:lines 45-80",
+    "review-session/FREEZE_REMEDIATION_V1/REMEDIATION_FINDING_REGISTER.md:lines 324-335"
+  ],
+  "capability_impact": "Strengthens CAP-02 (Canonical State & Data Consistency) and CAP-16 (Hermetic Simulation & Testing) by providing standardized, frictionless schema validation mechanics across all 15 repositories and client SDKs.",
+  "residual_risk": "Certain older schema validator libraries may struggle with nested dynamic $ref fragment resolution across bundled JSON schemas. Mitigated by providing pre-bundled dereferenced schema exports in avf-contracts package distribution and documenting standard Ajv/Pydantic configuration templates.",
+  "timestamp": "2026-08-15T21:28:45+07:00"
+}

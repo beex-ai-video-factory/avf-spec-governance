@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-021",
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "voter_role": "R01",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Domain Ubiquitous Language and Architecture perspective, all handoff documentation, agent build packets, and integration indices must strictly reflect the ratified domain model and normative blueprints. Phantom concepts or unratified subsystems—such as fabricated SecretEnclave hardware modules, non-existent R10 gRPC endpoints, or unvoted R13 WebSocket server claims—create severe domain ambiguity, erode developer trust, and lead autonomous coding agents to generate divergent implementations. CP-021 purges these unbacked claims and establishes exact 1:1 fidelity between handoff artifacts and normative repository blueprints.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/09_agent_packets/AGENT_BUILD_PACKET_INDEX.md:lines 1-24",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/04_integration/DEPENDENCY_GRAPH.md:lines 1-50",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 1-58",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R10_FLOWKIT_BRIDGE.md:lines 1-58",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R13_OPERATOR_CONSOLE.md:lines 1-58"
+  ],
+  "capability_impact": "Guarantees domain consistency and contract adherence across all system capabilities (CAP-01 through CAP-12), ensuring autonomous agent code generation remains strictly within normative architectural boundaries.",
+  "residual_risk": "Future requirements for advanced hardware security modules or real-time streaming sockets may be requested. Mitigated by formal Council change proposal procedures ensuring any architectural expansions undergo full multi-role review and ratification.",
+  "timestamp": "2026-08-15T21:27:54+07:00"
+}

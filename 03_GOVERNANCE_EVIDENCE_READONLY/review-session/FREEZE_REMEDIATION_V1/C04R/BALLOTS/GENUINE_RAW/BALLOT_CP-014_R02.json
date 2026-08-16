@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-014",
+  "proposal_title": "Media Processing DLQ, Quarantine State & Exponential Retry Policy",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "Media processing operations (FFmpeg muxing, transcoding, filter graph rendering) are inherently vulnerable to malformed video frames and process crashes. Incorporating a dedicated Dead Letter Queue (DLQ), explicit quarantine state isolation, and jittered exponential retry policies prevents poison tasks from causing infinite retry thrashing or crashing the entire media worker cluster. Isolating failed tasks into QUARANTINE guarantees zero data loss and allows post-incident debugging without blocking regular production throughput.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R12_MEDIA.md:lines 8-26, 36-38",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 27, 41",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 36-38"
+  ],
+  "capability_impact": "Directly hardens CAP-08 (Media Processing Pipeline) and CAP-12 (Autonomous Error Recovery and Fault Isolation).",
+  "residual_risk": "Quarantine storage accumulation if broken media artifacts remain unpurged. Mitigated by automated retention TTL policies on quarantine S3/GCS buckets and alert thresholds configured in R14.",
+  "timestamp": "2026-08-15T21:29:50+07:00"
+}

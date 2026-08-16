@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-016",
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "voter_role": "R01",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Domain-Driven Design perspective, domain entities must encapsulate core business invariants and lifecycle state rather than low-level infrastructure dispatch mechanisms. The attribute track_mode represents an operational execution routing choice (such as browser extension worker versus headless Playwright worker versus API bridge). Embedding track_mode directly in the canonical GenerationJob entity leaked operational worker plumbing into the domain model. Formally deleting track_mode from domain-entities.schema.json and retaining operational dispatch routing within execution envelopes (e.g. FlowExecutionPort and ProviderRequest contracts) restores clean bounded context separation and purges infrastructure pollution from the domain core.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 294-390",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 57-83",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26"
+  ],
+  "capability_impact": "Directly preserves CAP-01 (Canonical Core State Management) by ensuring domain entity definitions remain strictly focused on business state and lineage without infrastructure dispatch contamination.",
+  "residual_risk": "Workflow orchestrators or provider adapters expecting track_mode on the domain entity could experience deserialization mismatches if not updated. Mitigated by defining flow_track in operational execution contracts (flow-execution-result, provider-request) and updating R06 Workflow to pass routing options dynamically.",
+  "timestamp": "2026-08-15T21:27:50+07:00"
+}

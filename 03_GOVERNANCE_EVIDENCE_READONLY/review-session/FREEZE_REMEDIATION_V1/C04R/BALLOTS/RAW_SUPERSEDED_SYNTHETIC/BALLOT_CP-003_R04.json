@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-18 Port Equivalence",
+  "change_id": "CP-003",
+  "domain_specific_rationale": "Eliminating unrestricted additionalProperties on params ensures machine-verifiable contract validation for all browser worker commands and responses.",
+  "evidence_citations": "02_contracts/browser-command.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

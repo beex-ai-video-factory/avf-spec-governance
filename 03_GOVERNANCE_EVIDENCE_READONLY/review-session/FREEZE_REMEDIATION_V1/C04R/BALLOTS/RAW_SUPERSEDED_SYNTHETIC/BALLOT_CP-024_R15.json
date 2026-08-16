@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Forensic Trustworthiness",
+  "change_id": "CP-024",
+  "domain_specific_rationale": "Independent external auditors can run python3 verify_package.py with zero setup to verify freeze integrity.",
+  "evidence_citations": "verify_package.py",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Deterministic Package Verification Tooling (verify_package.py)",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R15"
+}

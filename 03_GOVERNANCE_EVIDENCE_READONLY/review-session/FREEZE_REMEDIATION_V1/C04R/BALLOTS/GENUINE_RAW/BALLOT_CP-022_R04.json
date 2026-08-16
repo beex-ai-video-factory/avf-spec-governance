@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-022",
+  "proposal_title": "JSON Schema Root Packaging & Fragment Entrypoint Documentation",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Schema Packaging and Tooling Conformance perspective, CP-022 resolves schema validation ambiguity by documenting that domain-entities.schema.json functions as a multi-entity schema package where individual entity definitions reside under root / and are consumed via fragment entrypoints (e.g. domain-entities.schema.json#//Project, domain-entities.schema.json#//GenerationJob). Formally documenting these fragment entrypoints in CONTRACTS_OVERVIEW.md Section 2 guarantees consistent behavior across JSON Schema draft-07 validators, TypeScript interface generators (json-schema-to-typescript), and consumer-driven contract test harnesses.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 19-28 (Section 2: Schema Packaging & Fragment Entrypoint Conventions)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 1-2",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/API_COMPATIBILITY_POLICY.md:lines 22-25"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State) and CAP-17 (Developer Experience & Contract Tooling).",
+  "residual_risk": "Tooling lacking JSON pointer fragment support might attempt root object validation. Mitigated by standardizing on compliant Draft-07 validators and publishing pre-compiled TypeScript SDKs from R01.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

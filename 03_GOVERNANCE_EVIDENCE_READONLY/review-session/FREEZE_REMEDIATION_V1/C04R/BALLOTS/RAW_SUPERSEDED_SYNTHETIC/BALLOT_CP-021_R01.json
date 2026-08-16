@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Domain Alignment",
+  "change_id": "CP-021",
+  "domain_specific_rationale": "All 15 build packets align with domain architecture without introducing rogue communication protocols.",
+  "evidence_citations": "03_repo_blueprints/",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R01"
+}

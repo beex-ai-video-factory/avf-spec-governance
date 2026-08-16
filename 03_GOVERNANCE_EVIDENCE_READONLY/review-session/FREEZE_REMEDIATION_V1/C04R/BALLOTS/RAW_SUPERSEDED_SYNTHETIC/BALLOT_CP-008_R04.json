@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-03 Contracts",
+  "change_id": "CP-008",
+  "domain_specific_rationale": "Contracts require idempotency_key on all job submission requests and provider adapter interfaces.",
+  "evidence_citations": "02_contracts/provider-request.schema.json",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Idempotency Key Specification & Deterministic Construction",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

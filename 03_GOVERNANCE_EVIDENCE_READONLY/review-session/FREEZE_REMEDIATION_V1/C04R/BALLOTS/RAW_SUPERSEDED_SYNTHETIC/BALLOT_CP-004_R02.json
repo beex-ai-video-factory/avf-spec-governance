@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-12 Autonomous Recovery",
+  "change_id": "CP-004",
+  "domain_specific_rationale": "Strategic retry categories (TRANSIENT, PERMANENT, POLICY_BLOCKED, RESOURCE_EXHAUSTED) allow the workflow retry engine to make deterministic backoff decisions without brittle string parsing.",
+  "evidence_citations": "02_contracts/CONTRACTS_OVERVIEW.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-009",
+  "proposal_title": "Two-Phase Credit Settlement Protocol",
+  "voter_role": "R14",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From an observability and cost-tracking perspective, the two-phase credit settlement protocol (Phase 1 reservation upon queueing, Phase 2 settlement upon terminal execution/QC completion or release on failure) provides deterministic financial lifecycle states that can be tracked with OTel metrics (credit.reserved, credit.settled, credit.released, credit.refunded). Correlating credit transactions with generation_job_id, shot_id, and trace_id enables precise real-time cost attribution, financial reconciliation dashboards, and alerting on unreleased reservations or budget anomalies.",
+  "evidence_citations": "01_master/DATA_MODEL.md; 03_repo_blueprints/R02_CORE_STATE.md:L19,L52,L83-90; 03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:L74,L94-98",
+  "capability_impact": "Supports CAP-14 (Platform Observability) cost tracking and preserves CAP-02 (Deterministic State Persistence) and CAP-08 (Resource/Cost Accounting).",
+  "residual_risk": "Unreleased reservations due to orphaned jobs or aborted workflows could skew credit metrics and billing analytics if not monitored. Mitigate with reservation TTL alerts, stuck-job metric counters, and automated reconciliation sweeps monitored by R14 dashboards.",
+  "timestamp": "2026-08-15T21:28:00+07:00"
+}

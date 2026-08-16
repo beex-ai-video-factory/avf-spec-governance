@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 Architecture Modularity",
+  "change_id": "CP-010",
+  "domain_specific_rationale": "The rebuilt DAG codifies exact architectural layers and eliminates circularities across all 15 repositories.",
+  "evidence_citations": "04_integration/DEPENDENCY_GRAPH.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Complete 15-Repository Acyclic Dependency DAG & Forbidden Matrix",
+  "residual_risk": "CI must enforce dependency rules.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R01"
+}

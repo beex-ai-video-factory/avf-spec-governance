@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-007",
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "voter_role": "R07",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "CP-007 eliminates fictional, unverified claims of a hardware SecretEnclave and replaces them with an implementable, defense-in-depth security model. It mandates OS/Vault runtime secret injection at process startup (disallowing hardcoded credentials), in-memory credential management with explicit Node.js buffer wiping (buf.fill(0)) to prevent memory scraping from GC heap dumps, and automatic redaction of Authorization, Cookie, set-cookie, and bearer tokens across traces, logs, and metrics via R14 Observability SDK. It also formalizes chmod 700 protection on Chrome user data directories and OS-pipe Native Messaging isolation. This is essential for protecting Google/browser session material and provider API keys across execution boundaries.",
+  "evidence_citations": [
+    "04_integration/SECURITY_MODEL.md:Lines 7-18 (Trust Boundaries 1-4: VPC isolation, worker chmod 700, in-memory buf.fill(0), telemetry redaction)",
+    "06_adrs/ADR-007_BROWSER_SECURITY.md:Lines 1-20 (Anti-abuse containment and security challenge policy)",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md:Section 13 (Credential Hygiene & buffer zeroing)",
+    "03_repo_blueprints/R09_BROWSER_WORKER.md:Section 13 (Local execution zone isolation)",
+    "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:Section 13 (Mandatory token masking and redaction filters)"
+  ],
+  "capability_impact": "Directly implements and hardens CAP-07 (Security & Isolation). Establishes clear trust boundaries separating core workflow services from privileged local execution zones without degrading video generation throughput.",
+  "residual_risk": "Node.js string conversions of secrets may leave immutable, unmanaged string copies in V8 heap memory before buffer zeroing occurs. Mitigation: R07 Provider SDK and R09 Browser Worker must enforce handling tokens strictly as raw Uint8Array/Buffer instances without intermediate UTF-8 string casting. CI suites must enforce automated memory leakage and redaction regression tests.",
+  "timestamp": "2026-08-15T21:28:10+07:00"
+}

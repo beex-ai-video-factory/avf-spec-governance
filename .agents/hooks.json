@@ -1,0 +1,44 @@
+{
+  "version": "1.0.0",
+  "description": "Antigravity Workspace Hooks for AI Video Factory Immutability & Safety",
+  "hooks": {
+    "pre_tool_execution": [
+      {
+        "name": "frozen_baseline_write_guard",
+        "description": "Prevents agent file write/delete operations from mutating frozen releases, source kits, governance evidence, or archives",
+        "command": ".agents/scripts/guard.sh \"$TARGET_FILE\"",
+        "target_tools": [
+          "write_to_file",
+          "replace_file_content",
+          "multi_replace_file_content",
+          "run_command"
+        ],
+        "fail_action": "BLOCK"
+      }
+    ],
+    "post_tool_execution": [
+      {
+        "name": "post_modification_linter",
+        "description": "Lightweight sanity check on modified files within 05_IMPLEMENTATION",
+        "target_paths": [
+          "05_IMPLEMENTATION/**"
+        ],
+        "fail_action": "WARN"
+      }
+    ],
+    "pre_agent_done": [
+      {
+        "name": "dod_gate_check",
+        "description": "Enforces Definition of Done checklist before completing implementation goals",
+        "command": "04_TOOLING/validation/verify_no_frozen_mutation.sh",
+        "fail_action": "BLOCK"
+      }
+    ]
+  },
+  "safety_invariants": {
+    "allow_auto_approve_destructive_commands": false,
+    "allow_paid_provider_calls": false,
+    "allow_captcha_bypasses": false,
+    "fallback_protection": "OS_POSIX_READONLY_PERMISSIONS"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-007",
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "voter_role": "R15",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As Red Team Specialist with mandatory sign-off authority, CP-007 replaces ambiguous cryptographic claims ('SecretEnclave') with practical, auditable, and testable defense-in-depth controls. From an adversarial penetration perspective, the primary attack surfaces in browser-based automation are memory dump extraction, accidental log harvesting, and local profile theft. By mandating OS-level credential injection at startup, immediate in-memory Buffer zeroing (buf.fill(0)), telemetry redaction of sensitive HTTP headers (Authorization, Cookie, set-cookie), and chmod 700 isolation on Chrome user profiles, this change significantly reduces secret exposure risk across all worker nodes.",
+  "evidence_citations": [
+    "04_integration/SECURITY_MODEL.md:L7-L18",
+    "03_repo_blueprints/R09_BROWSER_WORKER.md:L45-L47",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md",
+    "06_adrs/ADR-007_BROWSER_SECURITY.md:L1-L20"
+  ],
+  "capability_impact": "Preserves and reinforces CAP-07 (Security & Isolation) and CAP-15 (Anti-Abuse Compliance).",
+  "residual_risk": "Residual Risk: In Node.js/V8 environments, string-allocated secrets (immutable in JS) cannot be wiped by buf.fill(0) if converted to strings before zeroing, which could leave ephemeral copies in V8 heap string table. Required Mitigation: Ensure all secret ingestion and provider signing routines in R07 and R09 manipulate binary Buffer/Uint8Array directly without intermediate string conversion, and include heap inspection unit tests in the security test suite.",
+  "timestamp": "2026-08-15T21:26:40+07:00"
+}

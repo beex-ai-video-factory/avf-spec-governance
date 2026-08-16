@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-03 Provider Contracts",
+  "change_id": "CP-019",
+  "domain_specific_rationale": "Passing attempt_index to ProviderRequest enables adapters to construct deterministic provider-side idempotency keys.",
+  "evidence_citations": "02_contracts/provider-request.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Addition of attempt_index to provider-request.schema.json",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

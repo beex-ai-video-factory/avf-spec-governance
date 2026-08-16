@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-08 QA Harness",
+  "change_id": "CP-003",
+  "domain_specific_rationale": "QA automated conformance tests can execute identical command sequences against both Track A and Track B fake adapters.",
+  "evidence_citations": "03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "residual_risk": "Test suite must maintain fake adapters.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

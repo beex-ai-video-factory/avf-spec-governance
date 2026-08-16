@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avf.internal/schemas/v1/provider-request.schema.json",
+  "title": "AVF Provider Execution Request Contract",
+  "description": "Conforming to CP-002, CP-004, CP-005, CP-010, CP-011",
+  "type": "object",
+  "required": [
+    "request_id",
+    "job_id",
+    "idempotency_key",
+    "provider_id",
+    "prompt",
+    "budget_limit_usd",
+    "trace_context",
+    "attempt_index"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "job_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "provider_id": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "negative_prompt": {
+      "type": "string"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "dimensions": {
+      "type": "object",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer"
+        },
+        "height": {
+          "type": "integer"
+        }
+      }
+    },
+    "duration_seconds": {
+      "type": "number",
+      "minimum": 1.0
+    },
+    "reference_images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "uri",
+          "sha256"
+        ],
+        "properties": {
+          "uri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          }
+        }
+      }
+    },
+    "budget_limit_usd": {
+      "type": "number",
+      "minimum": 0.0
+    },
+    "trace_context": {
+      "type": "object",
+      "required": [
+        "traceparent"
+      ],
+      "properties": {
+        "traceparent": {
+          "type": "string"
+        },
+        "tracestate": {
+          "type": "string"
+        }
+      }
+    },
+    "attempt_index": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1
+    }
+  },
+  "additionalProperties": false
+}

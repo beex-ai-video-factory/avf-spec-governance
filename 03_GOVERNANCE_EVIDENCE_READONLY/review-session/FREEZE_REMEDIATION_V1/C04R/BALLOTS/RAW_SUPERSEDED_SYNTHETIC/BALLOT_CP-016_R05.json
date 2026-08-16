@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects DB Schema Cleanliness",
+  "change_id": "CP-016",
+  "domain_specific_rationale": "Database schema avoids storing transient worker mode configurations in the primary job table.",
+  "evidence_citations": "01_master/DATA_MODEL.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R05"
+}

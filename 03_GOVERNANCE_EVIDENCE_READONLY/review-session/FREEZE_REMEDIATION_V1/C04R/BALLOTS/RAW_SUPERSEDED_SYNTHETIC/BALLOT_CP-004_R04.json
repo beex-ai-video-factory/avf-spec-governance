@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-03 Provider Abstraction",
+  "change_id": "CP-004",
+  "domain_specific_rationale": "Separating transport status from asynchronous generation status and establishing the 9-code error taxonomy provides an unambiguous provider abstraction.",
+  "evidence_citations": "02_contracts/provider-result.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "residual_risk": "Adapters must map provider responses accurately.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

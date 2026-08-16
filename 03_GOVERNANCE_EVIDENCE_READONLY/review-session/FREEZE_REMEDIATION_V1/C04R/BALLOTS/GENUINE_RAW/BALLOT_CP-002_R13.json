@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-002",
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine & Stage Mapping",
+  "voter_role": "R13",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Operator Console (R13) perspective, CP-002 provides the foundational architecture required for robust UI/UX observability and human-in-the-loop (HITL) control. The separation of durable business lifecycle status (7 CanonicalLifecycleStatus enums) from fine-grained workflow execution stages (ExecutionStage enums) eliminates previous ambiguity where operational dashboards could not distinguish between high-level job state and internal worker execution steps without parsing raw unstructured logs. With this hierarchical model, the Operator Console can cleanly render high-level fleet health cards and aggregate queue metrics (QUEUED, RESERVED, RUNNING, COMPLETED, FAILED, CANCELLED, RECONCILED) while simultaneously displaying granular visual step progress (e.g., WAITING_FOR_ASSETS -> PROMPT_READY -> BUDGET_RESERVED -> SUBMITTING -> SUBMITTED -> GENERATING -> DOWNLOADING -> DOWNLOADED -> QC_RUNNING -> APPROVED) in detailed job inspection views. Furthermore, the explicit parent-to-child state mapping matrix provides unambiguous guardrails for operator actions (such as manual aborts, retry triggers, and QC review interventions), preventing illegal state transitions from being initiated at the console layer and guaranteeing strict conformance with R02 Core State invariants without requiring direct database access.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/CHANGE_PROPOSALS/CP-002_GENERATION_JOB_HIERARCHICAL_STATE_MACHINE.md:lines 1-23",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 7-51",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 12-45, 294-370",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R13_OPERATOR_CONSOLE.md:lines 8-26, 48-59"
+  ],
+  "capability_impact": "Directly strengthens CAP-01 (Canonical Core State Management) and operator monitoring capabilities. Seamlessly interoperates with CAP-04 (Workflow Engine) and CAP-03 (Provider SDK) with zero capability regressions across operator dashboards, telemetry streams, or manual remediation workflows.",
+  "residual_risk": "Operator UI client stores could experience minor UI state tearing or flicker if event streams emit execution stage updates asynchronously before lifecycle state persistence confirms. Mitigated by consuming unified event envelopes from R02/R06 containing atomic snapshots of both status and execution_stage, backed by client-side JSON Schema validation.",
+  "timestamp": "2026-08-15T21:28:40+07:00"
+}

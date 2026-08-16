@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Adapter Encapsulation",
+  "change_id": "CP-017",
+  "domain_specific_rationale": "Google Flow Adapter handles track routing internally based on deployment profile.",
+  "evidence_citations": "03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Deletion of flow_track from provider-request.schema.json",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

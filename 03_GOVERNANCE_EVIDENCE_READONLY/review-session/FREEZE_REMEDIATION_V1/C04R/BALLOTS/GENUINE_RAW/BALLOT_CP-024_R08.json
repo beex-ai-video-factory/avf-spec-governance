@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-024",
+  "proposal_title": "Deterministic Package Verification Tooling",
+  "voter_role": "R08",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As QA Specialist with mandatory signoff authority, I strongly endorse providing the standalone, zero-external-dependency `verify_package.py` verification tool. It enables fully automated, deterministic validation of candidate manifests, individual file hashes, tree hashes, and archive digests in CI/CD pipelines and local pre-freeze verification. This eliminates manual verification errors and fulfills the strict acceptance criteria set forth in our Definition of Done.",
+  "evidence_citations": "00_governance/03_DEFINITION_OF_DONE.md (DOD-10 Automated Package Verification), 04_integration/FREEZE_CHECKLIST.md, 03_repo_blueprints/R15_INTEGRATION_HARNESS.md",
+  "capability_impact": "Directly implements and certifies CAP-14 (Release Integrity & Governance) and ensures reliable verification of release candidate artifacts.",
+  "residual_risk": "Python runtime differences across execution environments; mitigated by restricting implementation strictly to Python 3 standard library modules (hashlib, json, sys, os, pathlib).",
+  "timestamp": "2026-08-15T21:28:50+07:00"
+}

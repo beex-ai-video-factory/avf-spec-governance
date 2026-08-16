@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-05 Prompt Compiler",
+  "change_id": "CP-001",
+  "domain_specific_rationale": "AI prompt compilers can now trace prompt optimization variants directly to the originating creative intent parameters without loss of camera/lighting context.",
+  "evidence_citations": "03_repo_blueprints/R05_PROMPT_COMPILER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "residual_risk": "Minor: prompt compiler must populate shot_version_id.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R09"
+}

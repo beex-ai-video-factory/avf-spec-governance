@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 and CAP-06",
+  "change_id": "CP-001",
+  "domain_specific_rationale": "The updated domain-entities schema resolves the inverted provenance bug, incorporates RFC 4122 UUID validation, and decouples optional LoRA/face embeddings cleanly into extensible custom_attributes.",
+  "evidence_citations": "02_contracts/domain-entities.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "residual_risk": "Contract consumers must update TypeScript model bindings.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

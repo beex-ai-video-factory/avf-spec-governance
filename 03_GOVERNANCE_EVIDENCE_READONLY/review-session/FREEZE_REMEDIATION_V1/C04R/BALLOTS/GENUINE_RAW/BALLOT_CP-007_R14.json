@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-007",
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "voter_role": "R14",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "R14 owns telemetry redaction filters, structured logging schemas, and trace attribute sanitization. CP-007 replaces unrealistic claims with concrete runtime secret injection and mandates token/cookie/credential redaction at the telemetry boundary. This ensures that logs, traces, and span attributes collected by R14 never leak sensitive bearer tokens, session cookies, API keys, or security challenge artifacts, eliminating compliance and exfiltration risks across distributed log pipelines.",
+  "evidence_citations": "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:L56,L72,L80,L87,L111; 04_integration/SECURITY_MODEL.md:L37,L71,L74; 06_adrs/ADR-007_BROWSER_SECURITY.md; review-session/FREEZE_REMEDIATION_V1/C03R/SOL_06_SECURITY_SECRET_HANDLING_BOUNDARY.md",
+  "capability_impact": "Protects CAP-14 (Platform Observability) and CAP-07 (Security & Isolation) by enforcing zero PII/secret emission in telemetry streams while maintaining observability diagnostics.",
+  "residual_risk": "Complex nested error messages, raw HTTP headers, or provider diagnostic screenshots might inadvertently bypass naive regex redaction. Mitigate with mandatory contract-level redaction unit tests and structured log scrubbers in the R14 shared instrumentation SDK.",
+  "timestamp": "2026-08-15T21:28:00+07:00"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-09 Media Processing",
+  "change_id": "CP-014",
+  "domain_specific_rationale": "Dead letter queue and quarantine state isolation prevent corrupted video files from crashing processing workers.",
+  "evidence_citations": "03_repo_blueprints/R12_MEDIA.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Media Processing DLQ, Quarantine State & Exponential Retry Policy",
+  "residual_risk": "Quarantine alerts must notify operators.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

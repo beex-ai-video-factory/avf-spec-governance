@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avf.local/contracts/domain-entities/1.0",
+  "title": "SelectedAVFDomainEntities",
+  "type": "object",
+  "$defs": {
+    "versionRef": {
+      "type": "object",
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "shotVersion": {
+      "type": "object",
+      "required": [
+        "shot_version_id",
+        "shot_id",
+        "version",
+        "duration_sec",
+        "action",
+        "camera",
+        "constraints"
+      ],
+      "properties": {
+        "shot_version_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "shot_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "duration_sec": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "action": {
+          "type": "object"
+        },
+        "camera": {
+          "type": "object"
+        },
+        "environment": {
+          "type": "object"
+        },
+        "character_version_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "style_version_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "asset_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "promptVersion": {
+      "type": "object",
+      "required": [
+        "prompt_version_id",
+        "shot_version_id",
+        "version",
+        "provider_family",
+        "compiler_version",
+        "prompt_text",
+        "input_hash"
+      ],
+      "properties": {
+        "prompt_version_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "shot_version_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "provider_family": {
+          "type": "string"
+        },
+        "compiler_version": {
+          "type": "string"
+        },
+        "prompt_text": {
+          "type": "string"
+        },
+        "input_hash": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

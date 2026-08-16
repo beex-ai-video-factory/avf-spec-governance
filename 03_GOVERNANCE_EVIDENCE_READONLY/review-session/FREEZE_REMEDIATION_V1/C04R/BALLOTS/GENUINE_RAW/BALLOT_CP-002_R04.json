@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-002",
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine & Stage Mapping",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From the Contracts and API specification perspective, CP-002 resolves a critical ambiguity between coarse-grained database lifecycle status and fine-grained orchestration execution stages. Conflating operational step states with durable aggregate root statuses breaks API consumers that need stable, coarse-grained state transitions. The two-tier specification establishes CanonicalLifecycleStatus (QUEUED, RESERVED, RUNNING, COMPLETED, FAILED, CANCELLED, RECONCILED) as the durable contract enum in domain-entities.schema.json, while defining ExecutionStage (17 granular stages such as WAITING_FOR_ASSETS, PROMPT_READY, BUDGET_RESERVED, SUBMITTING, SUBMITTED, GENERATING, DOWNLOADING, DOWNLOADED, QC_RUNNING, APPROVED, etc.) for telemetry, event envelopes, and orchestrator tracking. The explicit Parent-to-Child mapping matrix and transition table in STATUS_STATE_MACHINES.md define an unambiguous formal state contract that prevents invalid intermediate state emissions and guarantees deterministic contract validation.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 7-51 (Two-Tier Hierarchical State Machine and Parent-to-Child Mapping Matrix)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 12-45 (CanonicalLifecycleStatus and ExecutionStage enum definitions), lines 334-339 (GenerationJob status and execution_stage properties)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 7-17"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State), CAP-03 (Provider Abstraction), and CAP-04 (Workflow Engine & Orchestration).",
+  "residual_risk": "Clients or workers might attempt to transition status out of sync with allowed execution stages. Mitigated by R02 Core State contract validation rejecting invalid status/stage combinations based on the normative matrix.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

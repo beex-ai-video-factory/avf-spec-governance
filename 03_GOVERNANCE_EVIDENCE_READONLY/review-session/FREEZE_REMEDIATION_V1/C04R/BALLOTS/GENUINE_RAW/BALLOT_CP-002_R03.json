@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-002",
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine & Stage Mapping",
+  "voter_role": "R03",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From the Workflow Engine (R06) perspective, separating durable database lifecycle states from fine-grained workflow execution stages is essential for robust temporal orchestration. The two-tier architecture cleanly demarcates core transactional persistence (7 canonical statuses in R02 PostgreSQL) from ephemeral orchestration milestones (11+ execution stages). This prevents state machine explosion in the relational database while granting the workflow engine the granularity needed to manage complex asynchronous activities—such as asset resolution, budget reservation, provider submission polling, media downloading, and automated QC evaluation. The strict Parent-to-Child Mapping Matrix ensures that workflow activity heartbeats and progress events can be reported deterministically without causing illegal database state transitions or race conditions during lease renewals and crash recovery.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 1-51",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 12-45, 294-389",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 8-26, 39-44",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26"
+  ],
+  "capability_impact": "Directly reinforces CAP-04 (Workflow Engine Orchestration) by providing explicit stage boundaries for workflow activities, retries, and compensation handlers, while preserving CAP-01 (Canonical Core State Integrity) and CAP-03 (Provider SDK Isolation).",
+  "residual_risk": "Workflow worker crash during intermediate execution stages (e.g. between SUBMITTING and SUBMITTED or DOWNLOADING and DOWNLOADED) could leave transient execution_stage out of sync with external provider truth if lease expiration handling is uncoordinated. Mitigated by R02 Reconciliation Worker protocol, which leverages lease_expires_at timeouts to inspect external provider job state and deterministically transition stale jobs to RECONCILED or trigger clean retry workflows.",
+  "timestamp": "2026-08-15T21:26:30+07:00"
+}

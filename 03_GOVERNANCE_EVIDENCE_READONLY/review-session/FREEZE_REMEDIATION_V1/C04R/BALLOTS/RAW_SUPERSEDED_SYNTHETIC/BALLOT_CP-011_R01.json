@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 Domain Fidelity",
+  "change_id": "CP-011",
+  "domain_specific_rationale": "Preserves shot continuity references in the semantic AST before compilation to target engine strings.",
+  "evidence_citations": "01_master/DATA_MODEL.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "3-Layer Prompt Compilation AST & Extensible Directives",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R01"
+}

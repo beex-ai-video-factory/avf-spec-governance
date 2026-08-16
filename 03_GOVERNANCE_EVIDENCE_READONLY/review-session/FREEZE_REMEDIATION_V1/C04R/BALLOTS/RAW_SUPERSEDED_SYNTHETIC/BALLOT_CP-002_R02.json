@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 and CAP-03",
+  "change_id": "CP-002",
+  "domain_specific_rationale": "The 7-state CanonicalLifecycleStatus in PostgreSQL paired with the 11-stage ExecutionStage provides deterministic state isolation and eliminates split-brain conditions between DB and workers.",
+  "evidence_citations": "02_contracts/STATUS_STATE_MACHINES.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine",
+  "residual_risk": "State transitions must be guarded by R02 state transition validator.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

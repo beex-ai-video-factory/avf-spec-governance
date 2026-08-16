@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-15 Security Posture",
+  "change_id": "CP-007",
+  "domain_specific_rationale": "Eliminating unbacked cryptographic claims prevents false security assumptions during red-team penetration testing.",
+  "evidence_citations": "06_adrs/ADR-007_BROWSER_SECURITY.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R15"
+}

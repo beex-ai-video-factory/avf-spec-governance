@@ -1,0 +1,15 @@
+{
+  "change_id": "CP-012",
+  "proposal_title": "Asset Versioning & Character/Style Continuity Scoring Invariants",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Contracts and Data Integrity perspective, CP-012 standardizes the AssetVersion, CharacterVersion, and StyleVersion schema contracts in domain-entities.schema.json. It mandates critical integrity fields: checksum_sha256 (validated via pattern ^[0-9a-fA-F]{64}$), byte_size (minimum 1), mime_type, origin_uri, source_type, and license_type. By decoupling vendor-specific embeddings and LoRA weights into optional custom_attributes, the contract accommodates multimodal providers while enforcing immutable asset provenance and cryptographic verification at contract boundaries.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 470-610 (AssetVersion, CharacterVersion, StyleVersion schema definitions and checksum regex)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R04_ASSETS_CONTINUITY.md:lines 8-25"
+  ],
+  "capability_impact": "Preserves CAP-06 (Assets & Continuity Invariants) and CAP-01 (Canonical Core State).",
+  "residual_risk": "Invalid URI protocols in storage_uri or origin_uri could lead to retrieval errors. Mitigated by URI format validation and storage adapter conformance test suites.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

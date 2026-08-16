@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-10 Developer Experience",
+  "change_id": "CP-003",
+  "domain_specific_rationale": "DX is greatly improved because TypeScript SDK generators can emit strongly-typed client stubs for all 10 operations from the JSON schemas.",
+  "evidence_citations": "03_repo_blueprints/R10_FLOWKIT_BRIDGE.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R10"
+}

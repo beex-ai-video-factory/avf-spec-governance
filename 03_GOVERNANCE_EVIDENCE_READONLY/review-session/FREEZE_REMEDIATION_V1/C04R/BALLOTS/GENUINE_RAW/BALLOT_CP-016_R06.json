@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-016",
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "voter_role": "R06",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Flow Browser Specialist (R06) perspective, removing track_mode from the canonical GenerationJob domain entity schema is entirely sound. Whether a generation task is executed via Track A (Playwright/Chrome MV3 worker) or Track B (FlowKit bridge) is strictly an operational routing and worker dispatch concern handled dynamically by R08 Google Flow Adapter and runtime dispatchers. Embedding track_mode into the canonical domain entity unnecessarily polluted core business entities with transient transport details and would have forced artificial database mutations whenever dynamic failover between Track A and Track B occurred. Deleting track_mode cleanses the domain model, maintains strict domain-infrastructure separation, and preserves complete freedom for browser worker pools to execute adaptive track switching behind the FlowExecutionPort interface.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 294-380",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/CHANGE_PROPOSALS/CP-016_DELETION_OF_TRACK_MODE_FROM_CORE_SCHEMA.md:lines 1-15"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State Integrity) and CAP-18 (Track A / Track B Port Equivalence) by removing operational infrastructure coupling from canonical entity definitions while maintaining dynamic worker dispatch flexibility.",
+  "residual_risk": "Downstream analytics queries monitoring Track A vs Track B performance distribution cannot rely on a static database column on GenerationJob. Mitigated by R14 OpenTelemetry tracing attributes (avf.worker.track) emitted during each FlowExecutionPort operation.",
+  "timestamp": "2026-08-15T21:28:40+07:00"
+}

@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-013",
+  "proposal_title": "Two-Stage Automated QC Pipeline & Verification Metrics",
+  "voter_role": "R14",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "The separation of QC into Stage 1 (deterministic FFprobe technical validation) and Stage 2 (multimodal/neural semantic validation) establishes clean, distinct latency, failure, and scoring boundaries. This allows R14 to emit granular observability metrics: container validation latency, codec conformance rates, MLLM evaluator latency, score distributions (per QC profile), and low-confidence drift rates. Emitting standardized QCResult telemetry linked to shot_id, take_id, and trace_id enables performance optimization and automated detection of evaluator degradation.",
+  "evidence_citations": "03_repo_blueprints/R11_QC.md:L78-86,L120-126; 03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:L13-19,L74; 02_contracts/CONTRACTS_OVERVIEW.md",
+  "capability_impact": "Preserves CAP-11 (Quality Control Pipeline) and CAP-14 (Platform Observability) with structured metric emissions for media validation.",
+  "residual_risk": "High-frequency frame analysis in Stage 2 MLLM evaluation may introduce telemetry cardinality explosion if per-frame metrics are emitted indiscriminately. Mitigate by aggregating frame-level metrics within R11 and emitting summarized evaluator scores with bounded dimension tags.",
+  "timestamp": "2026-08-15T21:28:00+07:00"
+}

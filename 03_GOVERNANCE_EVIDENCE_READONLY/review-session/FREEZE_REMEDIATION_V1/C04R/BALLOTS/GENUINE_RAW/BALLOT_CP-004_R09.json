@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-004",
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "voter_role": "R09",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "Generative video AI providers exhibit distinct asynchronous generation lifecycles and non-deterministic error domains. Conflating HTTP transport status with async generation state makes automated model orchestration and intelligent prompt retry impossible. CP-004 decouples transport status (SUCCESS, FAILED, PENDING, RUNNING) from asynchronous generation_status (QUEUED, PROCESSING, SUCCEEDED, FAILED, CANCELLED), matching the real-world operational pattern of cloud AI video engines. Most critically for R09, the 9-code normalized error taxonomy (PROVIDER_RATE_LIMIT, AUTH_REQUIRED, SECURITY_CHALLENGE, UI_CHANGED, BUDGET_EXHAUSTED, UNSUPPORTED_CAPABILITY, NETWORK_TIMEOUT, BAD_REQUEST, PROVIDER_INTERNAL_ERROR) combined with 4 retry categories (TRANSIENT, PERMANENT, POLICY_BLOCKED, RESOURCE_EXHAUSTED) provides exact signals to the AI orchestration layer. For example, UNSUPPORTED_CAPABILITY triggers prompt compiler capability renegotiation or fallback downscaling, POLICY_BLOCKED triggers automated prompt relaxation/safety filtering mitigation rather than wasteful retry loops, and PROVIDER_RATE_LIMIT initiates backoff pacing.",
+  "evidence_citations": [
+    "02_contracts/provider-result.schema.json (Lines 30-48: status enum and generation_status enum separation)",
+    "02_contracts/provider-result.schema.json (Lines 82-125: error schema defining 9 normalized error codes, 4 retry categories, suggested_backoff_ms, and raw_provider_error object)",
+    "02_contracts/domain-entities.schema.json#/$defs/NormalizedError (Lines 46-89: standardized error definition across domain entities)",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md (Section 9: Error normalization and SDK error mapping requirements)",
+    "03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md (Section 9: Flow adapter browser error normalization)"
+  ],
+  "capability_impact": "Directly supports and protects CAP-03 (Provider Abstraction) and CAP-12 (Autonomous Error Recovery). Gives AI generation workflows deterministic error classification to make intelligent prompt compensation and retry decisions.",
+  "residual_risk": "Third-party AI video providers continuously update their safety moderation filters and error messaging strings. Unrecognized error formats could default to PROVIDER_INTERNAL_ERROR. Mitigation: provider-result.schema.json mandates raw_provider_error capture, allowing provider adapters to parse unmapped vendor payloads and continuously refine regex/matching rules in adapter patches.",
+  "timestamp": "2026-08-15T21:29:45+07:00"
+}

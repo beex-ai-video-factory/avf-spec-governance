@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-11 Platform Integrity",
+  "change_id": "CP-015",
+  "domain_specific_rationale": "The 4-stage deterministic hashing protocol eliminates self-referential manifest circularities and ensures external audit reproducibility.",
+  "evidence_citations": "00_governance/01_SPEC_FREEZE_POLICY.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Release Identity Alignment & Deterministic 4-Stage Hashing Pipeline",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R11"
+}

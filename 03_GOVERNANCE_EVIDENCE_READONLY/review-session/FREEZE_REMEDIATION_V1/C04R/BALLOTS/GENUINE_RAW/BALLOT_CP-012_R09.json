@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-012",
+  "proposal_title": "Asset Versioning & Character/Style Continuity Scoring Invariants",
+  "voter_role": "R09",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "In AI video production, shot-to-shot visual coherence (character facial identity, wardrobe, cinematography style, color palette) is the defining quality barrier. CP-012 retains the asset versioning and continuity scoring invariants defined in R04_ASSETS_CONTINUITY.md. From an AI specialist standpoint, this architecture provides two critical guarantees: First, immutable AssetVersion records with SHA-256 checksums ensure that reference assets (e.g., character turnaround sheets, keyframe stills, environment plates) cannot mutate under active generations, preventing silent semantic drift. Second, decoupling character embeddings and LoRA weights into structured reference bindings (reference_asset_ids and custom_attributes in CharacterVersion/StyleVersion) enables R05 to inject consistent character trigger tokens, negative prompt style suppressors (negative_prompt_additions), and style prefixes (style_prompt_prefix) deterministically into generated prompts. This architecture supports both multi-image conditioning (IP-Adapter/InstantID) and latent LoRA injection across different generation backends.",
+  "evidence_citations": [
+    "03_repo_blueprints/R04_ASSETS_CONTINUITY.md (Section 1: Asset version management, character facial embedding continuity, and style guide validation; Section 3: Invariants INV-001 through INV-012)",
+    "02_contracts/domain-entities.schema.json#/$defs/CharacterVersion (Lines 529-569: character_version_id, name, face_embedding_hash, reference_asset_ids, custom_attributes)",
+    "02_contracts/domain-entities.schema.json#/$defs/StyleVersion (Lines 570-607: style_version_id, name, lora_weights_uri, style_prompt_prefix, negative_prompt_additions, custom_attributes)",
+    "02_contracts/domain-entities.schema.json#/$defs/AssetVersion (Lines 467-528: storage_uri, mime_type, byte_size, checksum_sha256, source_type, license_type)",
+    "review-session/FREEZE_REMEDIATION_V1/C02R_RAW_SUPERSEDED_SYNTHETIC/CLUSTER_10_PROMPT_AST_AND_ASSET_CONTINUITY.md (Section 1 & Section 6: Confirmation of continuity invariants and token extraction)"
+  ],
+  "capability_impact": "Directly preserves and strengthens CAP-06 (Assets & Continuity) and CAP-05 (Prompt Compiler). Guarantees reproducible character identity and aesthetic consistency across multi-shot sequence compilation.",
+  "residual_risk": "Disparate facial recognition / embedding models (e.g. ArcFace vs InsightFace vs CLIP image embeddings) produce non-interoperable vector spaces if generated heterogeneously across distributed workers. Mitigation: R04 records embedding model version metadata inside custom_attributes and retains immutable raw asset URIs in AssetVersion so embeddings can be deterministically re-indexed when needed.",
+  "timestamp": "2026-08-15T21:29:45+07:00"
+}

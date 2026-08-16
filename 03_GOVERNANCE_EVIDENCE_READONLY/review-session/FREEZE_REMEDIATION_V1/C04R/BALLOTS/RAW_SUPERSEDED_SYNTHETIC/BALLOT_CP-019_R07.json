@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Provider Telemetry",
+  "change_id": "CP-019",
+  "domain_specific_rationale": "Provider SDK leverages attempt_index for retry tracking in client telemetry.",
+  "evidence_citations": "03_repo_blueprints/R07_PROVIDER_SDK.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Addition of attempt_index to provider-request.schema.json",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R07"
+}

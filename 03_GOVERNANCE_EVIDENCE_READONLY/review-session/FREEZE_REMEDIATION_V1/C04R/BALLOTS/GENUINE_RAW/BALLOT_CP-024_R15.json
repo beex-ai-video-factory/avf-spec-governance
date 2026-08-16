@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-024",
+  "proposal_title": "Deterministic Package Verification Tooling",
+  "voter_role": "R15",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Red Team verification and validation standpoint, CP-024 provides a clean, independent, and tamper-evident verification utility (verify_package.py). By relying solely on Python standard library modules (hashlib, os), it eliminates external supply-chain dependencies that could be subverted. The inclusion of explicit exclusions for self-referential artifacts and deterministic lexicographical sorting of normative content files ensures that any unauthorized modification or corrupted artifact in the specification tree is immediately flagged during CI/CD freeze validation.",
+  "evidence_citations": [
+    "verify_package.py:L1-L40",
+    "KIT_MANIFEST.yaml",
+    "00_governance/01_SPEC_FREEZE_POLICY.md:L39-L42"
+  ],
+  "capability_impact": "Preserves CAP-17 (Auditability & Traceability) and CAP-19 (Deterministic Package Verification).",
+  "residual_risk": "Residual Risk: Hidden files, OS metadata artifacts (.DS_Store, Thumbs.db), or symlinks could potentially cause tree hash calculation discrepancies across different developer OS environments. Required Mitigation: Maintain strict ignore filters in EXCLUDE_FILES within verify_package.py (which already excludes .DS_Store and hidden files starting with .) and enforce symlink resolution policies in the test harness.",
+  "timestamp": "2026-08-15T21:26:40+07:00"
+}

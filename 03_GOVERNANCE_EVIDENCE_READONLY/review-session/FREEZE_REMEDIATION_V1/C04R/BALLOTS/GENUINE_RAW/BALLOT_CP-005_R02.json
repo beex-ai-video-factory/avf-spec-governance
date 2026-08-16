@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-005",
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry Distributed Tracing & Topic Naming",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "For system reliability, debugging distributed cascades, and diagnosing asynchronous worker timeouts, standardized OpenTelemetry tracing headers (trace_id, span_id) and correlation identifiers (correlation_id, workflow_run_id) inside every event envelope are indispensable. Standardizing topic names with lowercase dotted syntax (^avf\\.[a-z0-9_-]+(\\.[a-z0-9_-]+)+$) eliminates message routing ambiguities, dead letter confusion, and silent partition dropping across event brokers.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/event-envelope.schema.json:lines 1-61",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/04_integration/COMMAND_EVENT_CATALOG.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:lines 1-45"
+  ],
+  "capability_impact": "Preserves CAP-04 (Event-Driven Integration) and CAP-14 (Platform Observability), ensuring end-to-end trace propagation across all 15 repositories.",
+  "residual_risk": "Asynchronous event producers failing to propagate parent span context across process boundaries. Mitigated by R14 shared OpenTelemetry client interceptors enforcing automated context propagation.",
+  "timestamp": "2026-08-15T21:29:25+07:00"
+}

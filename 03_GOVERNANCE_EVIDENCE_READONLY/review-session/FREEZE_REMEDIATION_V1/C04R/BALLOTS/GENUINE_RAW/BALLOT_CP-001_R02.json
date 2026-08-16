@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-001",
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Reliability (R02) engineering perspective, fixing the inverted ShotVersion/PromptVersion lineage and enriching GenerationJob with explicit lifecycle provenance (prompt_version_id, attempt_index, requested_at, submitted_at, completed_at, lease_token, lease_expires_at, and normalized_error) is essential for distributed execution correctness. Without durable attempt indices and lease metadata embedded directly in the canonical entity model, asynchronous workers cannot safely perform leader election, heartbeat lease renewals, or prevent split-brain dual-generation scenarios. Additionally, standardizing RFC 4122 UUID validation prevents transaction aborts caused by malformed identifier strings across distributed node boundaries.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 1-45, 294-390",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 25-83",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26"
+  ],
+  "capability_impact": "Hardens CAP-01 (Canonical Core State) and CAP-12 (Autonomous Error Recovery) by providing deterministic provenance and execution tracking for every generation attempt.",
+  "residual_risk": "Database migration overhead on existing tables when adding NOT NULL constraints on provenance keys. Mitigated by staging migrations with default values (attempt_index=1) and backward-compatible schema migration scripts in R02.",
+  "timestamp": "2026-08-15T21:28:50+07:00"
+}

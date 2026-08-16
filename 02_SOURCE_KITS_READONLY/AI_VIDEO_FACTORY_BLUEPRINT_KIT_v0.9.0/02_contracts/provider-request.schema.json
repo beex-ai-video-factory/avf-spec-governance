@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avf.local/contracts/provider-request/1.0",
+  "title": "ProviderGenerationRequest",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "request_id",
+    "project_id",
+    "shot_version_id",
+    "prompt_version_id",
+    "idempotency_key",
+    "provider",
+    "capability",
+    "prompt",
+    "attempt_no"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "project_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "shot_version_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "prompt_version_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 8
+    },
+    "provider": {
+      "type": "string"
+    },
+    "capability": {
+      "type": "string",
+      "enum": [
+        "text_to_video",
+        "image_to_video",
+        "frames_to_video",
+        "reference_to_video",
+        "image_generation"
+      ]
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "negative_constraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "asset_refs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "asset_id",
+          "role"
+        ],
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "role": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "generation_options": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "budget": {
+      "type": "object",
+      "properties": {
+        "max_credits": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max_attempts": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "attempt_no": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "correlation": {
+      "type": "object",
+      "required": [
+        "trace_id",
+        "workflow_run_id"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string"
+        },
+        "workflow_run_id": {
+          "type": "string",
+          "format": "uuid"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

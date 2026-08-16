@@ -1,0 +1,67 @@
+{
+  "name": "AI_VIDEO_FACTORY_COUNCIL_PROMPT_KIT",
+  "version": "1.1.0",
+  "target_spec": "AI_VIDEO_FACTORY_BLUEPRINT_KIT_v0.9.0",
+  "council_round_order": [
+    "C00_BOOTSTRAP_AND_EVIDENCE",
+    "C01_INDEPENDENT_REVIEW",
+    "C02_CROSS_EXAMINATION",
+    "C03_SOLUTION_DESIGN",
+    "C04_CHANGESET_VOTING",
+    "C05_ADVERSARIAL_AUDIT",
+    "C06_FREEZE_READINESS",
+    "C07_FREEZE_CERTIFICATION"
+  ],
+  "implementation_order": [
+    "I00_REPO_BOOTSTRAP",
+    "I01_ARCHITECTURE_EXTRACTION",
+    "I02_CONTRACT_TESTS_FIRST",
+    "I03_TEST_AND_FAILURE_PLAN",
+    "I04_IMPLEMENTATION_PLAN",
+    "I05_TDD_BUILD_LOOP",
+    "I06_INDEPENDENT_CODE_REVIEW",
+    "I07_SYSTEMATIC_DEBUG",
+    "I08_INTEGRATION_CONFORMANCE",
+    "I09_CHAOS_SECURITY_AUDIT",
+    "I10_OBSERVABILITY_OPERATIONS",
+    "I11_DOCUMENTATION_HANDOFF",
+    "I12_RELEASE_EVIDENCE_GATE"
+  ],
+  "repo_profiles": [
+    "R01_AVF_CONTRACTS",
+    "R02_AVF_CORE_STATE",
+    "R03_AVF_CREATIVE",
+    "R04_AVF_ASSETS_CONTINUITY",
+    "R05_AVF_PROMPT_COMPILER",
+    "R06_AVF_WORKFLOW",
+    "R07_AVF_PROVIDER_SDK",
+    "R08_AVF_GOOGLE_FLOW_ADAPTER",
+    "R09_AVF_BROWSER_WORKER",
+    "R10_AVF_FLOWKIT_BRIDGE",
+    "R11_AVF_QC",
+    "R12_AVF_MEDIA",
+    "R13_AVF_OPERATOR_CONSOLE",
+    "R14_AVF_PLATFORM_OBSERVABILITY",
+    "R15_AVF_INTEGRATION_HARNESS"
+  ],
+  "phase_order": [
+    "P0_ARCHITECTURAL_SPIKES",
+    "P1_SINGLE_SHOT",
+    "P2_MULTI_SHOT_DURABILITY",
+    "P3_CREATIVE",
+    "P4_ASSETS_CONTINUITY",
+    "P5_QC",
+    "P6_OPERATOR",
+    "P7_SCALE"
+  ],
+  "governance_hardening": [
+    "protected_capability_register",
+    "evidence_grading",
+    "requirement_traceability",
+    "structured_cross_examination",
+    "voting_scope_quorum",
+    "human_round_handshake",
+    "semantic_diff_audit",
+    "implementation_handoff_freeze_gate"
+  ]
+}

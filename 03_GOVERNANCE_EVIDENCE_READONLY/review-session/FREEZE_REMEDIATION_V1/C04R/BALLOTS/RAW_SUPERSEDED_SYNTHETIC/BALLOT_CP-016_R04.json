@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Contract Simplicity",
+  "change_id": "CP-016",
+  "domain_specific_rationale": "Contracts approve removing track_mode from domain-entities.schema.json.",
+  "evidence_citations": "02_contracts/domain-entities.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

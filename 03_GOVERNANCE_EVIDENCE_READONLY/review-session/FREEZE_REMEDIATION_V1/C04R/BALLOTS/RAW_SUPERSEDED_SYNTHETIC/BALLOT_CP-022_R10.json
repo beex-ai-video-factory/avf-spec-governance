@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Developer Tooling",
+  "change_id": "CP-022",
+  "domain_specific_rationale": "TypeScript type generator scripts know to parse individual fragment entrypoints.",
+  "evidence_citations": "03_repo_blueprints/R01_CONTRACTS.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "JSON Schema Root Packaging & Fragment Entrypoint Documentation",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R10"
+}

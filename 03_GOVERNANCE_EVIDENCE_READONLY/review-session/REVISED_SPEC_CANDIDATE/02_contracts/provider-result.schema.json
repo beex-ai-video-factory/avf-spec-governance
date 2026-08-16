@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avf.internal/schemas/v1/provider-result.schema.json",
+  "title": "AVF Provider Execution Result Contract",
+  "description": "Conforming to CP-002, CP-004, CP-010",
+  "type": "object",
+  "required": [
+    "request_id",
+    "job_id",
+    "status",
+    "actual_cost_usd",
+    "trace_context"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "job_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "provider_job_id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILED",
+        "RETRYABLE_ERROR"
+      ]
+    },
+    "media_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "media_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$"
+    },
+    "actual_cost_usd": {
+      "type": "number",
+      "minimum": 0.0
+    },
+    "generation_duration_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "error_code",
+        "category",
+        "retryable",
+        "message"
+      ],
+      "properties": {
+        "error_code": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "TRANSIENT",
+            "PERMANENT",
+            "POLICY",
+            "RESOURCE"
+          ]
+        },
+        "retryable": {
+          "type": "boolean"
+        },
+        "retry_after_ms": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "trace_context": {
+      "type": "object",
+      "required": [
+        "traceparent"
+      ],
+      "properties": {
+        "traceparent": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-11 Platform Infrastructure",
+  "change_id": "CP-005",
+  "domain_specific_rationale": "Kafka/RabbitMQ message routing rules can now bind directly to topic names matching the canonical dotted event_type strings.",
+  "evidence_citations": "04_integration/COMMAND_EVENT_CATALOG.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry & Dotted Naming",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R11"
+}

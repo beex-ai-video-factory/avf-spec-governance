@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-14 Cost Efficiency",
+  "change_id": "CP-013",
+  "domain_specific_rationale": "Fast stage-1 technical checks save GPU costs by filtering out invalid containers before running neural models.",
+  "evidence_citations": "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Two-Stage Automated QC Pipeline & Verification Metrics",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R14"
+}

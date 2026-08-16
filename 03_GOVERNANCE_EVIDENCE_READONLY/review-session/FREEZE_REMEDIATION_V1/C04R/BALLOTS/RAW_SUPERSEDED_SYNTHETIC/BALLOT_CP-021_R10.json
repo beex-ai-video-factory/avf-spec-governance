@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-10 Developer Handoff",
+  "change_id": "CP-021",
+  "domain_specific_rationale": "Handoff index now accurately reflects actual repository boundaries and eliminates confusion for implementation coding agents.",
+  "evidence_citations": "09_agent_packets/AGENT_BUILD_PACKET_INDEX.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R10"
+}

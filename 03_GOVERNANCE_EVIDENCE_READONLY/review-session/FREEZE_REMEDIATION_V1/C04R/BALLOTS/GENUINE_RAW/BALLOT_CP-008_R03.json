@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-008",
+  "proposal_title": "Idempotency Key Specification & Deterministic Construction",
+  "voter_role": "R03",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Workflow Specialist perspective, deterministic idempotency key derivation SHA256(shot_version_id + prompt_version_id + provider_id + attempt_index + parameters_hash) is foundational for durable DAG execution, at-least-once task dispatch, and replay safety in Temporal/R06. When dispatching asynchronous generation tasks to external provider adapters (R07/R08/R09/R10), deterministic idempotency keys prevent duplicate generation jobs, accidental double-spend of credits, and conflicting duplicate take creation upon workflow activity retries or network partition recovery. Furthermore, explicitly binding attempt_index into the hash ensures that intentional re-renders or escalated retries generate fresh, non-colliding idempotency keys without corrupting previous attempt history.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 57-83",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 294-389",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 39-41",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 39-41"
+  ],
+  "capability_impact": "Guarantees CAP-04 (Workflow Engine Orchestration) replay safety and task dispatch deduplication, and safeguards CAP-01 (Canonical Core State) and CAP-02 (Credit Settlement and Ledger Invariants).",
+  "residual_risk": "Risk of divergent hash generation if parameters dictionary serialization is non-deterministic (e.g. varying key ordering across runtime environments). Mitigated by mandating RFC 8785 JSON Canonicalization Scheme (JCS) / sorted-key JSON serialization before computing parameters_hash.",
+  "timestamp": "2026-08-15T21:26:30+07:00"
+}

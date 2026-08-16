@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-015",
+  "proposal_title": "Release Identity Alignment & Deterministic 4-Stage Hashing Pipeline",
+  "voter_role": "R11",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a platform engineering and release distribution perspective, release integrity must be mathematically verifiable, deterministic, and free of circular self-referential hashing paradoxes. Forensic audit findings (FA-006 / TECH-011) identified that earlier freeze mechanisms attempted to hash manifest files that in turn recorded the overall bundle digest. CP-015 resolves this critical defect by establishing an explicit 4-stage deterministic hashing protocol: (1) calculate individual SHA-256 for all normative content files, (2) compute CONTENT_TREE_SHA256 from sorted 'relative_path\\tsha256\\n' strings excluding self-referential artifacts, (3) persist immutable manifest records (CONTENT_HASHES.json, FINAL_SPEC_MANIFEST.md, KIT_MANIFEST.yaml), and (4) archive the package into a distributable zip file with its corresponding DISTRIBUTABLE_ZIP_SHA256. Furthermore, it cryptographically anchors Council certification signatures to immutable raw voter ballot SHA-256 digests in C04R.",
+  "evidence_citations": [
+    "REMEDIATION_FINDING_REGISTER.md:L247-L263 (TECH-011 root cause and 4-stage deterministic hashing closure specification)",
+    "REVISED_SPEC_CANDIDATE/verify_package.py:L8-L32 (EXCLUDE_FILES set and deterministic compute_content_tree_sha256 implementation)",
+    "00_governance/AUTONOMOUS_FREEZE_REMEDIATION_MASTER.md:Section 14 (Release integrity, non-self-referential hashing, and cryptographic audit trail)"
+  ],
+  "capability_impact": "Guarantees absolute cryptographic provenance, auditability, and tamper-evident packaging for the entire specification freeze, protecting autonomous coding agent handoff and multi-repository downstream builds.",
+  "residual_risk": "Operating system newline discrepancies (CRLF vs LF) or file sorting locales could cause tree hash mismatches during verification on non-POSIX platforms. Mitigated by binary-mode file reading and strict lexicographical UTF-8 byte sorting in verify_package.py.",
+  "timestamp": "2026-08-15T21:29:45+07:00"
+}

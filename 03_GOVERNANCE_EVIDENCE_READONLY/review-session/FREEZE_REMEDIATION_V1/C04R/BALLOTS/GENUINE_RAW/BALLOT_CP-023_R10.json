@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-023",
+  "proposal_title": "Release Version 1.0.0 Synchronization Across All Candidate Files",
+  "voter_role": "R10",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As Developer Experience Architect with mandatory signoff authority, release identity consistency across all specification artifacts, build manifests, package descriptors, and documentation is essential for automated tooling and developer sanity. Discrepancies between version indicators (e.g. VERSION showing 0.9.0 while README.md or KIT_MANIFEST.yaml references 1.0.0-rc1 / 1.0.0) break semantic versioning tooling, trigger false-positive cache invalidations in CI build agents, create package manager resolution mismatches, and confuse onboarding developers regarding which specification snapshot is authoritative. CP-023 establishes atomic version synchronization to 1.0.0-remediated-rc1 (promoted to 1.0.0 upon freeze certification) across VERSION, README.md, KIT_MANIFEST.yaml, and COMMITTEE_REVIEW_EDITION.md, guaranteeing an unambiguous, auditable single source of version truth for all developer and CI workflows.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/VERSION:line 1",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/README.md:lines 1-15",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/KIT_MANIFEST.yaml:lines 1-12",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/COMMITTEE_REVIEW_EDITION.md:lines 1-10",
+    "review-session/FREEZE_REMEDIATION_V1/REMEDIATION_FINDING_REGISTER.md:lines 99-110"
+  ],
+  "capability_impact": "Directly ensures Release Reproducibility, CI/CD Pipeline Automation, and Package Verification Integrity across all system components, protecting developer onboarding and tooling predictability.",
+  "residual_risk": "Manual editing of documentation during future patch releases could re-introduce version desynchronization. Mitigated by an automated release version verification script (scripts/verify_version_sync.py) integrated into the mandatory CI pre-freeze gate matrix.",
+  "timestamp": "2026-08-15T21:28:45+07:00"
+}

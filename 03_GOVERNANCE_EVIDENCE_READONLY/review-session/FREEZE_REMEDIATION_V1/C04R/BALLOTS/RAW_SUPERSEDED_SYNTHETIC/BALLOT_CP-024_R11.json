@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Package Verifiability",
+  "change_id": "CP-024",
+  "domain_specific_rationale": "Standalone verification script enables automated cryptographic validation of individual files, tree hash, and zip archive.",
+  "evidence_citations": "verify_package.py",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Deterministic Package Verification Tooling (verify_package.py)",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R11"
+}

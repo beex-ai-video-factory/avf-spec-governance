@@ -1,0 +1,15 @@
+{
+  "change_id": "CP-011",
+  "proposal_title": "3-Layer Prompt Compilation AST & Extensible Directives",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Contracts and Schema Versioning standpoint, CP-011 establishes a clean separation between high-level prompt semantics (Semantic AST), provider-agnostic intermediate representation (Engine IR), and rendered provider payloads (Target Payload). In domain-entities.schema.json, the PromptVersion entity includes ast_snapshot (object) and parameters (object) alongside rendered positive_prompt and negative_prompt. This contract schema allows the prompt compiler (R05) to evolve intermediate directive syntax and AST transformations without introducing breaking changes to the immutable PromptVersion domain contract.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 244-293 (PromptVersion schema with ast_snapshot, parameters, positive_prompt, negative_prompt)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 8-23"
+  ],
+  "capability_impact": "Preserves CAP-05 (Prompt Compiler AST Synthesis) and CAP-06 (Assets & Continuity Invariants).",
+  "residual_risk": "Unversioned changes within ast_snapshot internal AST dialects could impact deterministic prompt reproduction. Mitigated by storing schema_version within AST snapshot objects.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

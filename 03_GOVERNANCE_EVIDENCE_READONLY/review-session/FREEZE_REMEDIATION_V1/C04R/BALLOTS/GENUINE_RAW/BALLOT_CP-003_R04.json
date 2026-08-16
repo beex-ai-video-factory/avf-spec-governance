@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-003",
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As Contracts Specialist, CP-003 is crucial for guaranteeing true port-and-adapter substitutability across Track A (Browser Automation / Playwright / Extension) and Track B (FlowKit Bridge). In browser-command.schema.json, the discriminated oneOf structure keyed on command_type enforces strict parameter schemas for all 10 operations (ENSURE_SESSION, OPEN_FLOW, CREATE_OR_SELECT_PROJECT, ATTACH_ASSETS, SET_GENERATION_OPTIONS, SUBMIT_PROMPT, READ_GENERATION_STATE, DOWNLOAD_OUTPUT, CAPTURE_DIAGNOSTIC, CANCEL) with additionalProperties: false. Furthermore, the newly introduced flow-execution-result.schema.json establishes a symmetrical execution response envelope containing command_id, session_id, command_type, status, duration_ms, and structured error payloads conforming to the NormalizedError taxonomy. Standardizing parameter constraints, default timeouts (60000ms), and error structures at the JSON schema contract layer prevents implementation drift and eliminates hidden coupling between adapter internals and core orchestration.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/browser-command.schema.json:lines 1-356 (discriminated command contract and operation oneOf branches)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/flow-execution-result.schema.json:lines 1-104 (FlowExecutionPort standardized result envelope and error schema)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 11-13 (Contract Inventory items 2-3)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 8-23"
+  ],
+  "capability_impact": "Preserves CAP-02 (Google Flow Adapter) and CAP-18 (Track A / Track B Port Equivalence) by enforcing strict contract parity.",
+  "residual_risk": "Future browser UI changes might introduce additional operational parameters. Mitigated by strict schema versioning (MAJOR.MINOR) and consumer-driven contract tests for all 10 operations.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

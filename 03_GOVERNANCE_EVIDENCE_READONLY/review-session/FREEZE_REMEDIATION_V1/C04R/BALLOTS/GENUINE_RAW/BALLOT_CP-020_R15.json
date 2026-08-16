@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-020",
+  "proposal_title": "Security Model Secret Handling Prose & Redaction Rules Formalization",
+  "voter_role": "R15",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As Red Team Specialist with mandatory sign-off authority on security amendments, CP-020 formalizes the concrete security rules and redaction criteria in SECURITY_MODEL.md and ADR-007_BROWSER_SECURITY.md. Formalizing the requirement that telemetry sanitization must mask Authorization, Cookie, set-cookie, and bearer tokens eliminates security ambiguities during automated penetration testing and failure injection audits. It ensures that worker compromises or log pipeline taps cannot extract active operator credentials.",
+  "evidence_citations": [
+    "04_integration/SECURITY_MODEL.md:L1-L18",
+    "06_adrs/ADR-007_BROWSER_SECURITY.md:L1-L20",
+    "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md"
+  ],
+  "capability_impact": "Preserves and formalizes CAP-07 (Security & Isolation) and CAP-15 (Anti-Abuse Compliance).",
+  "residual_risk": "Residual Risk: Unconventional custom authorization headers or sensitive tokens passed in query parameters/URI paths (such as ?token=... or ?apiKey=...) might evade header-only redaction filters. Required Mitigation: Expand R14 Observability telemetry redaction rules to include URI query parameter masking for known secret parameter names (key, token, secret, sig) and payload body redaction before emitting telemetry.",
+  "timestamp": "2026-08-15T21:26:40+07:00"
+}

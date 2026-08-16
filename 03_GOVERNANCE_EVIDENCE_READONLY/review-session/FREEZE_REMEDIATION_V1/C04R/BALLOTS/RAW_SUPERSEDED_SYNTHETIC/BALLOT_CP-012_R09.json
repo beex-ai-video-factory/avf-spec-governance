@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-05 AI Generation",
+  "change_id": "CP-012",
+  "domain_specific_rationale": "AI compiler leverages character tokens to inject consistent subject prompts.",
+  "evidence_citations": "03_repo_blueprints/R05_PROMPT_COMPILER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Asset Versioning & Character/Style Continuity Scoring Invariants",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R09"
+}

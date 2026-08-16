@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-02 and CAP-18",
+  "change_id": "CP-003",
+  "domain_specific_rationale": "Freezing all 10 operations with strict parameter and result schemas in browser-command and flow-execution-result schemas guarantees Track A and Track B hot-swappability.",
+  "evidence_citations": "02_contracts/browser-command.schema.json, flow-execution-result.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "residual_risk": "DOM automation changes must remain encapsulated in R09/R10.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R06"
+}

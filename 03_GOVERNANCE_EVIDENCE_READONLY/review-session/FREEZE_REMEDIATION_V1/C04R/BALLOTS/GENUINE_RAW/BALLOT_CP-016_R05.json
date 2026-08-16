@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-016",
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "voter_role": "R05",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a relational modeling and schema normalization perspective, track_mode represents worker dispatch/execution routing infrastructure rather than an intrinsic domain entity property of GenerationJob: 1) Decoupling Infrastructure from Core Schema: Purging track_mode from domain-entities.schema.json eliminates domain schema pollution and prevents schema migrations whenever worker execution modalities change or expand; 2) Alignment with Physical Table Schema: In DATA_MODEL.md, the operational channel is tracked via flow_track where appropriate, avoiding conflicting legacy track_mode fields in domain entities; 3) Formal Governance Ratification: Formally ratifies the removal that was identified during FA-003, ensuring 100% governance compliance.",
+  "evidence_citations": "01_master/DATA_MODEL.md §2.3 (generation_jobs: flow_track); 02_contracts/domain-entities.schema.json lines 351-358 (flow_track enum); review-session/FREEZE_REMEDIATION_V1/CHANGE_PROPOSALS/CP-016_DELETION_OF_TRACK_MODE_FROM_CORE_SCHEMA.md.",
+  "capability_impact": "Protects CAP-01 (Canonical Core State) and database schema cleanliness by enforcing clean separation of domain state and operational execution mechanisms.",
+  "residual_risk": "None. Downstream worker routing adapters utilize provider request contracts and flow_track without relying on legacy track_mode.",
+  "timestamp": "2026-08-15T21:28:30+07:00"
+}

@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-018",
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Contracts and Concurrency Control perspective, CP-018 establishes two indispensable contract primitives in domain-entities.schema.json#//GenerationJob: attempt_index (integer >= 1) and lease management fields (lease_token UUID and lease_expires_at date-time). Explicitly specifying attempt_index in the canonical contract guarantees monotonic attempt tracking and deterministic idempotency key derivation. Standardizing lease expiration semantics (90-minute safety lease TTL with 30-second worker heartbeats) provides an explicit, testable contract boundary for lease-breaking, timeout detection, and state reconciliation worker operations.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 305, 340-343 (attempt_index definition), lines 359-364 (lease_token and lease_expires_at definitions)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 47-51 (State Invariants: Lease Expiration)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State Management) and CAP-12 (Autonomous Error Recovery & Lease Reconciliation).",
+  "residual_risk": "Clock skew across distributed nodes could cause premature lease expiration. Mitigated by standardizing ISO-8601 UTC timestamps (date-time) and configuring NTP synchronization across worker fleets.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

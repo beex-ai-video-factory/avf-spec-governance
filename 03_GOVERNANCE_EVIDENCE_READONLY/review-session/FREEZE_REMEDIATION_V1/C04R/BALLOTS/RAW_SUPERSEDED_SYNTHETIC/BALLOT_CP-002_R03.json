@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-04 Workflow Engine",
+  "change_id": "CP-002",
+  "domain_specific_rationale": "Temporal activities can now emit granular execution stages (SUBMITTING, GENERATING, DOWNLOADING, QC_RUNNING) without violating canonical DB status constraints.",
+  "evidence_citations": "03_repo_blueprints/R06_WORKFLOW.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine",
+  "residual_risk": "Workflow activity retry logic must map to parent status.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R03"
+}

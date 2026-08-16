@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-018",
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "Formally ratifying `attempt_index` (integer >= 1) and explicit lease semantics with a 90-minute safety Lease TTL and 30-second worker heartbeats resolves critical distributed failure modes: zombie tasks, hanging locks, and split-brain dual-generation. The 90-minute safety ceiling accommodates long-tail video render times while establishing an absolute deterministic upper boundary for automated task reclamation by R02 Reconciliation Workers. Monotonic attempt indexing guarantees clear auditability across retries.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 305, 340-343, 359-364",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 68-74",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 47-51"
+  ],
+  "capability_impact": "Directly reinforces CAP-01 (Canonical Core State) and CAP-12 (Autonomous Error Recovery and Lease Management).",
+  "residual_risk": "Clock skew between distributed worker nodes and PostgreSQL server affecting lease expiry calculations. Mitigated by using database-side timestamps (`NOW()`) for all lease evaluations and heartbeat expirations.",
+  "timestamp": "2026-08-15T21:29:55+07:00"
+}

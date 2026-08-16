@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-008",
+  "proposal_title": "Idempotency Key Specification & Deterministic Construction",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "Deterministic idempotency key derivation `SHA256(shot_version_id + prompt_version_id + provider_id + attempt_index + parameters_hash)` backed by a database unique constraint `UNIQUE(provider_id, idempotency_key)` is foundational to distributed reliability. It guarantees zero duplicate provider submissions during network timeouts, message re-deliveries, or concurrent workflow retries. Explicit inclusion of `attempt_index` permits controlled, auditable retries while strictly precluding accidental double-billing or redundant GPU computations.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 57-83",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 303, 330-333",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 39-41"
+  ],
+  "capability_impact": "Directly guarantees CAP-01 (Canonical Core State Invariants) and CAP-12 (Autonomous Fault Recovery and Deduplication).",
+  "residual_risk": "Non-deterministic parameter object hashing if JSON key ordering is not canonicalized. Mitigated by mandating RFC 8785 JSON Canonicalization Scheme (JCS) before hashing parameters_hash.",
+  "timestamp": "2026-08-15T21:29:35+07:00"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-07 Security Isolation",
+  "change_id": "CP-004",
+  "domain_specific_rationale": "SECURITY_CHALLENGE and AUTH_REQUIRED error codes trigger safe human-in-the-loop pause states rather than failing pipelines or leaking credentials.",
+  "evidence_citations": "04_integration/SECURITY_MODEL.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "residual_risk": "Operator must be notified on security challenge.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R07"
+}

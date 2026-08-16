@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Release Integrity",
+  "change_id": "CP-015",
+  "domain_specific_rationale": "Red team independently verifies that the computed package tree hash matches content files with zero file drift.",
+  "evidence_citations": "KIT_MANIFEST.yaml",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Release Identity Alignment & Deterministic 4-Stage Hashing Pipeline",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R15"
+}

@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-007",
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "voter_role": "R06",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Flow Browser Specialist (R06) perspective, browser automation workers necessarily interface with sensitive authentication state, including Google session cookies, OAuth bearer tokens, and automation profile directories. The previous blueprint asserted unrealizable mechanisms like 'SecretEnclave hardware module' and mandatory C++ native zeroization in standard JS workers, which would have crippled browser worker portability and local development. CP-007 rectifies this by specifying practical and enforceable security controls: OS/Vault credential injection into worker execution environments, standard Node.js buffer clearing (buf.fill(0)) post-authentication, OS-level permission restrictions (chmod 700) on persistent browser profile directories, and automated telemetry redaction filters in the R14 Observability SDK. This ensures that browser diagnostic captures (HAR traces and console logs via CAPTURE_DIAGNOSTIC) do not leak sensitive session cookies or bearer tokens into central observability stores, while maintaining full operational agility for browser automation workers.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R07_PROVIDER_SDK.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/C03R/SOL_06_SECURITY_SECRET_HANDLING_BOUNDARY.md:lines 1-39",
+    "review-session/FREEZE_REMEDIATION_V1/CHANGE_PROPOSALS/CP-007_SECURITY_CREDENTIAL_INJECTION_AND_REDACTION.md:lines 1-20"
+  ],
+  "capability_impact": "Directly preserves CAP-07 (Security & Isolation) while establishing realistic, testable trust boundaries for browser worker runtimes and telemetry exports across both Track A and Track B.",
+  "residual_risk": "High-volume browser diagnostic captures (HAR files generated via CAPTURE_DIAGNOSTIC) could potentially include authorization tokens if headers are improperly masked during network interception. Mitigated by R09 pre-upload redaction pipeline that scrubs Cookie, Authorization, and Proxy-Authorization headers prior to bundling diagnostic packages.",
+  "timestamp": "2026-08-15T21:28:30+07:00"
+}

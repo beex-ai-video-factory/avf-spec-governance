@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-15 Anti-Abuse Compliance",
+  "change_id": "CP-006",
+  "domain_specific_rationale": "Red team review confirms that Playwright dedicated profile execution avoids common bot detection heuristics while preserving isolation.",
+  "evidence_citations": "04_integration/SECURITY_MODEL.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R15"
+}

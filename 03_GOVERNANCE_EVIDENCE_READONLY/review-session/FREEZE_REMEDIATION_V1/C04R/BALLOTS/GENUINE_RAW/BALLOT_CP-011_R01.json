@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-011",
+  "proposal_title": "3-Layer Prompt Compilation AST & Extensible Directives",
+  "voter_role": "R01",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "CP-011 provides an exemplary DDD Anti-Corruption Layer (ACL) pattern between high-level creative direction and proprietary video generator syntax. The 3-layer architecture cleanly separates: (1) Semantic AST containing domain concepts (cinematography, lighting, subject action, camera movement, style parameters) derived from ShotVersion; (2) Engine IR acting as a normalized intermediate representation; and (3) Target Payload mapping to concrete downstream provider syntaxes (ComfyUI graph, Runway Gen-3 JSON, Luma API, etc.). This ensures that core domain entities remain pristine and immune to upstream/downstream AI model syntax turbulence.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R05_PROMPT_COMPILER.md:lines 8-26",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 244-293",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 42-56"
+  ],
+  "capability_impact": "Directly preserves and enhances CAP-05 (Prompt Compiler & Dynamic Syntax Mapping), preventing generative engine churn from polluting domain models.",
+  "residual_risk": "New generative AI modalities or non-standard provider parameters may not map cleanly to standard Engine IR constructs. Mitigated by the extensible directives architecture and JSONB snapshot storage in PromptVersion.ast_snapshot.",
+  "timestamp": "2026-08-15T21:27:38+07:00"
+}

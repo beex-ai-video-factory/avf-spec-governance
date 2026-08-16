@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-019",
+  "proposal_title": "Addition of attempt_index to provider-request.schema.json",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "Propagating `attempt_index` into `provider-request.schema.json` is critical to allow provider adapters to construct deterministic, attempt-aware upstream idempotency keys and request tags. Without attempt_index in the provider request contract, provider SDKs risk either reusing idempotency tokens across attempts (causing upstream APIs to return cached results/errors from prior attempts) or generating non-deterministic random tokens that forfeit idempotency guarantees altogether.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/provider-request.schema.json:lines 13, 63-67",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R07_PROVIDER_SDK.md:lines 8-26",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md:lines 8-26"
+  ],
+  "capability_impact": "Directly supports CAP-03 (Provider Abstraction) and CAP-12 (Autonomous Fault Recovery and Retry Transparency).",
+  "residual_risk": "External provider APIs that do not accept attempt metadata. Mitigated by adapter layer formatting attempt_index into provider-specific header or metadata fields only when supported, while maintaining internal contract consistency.",
+  "timestamp": "2026-08-15T21:30:00+07:00"
+}

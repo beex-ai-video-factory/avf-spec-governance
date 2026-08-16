@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-018",
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "voter_role": "R06",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the Flow Browser Specialist (R06) perspective, CP-018 provides crucial guarantees for browser-based generative AI workflows. Browser automation with third-party providers like Google Flow involves inherent latency characteristics: jobs frequently experience external provider queuing delays, complex multi-pass diffusion generation cycles (5-15 minutes), and multi-gigabyte media asset downloads. Setting the safety lease TTL to 90 minutes with 30-second worker heartbeats provides the browser worker runtime sufficient runway to complete end-to-end execution without risking premature lease revocation or duplicate task assignment by the R02 reconciliation engine. Furthermore, adding attempt_index (integer >= 1) to GenerationJob enables precise attempt-scoped idempotency key derivation (job_id:attempt_index), preventing browser retry attempts from colliding with prior failed or interrupted browser sessions. This eliminates race conditions during browser crash recovery and retry dispatch.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 294-350",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/CHANGE_PROPOSALS/CP-018_ATTEMPT_INDEX_AND_LEASE_TTL_SEMANTICS.md:lines 1-16"
+  ],
+  "capability_impact": "Directly preserves CAP-01 (Canonical Core State Integrity), CAP-02 (Google Flow Adapter Execution), and CAP-04 (Workflow Engine Orchestration) by ensuring robust execution lease protection and deterministic retry isolation for long-running browser worker automation.",
+  "residual_risk": "If an unresponsive browser worker fails to heartbeat while retaining an active lease, the 90-minute safety lease TTL creates an extended recovery window before automated reconciliation occurs. Mitigated by R09 worker-side watchdog timers that abort stuck Playwright contexts upon element/page interaction timeouts (30s/10s) and explicitly release leases or report terminal errors.",
+  "timestamp": "2026-08-15T21:28:50+07:00"
+}

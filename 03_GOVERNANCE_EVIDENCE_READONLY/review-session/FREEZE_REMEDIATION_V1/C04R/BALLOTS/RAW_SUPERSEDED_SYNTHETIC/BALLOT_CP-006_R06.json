@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-02 Google Flow Execution",
+  "change_id": "CP-006",
+  "domain_specific_rationale": "Formalizing the A1/A2 Extension -> A3 Playwright Dedicated Profile -> Track B FlowKit hierarchy ensures operational continuity regardless of browser platform updates.",
+  "evidence_citations": "03_repo_blueprints/R09_BROWSER_WORKER.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "residual_risk": "A3 profile directory must be pre-configured with Google login.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R06"
+}

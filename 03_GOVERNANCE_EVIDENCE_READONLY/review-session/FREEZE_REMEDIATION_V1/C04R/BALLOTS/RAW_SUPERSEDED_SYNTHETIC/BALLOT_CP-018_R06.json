@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Workflow Retries",
+  "change_id": "CP-018",
+  "domain_specific_rationale": "Workflow engine increments attempt_index on transient retry executions.",
+  "evidence_citations": "03_repo_blueprints/R06_WORKFLOW.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R06"
+}

@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-010",
+  "proposal_title": "Complete 15-Repository Acyclic Dependency DAG & Forbidden Matrix",
+  "voter_role": "R10",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Developer Ergonomics, CI/CD Pipeline, and AI Handoff perspective, an incomplete or loosely specified repository dependency graph causes severe developer friction: build-order deadlocks, circular import errors, multi-repo CI workspace confusion, and rogue cross-repository coupling by coding agents. CP-010 establishes a crystal-clear, mathematically verified 4-tier acyclic dependency DAG across all 15 system repositories. Crucially for DX and automated agent governance, CP-010 integrates an explicit, enforceable Forbidden Dependency Matrix into every repository blueprint (R01_CONTRACTS.md through R15_INTEGRATION_HARNESS.md). This enables the immediate implementation of automated dependency linter rules (eslint-plugin-import, depcheck, cargo-deny, madge) in local pre-commit hooks and CI pipelines, providing instant feedback to developers and autonomous coding agents when forbidden boundary crossings occur.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/04_integration/DEPENDENCY_GRAPH.md:lines 1-70",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/REPOSITORY_STRATEGY.md:lines 30-110",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/05_phases/BUILD_ORDER.md:lines 1-65",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 15-35",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R15_INTEGRATION_HARNESS.md:lines 20-45"
+  ],
+  "capability_impact": "Protects CAP-02 (Canonical State & Data Consistency), CAP-04 (Pluggable Provider Abstraction), CAP-16 (Hermetic Simulation & Testing), and overall Multi-Repository Implementability by ensuring clean modular isolation and predictable bottom-up buildability.",
+  "residual_risk": "Developers or AI agents working in monorepo or polyrepo setups might bypass linter rules with symlinks or local relative imports. Mitigated by strict CI boundary checks, containerized hermetic builds in R15 Integration Harness, and package lockfile validation.",
+  "timestamp": "2026-08-15T21:28:45+07:00"
+}

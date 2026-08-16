@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-04 Reliability",
+  "change_id": "CP-005",
+  "domain_specific_rationale": "Correlation and aggregate version fields ensure exactly-once event processing and idempotency enforcement in event subscribers.",
+  "evidence_citations": "02_contracts/CONTRACTS_OVERVIEW.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry & Dotted Naming",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

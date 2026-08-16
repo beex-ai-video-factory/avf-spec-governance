@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 and CAP-05",
+  "change_id": "CP-001",
+  "domain_specific_rationale": "Restoring ShotVersion creative intent and PromptVersion->ShotVersion linkage establishes true DDD aggregate boundaries and enables prompt revision branches without shot entity corruption.",
+  "evidence_citations": "01_master/DATA_MODEL.md \u00a72.1-2.4",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "residual_risk": "Requires schema migration in Core State repository.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R01"
+}

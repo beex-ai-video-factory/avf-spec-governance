@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Release Identity",
+  "change_id": "CP-023",
+  "domain_specific_rationale": "Synchronizing version 1.0.0 across VERSION, README, KIT_MANIFEST, and COMMITTEE_REVIEW_EDITION resolves identity ambiguity.",
+  "evidence_citations": "VERSION, README.md, KIT_MANIFEST.yaml",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Release Version 1.0.0 Synchronization Across All Candidate Files",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R10"
+}

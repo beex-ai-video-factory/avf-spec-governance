@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-014",
+  "proposal_title": "Media Processing DLQ, Quarantine State & Exponential Retry Policy",
+  "voter_role": "R08",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a QA and reliability test engineering viewpoint, having formal Dead Letter Queue (DLQ) replay semantics, explicit QUARANTINED asset states, and bounded exponential backoff policies is essential for isolating poison-pill media files. It ensures that unrecoverable container corruption or unsupported codecs do not trigger infinite retry loops or poison worker queues. Furthermore, explicit quarantine states provide verifiable state transitions that can be comprehensively validated under failure and chaos test scenarios.",
+  "evidence_citations": "03_repo_blueprints/R12_MEDIA.md (Failure Modes, Retry Strategy), 02_contracts/STATUS_STATE_MACHINES.md, 04_integration/TEST_STRATEGY.md (Failure/chaos scenarios 8, 9, 11)",
+  "capability_impact": "Protects CAP-09 (Media Processing & Assembly) and CAP-15 (System Reliability & Fault Isolation) during corrupted download or ingest failures.",
+  "residual_risk": "Accumulation of quarantined assets requiring operator triage; mitigated by structured diagnostic metadata, DLQ replay CLI tooling in R15, and Operator Console alerting.",
+  "timestamp": "2026-08-15T21:28:20+07:00"
+}

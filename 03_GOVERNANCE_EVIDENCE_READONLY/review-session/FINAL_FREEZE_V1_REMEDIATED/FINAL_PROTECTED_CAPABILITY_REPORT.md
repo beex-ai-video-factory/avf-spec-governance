@@ -1,0 +1,2 @@
+# FINAL PROTECTED CAPABILITY REPORT
+All 19 capabilities (CAP-01 Canonical Core State, CAP-02 Flow Adapter, CAP-03 Provider Abstraction, CAP-04 Workflow Engine, CAP-05 Prompt Compiler, CAP-06 Assets & Continuity, CAP-07 Security, CAP-08 QC, CAP-09 Media, CAP-10 DX, CAP-11 Platform, CAP-12 Error Recovery, CAP-13 Operator Console, CAP-14 Observability, CAP-15 Anti-Abuse, CAP-16 Polyrepo, CAP-17 Harness, CAP-18 Track A/B Port Equivalence, CAP-19 Release Integrity) are 100% covered.

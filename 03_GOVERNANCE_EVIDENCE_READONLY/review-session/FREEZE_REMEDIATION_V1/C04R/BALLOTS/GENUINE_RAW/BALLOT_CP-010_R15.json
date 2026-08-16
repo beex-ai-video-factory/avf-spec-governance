@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-010",
+  "proposal_title": "Complete 15-Repository Acyclic Dependency DAG & Forbidden Matrix",
+  "voter_role": "R15",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Red Team threat modeling perspective, enforcing a strict acyclic dependency DAG and an explicit Forbidden Dependency Matrix is essential for blast radius containment. A common exploit path in distributed multi-repo systems involves compromised worker nodes (such as browser automation scripts in R09/R10) querying relational databases directly or creating circular runtime references to bypass validation gates. CP-010 establishes hard architectural barriers: only R02 owns database access; R08 talks to R09/R10 strictly via FlowExecutionPort; and Layer 4/5 cannot bypass Layer 0 contract schemas. This provides clear segmentation against lateral movement and privilege escalation.",
+  "evidence_citations": [
+    "04_integration/DEPENDENCY_GRAPH.md:L7-L50",
+    "01_master/REPOSITORY_STRATEGY.md",
+    "00_governance/01_SPEC_FREEZE_POLICY.md:L23-L24"
+  ],
+  "capability_impact": "Preserves CAP-07 (Security & Isolation), CAP-14 (Polyrepo Isolation), and CAP-16 (Independent Deployability).",
+  "residual_risk": "Residual Risk: Developers might attempt runtime dynamic imports (eval, require with dynamic path, or RPC side-channels) that bypass static dependency linters. Required Mitigation: Implement automated AST dependency checking and import linting in CI (enforcing the matrix in 04_integration/DEPENDENCY_GRAPH.md) plus network namespace segmentation ensuring worker containers physically lack direct network routes to the Postgres database port.",
+  "timestamp": "2026-08-15T21:26:40+07:00"
+}

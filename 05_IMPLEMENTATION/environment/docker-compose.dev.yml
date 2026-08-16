@@ -1,0 +1,120 @@
+version: '3.8'
+
+services:
+  # R02 Core State Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: avf-postgres
+    profiles: ["core", "track-a", "track-b"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-avf_dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-avf_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-avf_canonical_state}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-avf_dev} -d ${POSTGRES_DB:-avf_canonical_state}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # R06 Temporal Workflow Engine
+  temporal:
+    image: temporalio/auto-setup:1.24.2
+    container_name: avf-temporal
+    profiles: ["core", "track-a", "track-b"]
+    environment:
+      - DB=postgresql
+      - DB_PORT=5432
+      - POSTGRES_USER=${POSTGRES_USER:-avf_dev}
+      - POSTGRES_PWD=${POSTGRES_PASSWORD:-avf_dev_password}
+      - POSTGRES_SEEDS=postgres
+      - DYNAMIC_CONFIG_FILE_PATH=/etc/temporal/config/dynamic_config.yaml
+    ports:
+      - "7233:7233"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  temporal-ui:
+    image: temporalio/ui:2.26.0
+    container_name: avf-temporal-ui
+    profiles: ["core", "track-a", "track-b"]
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+      - TEMPORAL_CORS_ORIGINS=http://localhost:3000
+    ports:
+      - "${TEMPORAL_UI_PORT:-8088}:8080"
+    depends_on:
+      - temporal
+
+  # Object Storage (S3 / MinIO Emulator)
+  minio:
+    image: minio/minio:RELEASE.2024-05-10T01-41-38Z
+    container_name: avf-minio
+    profiles: ["core", "track-a", "track-b"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-avf_minio_admin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-avf_minio_password}
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # R14 OpenTelemetry Collector
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.95.0
+    container_name: avf-otel-collector
+    profiles: ["core", "track-a", "track-b"]
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - "4317:4317" # OTLP gRPC
+      - "4318:4318" # OTLP HTTP
+      - "8889:8889" # Prometheus exporter metrics
+
+  # R07 / R15 Mock Video Generation Provider
+  fake-video-provider:
+    image: node:20-alpine
+    container_name: avf-fake-provider
+    profiles: ["core", "track-a", "track-b"]
+    working_dir: /app
+    ports:
+      - "8090:8090"
+    command: >
+      sh -c "node -e '
+        const http = require(\"http\");
+        const server = http.createServer((req, res) => {
+          res.setHeader(\"Content-Type\", \"application/json\");
+          if (req.url === \"/health\") {
+            res.writeHead(200);
+            res.end(JSON.stringify({ status: \"UP\", service: \"FakeVideoProvider\" }));
+          } else if (req.url === \"/generate\" && req.method === \"POST\") {
+            res.writeHead(200);
+            res.end(JSON.stringify({ generation_id: \"gen_\" + Date.now(), status: \"PENDING\" }));
+          } else {
+            res.writeHead(200);
+            res.end(JSON.stringify({ status: \"COMPLETED\", video_url: \"http://localhost:9000/avf-video-assets/sample.mp4\" }));
+          }
+        });
+        server.listen(8090, () => console.log(\"FakeVideoProvider mock listening on port 8090\"));
+      '"
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8090/health || exit 1"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+
+volumes:
+  postgres_data:
+  minio_data:

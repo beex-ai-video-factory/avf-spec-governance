@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Contract Schema",
+  "change_id": "CP-018",
+  "domain_specific_rationale": "Schema formally requires attempt_index on GenerationJob with minimum value 1.",
+  "evidence_citations": "02_contracts/domain-entities.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

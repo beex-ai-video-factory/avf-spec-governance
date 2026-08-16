@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-024",
+  "proposal_title": "Deterministic Package Verification Tooling (verify_package.py)",
+  "voter_role": "R11",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a platform engineering, tooling, and infrastructure automation standpoint, downstream consumers and automated build agents must be provided with a zero-dependency, self-contained verification tool to deterministically validate package integrity. Prior release processes relied on ad-hoc scripts or unverified manifest states (GOV-006 / TECH-011). CP-024 introduces `verify_package.py` into the root of the specification package. The tool utilizes exclusively Python 3 standard library modules (os, sys, hashlib, json) to traverse the package directory, exclude self-referential manifest and hash files, sort file paths in deterministic lexicographical order, compute individual file SHA-256 digests, and calculate the canonical CONTENT_TREE_SHA256 digest. This provides a universally runnable, deterministic verification gate for CI/CD runners and external auditors.",
+  "evidence_citations": [
+    "REVISED_SPEC_CANDIDATE/verify_package.py:L1-L40 (Complete zero-dependency standalone verification script with deterministic tree hashing and explicit exclusion sets)",
+    "REVISED_SPEC_CANDIDATE/README.md:L23-L25 (Documented execution instructions for independent package verification)",
+    "REMEDIATION_FINDING_REGISTER.md:L247-L263 (Closure criteria for TECH-011 and GOV-006)"
+  ],
+  "capability_impact": "Provides automated, verifiable, tamper-evident package validation across all deployment targets and platforms without external package dependencies.",
+  "residual_risk": "Operating system file permission differences or filesystem-specific extended attributes (.DS_Store) inadvertently modifying tree hash outputs. Mitigated by explicit EXCLUDE_FILES filtering and dotfile omission logic in verify_package.py.",
+  "timestamp": "2026-08-15T21:30:30+07:00"
+}

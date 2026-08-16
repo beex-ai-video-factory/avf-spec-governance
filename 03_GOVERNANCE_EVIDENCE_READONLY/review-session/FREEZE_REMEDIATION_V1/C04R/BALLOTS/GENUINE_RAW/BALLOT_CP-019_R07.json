@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-019",
+  "proposal_title": "Addition of attempt_index to provider-request.schema.json",
+  "voter_role": "R07",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "CP-019 incorporates attempt_index (integer >= 1, default 1) into provider-request.schema.json. From a security and cryptographic integrity perspective, attempt_index provides the essential entropy input required for deterministic, non-colliding provider-side idempotency keys (e.g. SHA256 hashing of job_id and attempt_index). This guarantees protection against duplicate submission replays, double-billing exploits, and desynchronization between Core lease tracking and provider downstream tasks. It also facilitates precise audit logging and non-repudiation of individual generation attempts.",
+  "evidence_citations": [
+    "02_contracts/provider-request.schema.json:Lines 13 & 63-67 (attempt_index integer property with minimum: 1, default: 1)",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md:Section 11 (Deterministic idempotency key specification)",
+    "04_integration/SECURITY_MODEL.md:Section 3 (Provider session and credential handling)"
+  ],
+  "capability_impact": "Directly supports CAP-03 (Provider Abstraction), CAP-07 (Security & Isolation), and CAP-12 (Autonomous Error Recovery) by ensuring cryptographically sound retry scoping and replay safety.",
+  "residual_risk": "Improper monotonic counter progression by upstream orchestrators could result in idempotency collisions. Mitigation: R02 Core State and R06 Workflow engines must strictly increment attempt_index when issuing renewed leases or handling recoverable transient failures.",
+  "timestamp": "2026-08-15T21:28:30+07:00"
+}

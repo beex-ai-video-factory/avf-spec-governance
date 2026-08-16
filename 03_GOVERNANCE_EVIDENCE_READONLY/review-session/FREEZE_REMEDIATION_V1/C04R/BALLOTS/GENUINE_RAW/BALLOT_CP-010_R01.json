@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-010",
+  "proposal_title": "Complete 15-Repository Acyclic Dependency DAG & Forbidden Matrix",
+  "voter_role": "R01",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Domain Architecture and Layering perspective, CP-010 establishes strict bounded context isolation and prevents domain model corruption across all 15 system repositories. It places R01 Contracts strictly at Layer 0 with zero inward or outward dependencies, establishing it as the pure schema source of truth. R02 Core State is isolated at Layer 1 as the sole custodian of transactional persistence, strictly prohibiting direct database access from domain services (R03-R05) and execution workers (R07-R13). The mathematically verified acyclic dependency DAG ensures that dependencies flow strictly from outer orchestrators/adapters toward inner domain contracts, conforming cleanly to Onion/Hexagonal architectural principles and preventing cyclical coupling.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/04_integration/DEPENDENCY_GRAPH.md:lines 1-50",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 8-32",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 24-32",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 27-32"
+  ],
+  "capability_impact": "Directly protects architectural integrity across all system capabilities (CAP-01 through CAP-12), ensuring clean separation between core domain state, workflow orchestration, and infrastructure execution adapters.",
+  "residual_risk": "Future development could inadvertently introduce illegal imports violating the forbidden dependency matrix. Mitigated by automated CI static analysis rules and strict import boundary verification in R15 Integration Harness.",
+  "timestamp": "2026-08-15T21:27:35+07:00"
+}

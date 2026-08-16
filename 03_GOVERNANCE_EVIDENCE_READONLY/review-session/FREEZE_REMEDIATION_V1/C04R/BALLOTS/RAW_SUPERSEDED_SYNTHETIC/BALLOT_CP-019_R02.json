@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Submission Auditability",
+  "change_id": "CP-019",
+  "domain_specific_rationale": "Reliability layer verifies that every provider submission carries an explicit attempt index.",
+  "evidence_citations": "02_contracts/CONTRACTS_OVERVIEW.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Addition of attempt_index to provider-request.schema.json",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

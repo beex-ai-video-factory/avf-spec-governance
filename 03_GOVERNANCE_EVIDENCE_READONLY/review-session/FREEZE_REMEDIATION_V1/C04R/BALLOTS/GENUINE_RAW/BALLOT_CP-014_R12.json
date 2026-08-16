@@ -1,0 +1,19 @@
+{
+  "change_id": "CP-014",
+  "proposal_title": "Media Processing DLQ, Quarantine State & Exponential Retry Policy",
+  "voter_role": "R12",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As R12 (Media Processing Specialist), establishing robust Dead Letter Queue (DLQ) replay mechanisms, quarantine state isolation, and exponential backoff with jitter is critical for media ingestion, transcoding, audio-video muxing, stitching, and thumbnail generation pipelines. Media rendering workloads are computationally expensive and highly vulnerable to 'poison pill' inputs (e.g., malformed codec bitstreams, corrupt container headers, or truncated chunks). Without explicit quarantine isolation and exponential retry policies, transient worker node I/O or storage saturations can trigger thundering herds, while permanent decoding defects can trap workers in infinite retry loops, exhausting cluster CPU/GPU resources and blocking the rendering queue. Retaining CP-014 formalizes the boundary between transient errors (which back off gracefully) and permanent media corruption (which isolates into quarantine for operator triage or automated replay upon remediation), preserving system stability and media processing SLA guarantees.",
+  "evidence_citations": [
+    "03_repo_blueprints/R12_MEDIA.md#L8-L10 (Section 1: Responsibility - Video transcoding, audio-video muxing, stitching, thumbnail generation, and DLQ quarantine)",
+    "03_repo_blueprints/R12_MEDIA.md#L36-L38 (Section 10: Retry Policy - Transient errors retry with exponential backoff and jitter; permanent errors fail immediately)",
+    "03_repo_blueprints/R12_MEDIA.md#L52-L55 (Section 15: MVP vs Production Scope - Automated DLQ recovery and enterprise scaling)",
+    "02_contracts/STATUS_STATE_MACHINES.md#L21-L30 (Section 1 Tier 2: Execution Stage transitions for failure handling and recovery)",
+    "07_REPO_CONTEXT_PROFILES/R12_AVF_MEDIA.md#L3-L5 (Mission: Own media ingest/probe/normalize/assembly/storage operations)"
+  ],
+  "capability_impact": "Directly safeguards high-throughput media transcoding and assembly pipelines against queue stalling and worker exhaustion. Guarantees that corrupted audio/video artifacts are quarantined safely without contaminating downstream delivery or breaking R02 canonical lifecycle state machine invariants.",
+  "residual_risk": "Quarantined media assets can lead to unbounded storage consumption in temporary/quarantine buckets if not bounded by TTLs, and misclassified codec errors could trigger unnecessary retry backoffs.",
+  "mitigation": "Enforce strict 14-day object storage retention TTLs on quarantined media artifacts, emit OpenTelemetry DLQ depth metrics via R14, and mandate ffprobe pre-flight validation to immediately fail non-transient format corruptions.",
+  "timestamp": "2026-08-15T21:27:30+07:00"
+}

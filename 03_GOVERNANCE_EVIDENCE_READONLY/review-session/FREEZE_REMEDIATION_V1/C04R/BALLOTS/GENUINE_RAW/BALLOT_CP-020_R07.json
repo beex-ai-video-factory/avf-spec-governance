@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-020",
+  "proposal_title": "Security Model Secret Handling Prose & Redaction Rules Formalization",
+  "voter_role": "R07",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "CP-020 formalizes and normatively ratifies the updated text of SECURITY_MODEL.md and ADR-007_BROWSER_SECURITY.md. As the Security Specialist, this proposal codifies our foundational security architecture into binding specification text: establishing VPC database boundaries, strict worker filesystem permissions (chmod 700), Native Messaging process user constraints, zero hardcoded credentials, explicit runtime memory wiping (buf.fill(0)), and centralized telemetry redaction across R14 SDK. It also formally rejects unsafe CAPTCHA-evasion mechanics in favor of secure operator challenge fallback states. This brings clarity and enforceability to platform security compliance.",
+  "evidence_citations": [
+    "04_integration/SECURITY_MODEL.md:Lines 1-18 (Complete normative trust boundaries, worker node permissions, credential hygiene, and telemetry redaction rules)",
+    "06_adrs/ADR-007_BROWSER_SECURITY.md:Lines 1-20 (Normative decision prohibiting automated challenge bypass and mandating operator intervention)",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md:Section 13 (Security & Trust Boundaries)",
+    "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:Section 13 (Mandatory Redaction Engine)"
+  ],
+  "capability_impact": "Directly establishes and hardens CAP-07 (Security & Isolation) across the entire AVF architecture. Provides an airtight security standard for all repository implementations.",
+  "residual_risk": "Custom third-party dependencies or unvetted npm packages introduced into workers could inadvertently bypass redaction or write sensitive state to disk. Mitigation: R15 Red Team security test harnesses must execute credential leakage probes and static code analysis (AST linting for secret keywords) during CI verification.",
+  "timestamp": "2026-08-15T21:28:40+07:00"
+}

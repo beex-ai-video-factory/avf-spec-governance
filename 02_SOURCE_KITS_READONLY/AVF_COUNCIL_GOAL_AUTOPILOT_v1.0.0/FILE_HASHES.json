@@ -1,0 +1,46 @@
+[
+  {
+    "path": "AVF_COUNCIL_ALWAYS_ON.md",
+    "sha256": "bebf238af8ccb801d2148517234da5c1c4f41be083b846ed0c205cf7809ec73a"
+  },
+  {
+    "path": "GOAL_C00_SEMANTIC_BASELINE.md",
+    "sha256": "e3b214ee7cc58607ebcac3f55b87ae2a6ddb47103b56d876b1dfd93d5f7c03cd"
+  },
+  {
+    "path": "GOAL_C01_BLIND_REVIEW.md",
+    "sha256": "0575fb4e077cbae65f0992302086bde77a8683c7097418b218f5c34961410a2d"
+  },
+  {
+    "path": "GOAL_C02_CROSS_EXAM.md",
+    "sha256": "53c890cfd78714bda5feff2be2b38376a14680de7308c69ac892581a452e287f"
+  },
+  {
+    "path": "GOAL_C03_SOLUTION_DESIGN.md",
+    "sha256": "ccc1747adf4d3d51a30b0c4581feff47bfd04bfeb0fb920f6da4f3b52e260d1d"
+  },
+  {
+    "path": "GOAL_C04_VOTING_SYNTHESIS.md",
+    "sha256": "854641cf1cb065209bd7cfbb1a335ac9a2a29d57a07442bff4117fd806a9a162"
+  },
+  {
+    "path": "GOAL_C05_INDEPENDENT_AUDIT.md",
+    "sha256": "d1810e21041f9d6d66f9fcb8f1c40bd176f8697e741295dec01dc6019c75895a"
+  },
+  {
+    "path": "GOAL_C06_FREEZE_READINESS.md",
+    "sha256": "5f525ad36798c1ff2332a2a39007b45268e15148c0696da176c07bb88bb4ee83"
+  },
+  {
+    "path": "GOAL_C07_CERTIFICATION.md",
+    "sha256": "7c9fc0b00e6ed06eee443a36936367e945b32bbb049992b59834e784a68fd22e"
+  },
+  {
+    "path": "QUICK_COMMANDS.md",
+    "sha256": "50781295614806929ba1333319c62303c866d8eb877953d5989b235c0409bf1a"
+  },
+  {
+    "path": "README.md",
+    "sha256": "c653250e0ba8bf80a35236023bc82748ec6bd3b9c1f938c82ed2406e4670ad8e"
+  }
+]

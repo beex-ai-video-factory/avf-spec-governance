@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-004",
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Contracts and API Architecture perspective, CP-004 establishes a clean separation between synchronous transport status (status: SUCCESS, FAILED, PENDING, RUNNING) and asynchronous provider job status (generation_status: QUEUED, PROCESSING, SUCCEEDED, FAILED, CANCELLED). Conflating HTTP/RPC transport status with async generation lifecycle causes protocol ambiguities in provider clients. Moreover, CP-004 freezes the canonical 9-code NormalizedError taxonomy (PROVIDER_RATE_LIMIT, AUTH_REQUIRED, SECURITY_CHALLENGE, UI_CHANGED, BUDGET_EXHAUSTED, UNSUPPORTED_CAPABILITY, NETWORK_TIMEOUT, BAD_REQUEST, PROVIDER_INTERNAL_ERROR) paired with strictly enumerated retry_category values (TRANSIENT, PERMANENT, POLICY_BLOCKED, RESOURCE_EXHAUSTED) and optional suggested_backoff_ms. Formalizing this taxonomy in provider-result.schema.json and domain-entities.schema.json ensures that autonomous error recovery and retry policies operate over deterministic contract enums rather than unstructured provider-specific error strings.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/provider-result.schema.json:lines 30-48 (status and generation_status enums), lines 82-125 (NormalizedError schema definition)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 46-89 (NormalizedError entity definition)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 30-42 (Section 3: Normalized Error Taxonomy)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/API_COMPATIBILITY_POLICY.md:lines 7-14"
+  ],
+  "capability_impact": "Preserves CAP-03 (Provider Abstraction) and CAP-12 (Autonomous Error Recovery) through structured, type-safe error normalization.",
+  "residual_risk": "Adapters may fail to properly map novel vendor error codes into the 9 standard taxonomy enums. Mitigated by conformance test fixtures validating raw-to-normalized error mappings across provider adapters.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

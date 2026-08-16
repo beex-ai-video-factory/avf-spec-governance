@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-002",
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine & Stage Mapping",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As the primary guardian of distributed reliability and state integrity, R02 strongly endorses the formal two-tier state machine architecture. Confining PostgreSQL database status to 7 coarse-grained, transactional states (QUEUED, RESERVED, RUNNING, COMPLETED, FAILED, CANCELLED, RECONCILED) eliminates high-frequency DB lock contention and write amplification. Meanwhile, delegating the 11+ fine-grained execution stages (e.g. WAITING_FOR_ASSETS, PROMPT_READY, BUDGET_RESERVED, SUBMITTING, SUBMITTED, GENERATING, DOWNLOADING, DOWNLOADED, QC_RUNNING) to workflow telemetry and event streams provides fine-grained observability without destabilizing transactional invariants. The Parent-to-Child Mapping Matrix ensures that crash recovery and lease timeouts can deterministically assess job health and prevent invalid lifecycle jumps.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 1-51",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 12-45, 334-339",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R06_WORKFLOW.md:lines 8-26"
+  ],
+  "capability_impact": "Directly preserves and reinforces CAP-01 (Canonical Core State) and CAP-04 (Workflow Engine Orchestration), providing clear fault isolation and deterministic lease recovery semantics.",
+  "residual_risk": "Asynchronous race condition if a crashed worker recovers just as the R02 Reconciliation Worker marks a job RECONCILED. Mitigated by strict atomic CAS (compare-and-swap) updates on lease_token and lease_expires_at in PostgreSQL.",
+  "timestamp": "2026-08-15T21:29:10+07:00"
+}

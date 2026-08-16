@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-009",
+  "proposal_title": "Two-Phase Credit Settlement Protocol",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "In high-cost generative AI systems, a two-phase credit settlement protocol is vital for financial consistency and fraud prevention. Reserving `estimated_cost_credits` atomically in Phase 1 (QUEUED -> RESERVED) prevents credit overdrafts across concurrent jobs. Settling `actual_cost_credits` or releasing reservations in Phase 2 upon COMPLETED, FAILED, or CANCELLED ensures that credits are never permanently stranded even when downstream workers experience fatal hardware faults or unrecoverable exceptions.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 74-75",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/STATUS_STATE_MACHINES.md:lines 13-18",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26"
+  ],
+  "capability_impact": "Directly preserves CAP-01 (Transactional Integrity) and CAP-14 (Usage & Cost Accounting) across distributed service boundaries.",
+  "residual_risk": "Orphaned credit reservations caused by worker unresponsiveness prior to Phase 2 completion. Mitigated by automated R02 lease reconciliation releasing or finalizing reservations upon 90-minute safety lease TTL expiry.",
+  "timestamp": "2026-08-15T21:29:40+07:00"
+}

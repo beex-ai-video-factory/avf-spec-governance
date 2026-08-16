@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CI Verification",
+  "change_id": "CP-024",
+  "domain_specific_rationale": "QA automated smoke tests execute verify_package.py in CI to catch corrupted or modified artifacts.",
+  "evidence_citations": "03_repo_blueprints/R15_INTEGRATION_HARNESS.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Deterministic Package Verification Tooling (verify_package.py)",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

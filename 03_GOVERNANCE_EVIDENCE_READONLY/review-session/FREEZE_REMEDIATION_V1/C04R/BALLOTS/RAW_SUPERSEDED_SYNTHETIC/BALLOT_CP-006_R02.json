@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-02 Reliability",
+  "change_id": "CP-006",
+  "domain_specific_rationale": "The proven existence of A3 Playwright and Track B fallbacks justifies classifying SPK-001 MV3 keepalive empirical risk as non-blocking for freeze.",
+  "evidence_citations": "07_risk/RISK_REGISTER.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

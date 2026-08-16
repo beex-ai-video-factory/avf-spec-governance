@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-015",
+  "proposal_title": "Release Identity Alignment & Deterministic 4-Stage Hashing Pipeline",
+  "voter_role": "R15",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Red Team and Software Supply Chain Security perspective, CP-015 eliminates critical integrity vulnerabilities in release generation and verification. Circular references in self-hashing manifests risked verification bypass or non-deterministic package states that an attacker could exploit to slip unvetted contract changes into production. The 4-stage deterministic hashing protocol (file hash calculation -> sorted entry tree hash -> non-self-referential manifest embedding -> archive digest) guarantees cryptographic immutability and verifiable provenance for the v1.0.0 freeze artifact.",
+  "evidence_citations": [
+    "00_governance/01_SPEC_FREEZE_POLICY.md:L17-L25",
+    "verify_package.py:L8-L32",
+    "KIT_MANIFEST.yaml"
+  ],
+  "capability_impact": "Preserves CAP-17 (Auditability & Traceability) and CAP-19 (Deterministic Package Verification).",
+  "residual_risk": "Residual Risk: Platform-specific line ending conversions (CRLF vs LF) or filesystem metadata discrepancies during cross-platform cloning (Windows vs macOS/Linux) could cause false-positive verification mismatches. Required Mitigation: Enforce .gitattributes with '* text=auto eol=lf' across all candidate repositories, and ensure verify_package.py operates strictly on binary streams or normalized byte arrays.",
+  "timestamp": "2026-08-15T21:26:40+07:00"
+}

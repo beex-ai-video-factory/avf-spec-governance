@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Adapter Routing",
+  "change_id": "CP-016",
+  "domain_specific_rationale": "Browser worker selects Track A vs Track B via configuration rather than entity field.",
+  "evidence_citations": "03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Deletion of GenerationJob.track_mode from Canonical Domain Schema",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R06"
+}

@@ -1,0 +1,19 @@
+{
+  "change_id": "CP-003",
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "voter_role": "R10",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Developer Experience, Code Generation, and AI Agent Handoff perspective, un-typed generic payload dictionaries (such as params: { type: 'object', additionalProperties: true } in v0.9.0 browser-command.schema.json) and un-schema'd return payloads represent severe ergonomic failure modes. When downstream engineering teams and autonomous coding agents attempt to implement adapters (R08_GOOGLE_FLOW_ADAPTER), worker executors (R09_BROWSER_WORKER), bridge proxies (R10_FLOWKIT_BRIDGE), or integration mock harnesses (R15_INTEGRATION_HARNESS), loose typing forces developers to guess parameter semantics and return envelopes, preventing automated TypeScript/Python interface generation (json-schema-to-typescript, pydantic-core). CP-003 solves this by introducing strict discriminated oneOf unions on command_type for all 10 operations (ENSURE_SESSION, OPEN_FLOW, CREATE_OR_SELECT_PROJECT, ATTACH_ASSETS, SET_GENERATION_OPTIONS, SUBMIT_PROMPT, READ_GENERATION_STATE, DOWNLOAD_OUTPUT, CAPTURE_DIAGNOSTIC, CANCEL) alongside a matching flow-execution-result.schema.json. This provides end-to-end static type safety, IDE autocompletion, compile-time validation, and deterministic mock fixture generation in local developer environments.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/browser-command.schema.json:lines 1-85",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/flow-execution-result.schema.json:lines 1-90",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md:lines 25-55",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 25-50",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R10_FLOWKIT_BRIDGE.md:lines 25-50",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/04_integration/LOCAL_DEVELOPMENT.md:lines 40-75"
+  ],
+  "capability_impact": "Directly reinforces CAP-03 (Google Flow Deep Integration), CAP-04 (Pluggable Provider Abstraction), CAP-16 (Hermetic Simulation & Testing), and CAP-18 (Dual-Track Replaceability) by guaranteeing compile-time and runtime interchangeability between Track A and Track B execution ports without developer ambiguity.",
+  "residual_risk": "Introduction of future diagnostic properties could cause schema validation rejections in legacy workers if additionalProperties is set to false. Mitigated by versioned schema releases (v1.0.0 -> v1.1.0) and backward-compatible schema extension guidelines in API_COMPATIBILITY_POLICY.md.",
+  "timestamp": "2026-08-15T21:28:45+07:00"
+}

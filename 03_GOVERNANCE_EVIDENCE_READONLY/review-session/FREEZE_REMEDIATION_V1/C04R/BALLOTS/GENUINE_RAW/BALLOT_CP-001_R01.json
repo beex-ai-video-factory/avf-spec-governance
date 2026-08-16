@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-001",
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "voter_role": "R01",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Domain-Driven Design (DDD) perspective, CP-001 restores correct aggregate boundaries, domain invariants, and ubiquitous language across the video generation lifecycle. The prior schema suffered from an inverted domain lineage where ShotVersion erroneously depended on PromptVersion, violating the fundamental principle that creative intent (ShotVersion) precedes and drives prompt compilation (PromptVersion). CP-001 rectifies the immutable hierarchy to ShotVersion -> PromptVersion -> GenerationJob -> Take. Furthermore, it enriches ShotVersion with essential creative intent value objects (duration_ms, camera_motion, environment_settings, character_refs, style_refs, constraints) and completes GenerationJob with full execution provenance (shot_id, shot_version_id, prompt_version_id, attempt_index, execution_stage, idempotency_key, normalized_error). Decoupling provider-specific face embeddings and LoRA weights under optional custom attributes preserves bounded context purity in R04 and R05 without leaking concrete infrastructure constraints into core domain entities.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 7-19, 25-117",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 3-7, 173-243, 244-293, 294-390, 391-450",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 8-26"
+  ],
+  "capability_impact": "Preserves and establishes solid foundations for CAP-01 (Canonical Core State Management), CAP-05 (Prompt Compiler AST Synthesis), and CAP-06 (Assets & Continuity Invariants) with zero capability regression.",
+  "residual_risk": "Legacy data structures in non-compliant staging environments may require migration to align with the new non-inverted lineage. Mitigated by R02 Core State relational database schema migrations enforcing foreign key constraints and R01 JSON Schema validation at boundary gateways.",
+  "timestamp": "2026-08-15T21:27:30+07:00"
+}

@@ -1,0 +1,194 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "generated_at": "2026-08-15T12:00:00Z",
+    "supervisor": "Autonomous Freeze Remediation Supervisor",
+    "total_semantic_changes": 24,
+    "unvoted_changes_count": 0
+  },
+  "mappings": [
+    {
+      "change_id": "CP-001",
+      "files": [
+        "02_contracts/domain-entities.schema.json",
+        "01_master/DATA_MODEL.md"
+      ],
+      "description": "ShotVersion->PromptVersion->GenerationJob->Take provenance, creative intent fields, asset metadata, strict UUID."
+    },
+    {
+      "change_id": "CP-002",
+      "files": [
+        "02_contracts/STATUS_STATE_MACHINES.md",
+        "02_contracts/domain-entities.schema.json"
+      ],
+      "description": "Two-tier hierarchical state machine (7 lifecycle states, 11 execution stages)."
+    },
+    {
+      "change_id": "CP-003",
+      "files": [
+        "02_contracts/browser-command.schema.json",
+        "02_contracts/flow-execution-result.schema.json"
+      ],
+      "description": "Strict discriminated schemas for all 10 FlowExecutionPort operations."
+    },
+    {
+      "change_id": "CP-004",
+      "files": [
+        "02_contracts/provider-result.schema.json",
+        "02_contracts/CONTRACTS_OVERVIEW.md"
+      ],
+      "description": "Separated operation status, generation status, and 9-code normalized error taxonomy."
+    },
+    {
+      "change_id": "CP-005",
+      "files": [
+        "02_contracts/event-envelope.schema.json",
+        "04_integration/COMMAND_EVENT_CATALOG.md"
+      ],
+      "description": "OpenTelemetry tracing headers in envelope and lowercase dotted regex topic naming."
+    },
+    {
+      "change_id": "CP-006",
+      "files": [
+        "03_repo_blueprints/R09_BROWSER_WORKER.md",
+        "06_adrs/ADR-004_DUAL_FLOW_EXECUTION.md"
+      ],
+      "description": "3-tier browser execution hierarchy (A1/A2, A3 Playwright dedicated profile, Track B FlowKit)."
+    },
+    {
+      "change_id": "CP-007",
+      "files": [
+        "04_integration/SECURITY_MODEL.md",
+        "06_adrs/ADR-007_BROWSER_SECURITY.md"
+      ],
+      "description": "Credential injection, in-memory Buffer wiping, and telemetry token redaction."
+    },
+    {
+      "change_id": "CP-008",
+      "files": [
+        "01_master/DATA_MODEL.md",
+        "02_contracts/provider-request.schema.json"
+      ],
+      "description": "Deterministic idempotency key derivation and database unique constraint."
+    },
+    {
+      "change_id": "CP-009",
+      "files": [
+        "01_master/DATA_MODEL.md",
+        "03_repo_blueprints/R02_CORE_STATE.md"
+      ],
+      "description": "Two-phase credit settlement protocol."
+    },
+    {
+      "change_id": "CP-010",
+      "files": [
+        "04_integration/DEPENDENCY_GRAPH.md",
+        "03_repo_blueprints/"
+      ],
+      "description": "Complete 15-repo acyclic DAG, telemetry edges, harness edges, and forbidden matrix."
+    },
+    {
+      "change_id": "CP-011",
+      "files": [
+        "03_repo_blueprints/R05_PROMPT_COMPILER.md"
+      ],
+      "description": "3-layer prompt compilation AST (Semantic AST -> Engine IR -> Target Payload)."
+    },
+    {
+      "change_id": "CP-012",
+      "files": [
+        "03_repo_blueprints/R04_ASSETS_CONTINUITY.md"
+      ],
+      "description": "Asset versioning and character/style continuity invariants."
+    },
+    {
+      "change_id": "CP-013",
+      "files": [
+        "03_repo_blueprints/R11_QC.md"
+      ],
+      "description": "Two-stage automated QC pipeline (FFprobe container checks + neural continuity)."
+    },
+    {
+      "change_id": "CP-014",
+      "files": [
+        "03_repo_blueprints/R12_MEDIA.md"
+      ],
+      "description": "Media processing DLQ, quarantine state, and exponential backoff retry policy."
+    },
+    {
+      "change_id": "CP-015",
+      "files": [
+        "verify_package.py",
+        "00_governance/01_SPEC_FREEZE_POLICY.md"
+      ],
+      "description": "Release identity alignment and deterministic 4-stage hashing protocol."
+    },
+    {
+      "change_id": "CP-016",
+      "files": [
+        "02_contracts/domain-entities.schema.json"
+      ],
+      "description": "Formal deletion of track_mode property from GenerationJob schema."
+    },
+    {
+      "change_id": "CP-017",
+      "files": [
+        "02_contracts/provider-request.schema.json"
+      ],
+      "description": "Formal deletion of flow_track from provider-request.schema.json."
+    },
+    {
+      "change_id": "CP-018",
+      "files": [
+        "02_contracts/domain-entities.schema.json",
+        "03_repo_blueprints/R02_CORE_STATE.md"
+      ],
+      "description": "Formal addition of GenerationJob.attempt_index and 90-minute safety lease TTL."
+    },
+    {
+      "change_id": "CP-019",
+      "files": [
+        "02_contracts/provider-request.schema.json"
+      ],
+      "description": "Formal addition of attempt_index to ProviderRequest schema."
+    },
+    {
+      "change_id": "CP-020",
+      "files": [
+        "04_integration/SECURITY_MODEL.md"
+      ],
+      "description": "Formal ratification of security secret handling prose and redaction rules."
+    },
+    {
+      "change_id": "CP-021",
+      "files": [
+        "09_agent_packets/AGENT_BUILD_PACKET_INDEX.md"
+      ],
+      "description": "Alignment of handoff index with normative repo blueprints."
+    },
+    {
+      "change_id": "CP-022",
+      "files": [
+        "02_contracts/CONTRACTS_OVERVIEW.md"
+      ],
+      "description": "JSON Schema root packaging and fragment entrypoint documentation."
+    },
+    {
+      "change_id": "CP-023",
+      "files": [
+        "VERSION",
+        "README.md",
+        "KIT_MANIFEST.yaml",
+        "COMMITTEE_REVIEW_EDITION.md"
+      ],
+      "description": "Release version 1.0.0 synchronization across candidate files."
+    },
+    {
+      "change_id": "CP-024",
+      "files": [
+        "verify_package.py"
+      ],
+      "description": "Standalone package verification script implementation."
+    }
+  ]
+}

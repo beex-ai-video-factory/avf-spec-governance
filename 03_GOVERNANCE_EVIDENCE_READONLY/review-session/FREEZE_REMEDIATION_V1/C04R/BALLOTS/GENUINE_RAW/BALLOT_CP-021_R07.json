@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-021",
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "voter_role": "R07",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "CP-021 removes unsubstantiated and hallucinated technical claims from implementation handoff documents (e.g. AGENT_BUILD_PACKET_INDEX.md), such as non-existent SecretEnclave hardware modules, unratified gRPC ports, or unauthenticated local WebSocket server primitives. From a security assurance perspective, ghost architecture is dangerous because developers and autonomous coding agents might rely on fictitious security boundaries instead of implementing genuine defense-in-depth controls. Aligning the handoff index directly with the 15 normative repository blueprints ensures that agents build against verified, realistic security patterns (OS permissions, in-memory zeroing, and OTel redaction).",
+  "evidence_citations": [
+    "09_agent_packets/AGENT_BUILD_PACKET_INDEX.md:Lines 1-24 (Accurate alignment of all 15 repositories and their respective normative contract and blueprint schemas)",
+    "04_integration/SECURITY_MODEL.md:Lines 7-18 (Canonical trust boundary definitions)",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md:Lines 1-59 (Normative R07 blueprint without phantom enclave dependencies)"
+  ],
+  "capability_impact": "Directly safeguards CAP-07 (Security & Isolation) by removing confusing contradictions and preventing autonomous agents from assuming non-existent hardware protections.",
+  "residual_risk": "Autonomous coding agents executing tasks might query legacy unaligned markdown artifacts if repository caches are uncleared. Mitigation: Build orchestrator must enforce verify_package.py checksum verification and wipe legacy handoff caches prior to agent execution.",
+  "timestamp": "2026-08-15T21:28:50+07:00"
+}

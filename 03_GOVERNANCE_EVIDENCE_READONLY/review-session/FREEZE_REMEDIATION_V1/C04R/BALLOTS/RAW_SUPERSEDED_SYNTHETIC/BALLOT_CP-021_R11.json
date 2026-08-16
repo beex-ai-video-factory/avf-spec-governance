@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Build Infrastructure",
+  "change_id": "CP-021",
+  "domain_specific_rationale": "Platform build instructions match repo blueprint CI/CD specifications.",
+  "evidence_citations": "05_phases/BUILD_ORDER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R11"
+}

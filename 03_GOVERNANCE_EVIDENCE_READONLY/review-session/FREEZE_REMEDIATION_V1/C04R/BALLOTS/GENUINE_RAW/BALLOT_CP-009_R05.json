@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-009",
+  "proposal_title": "Two-Phase Credit Settlement Protocol",
+  "voter_role": "R05",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a data architecture and financial ledger perspective, the Two-Phase Credit Settlement protocol guarantees ACID consistency for credit balances across asynchronous, multi-stage rendering workloads: 1) Relational Ledger Integrity: Phase 1 executes an atomic reservation (status = 'RESERVED', estimated_cost_credits) within a single PostgreSQL transaction using row-level locking (SELECT ... FOR UPDATE), preventing race conditions, balance underflow, and double spending; 2) Settlement / Release Guarantee: Phase 2 commits the exact cost (actual_cost_credits) upon job completion or releases the reserved allocation if the job terminates in FAILED or CANCELLED status; 3) Audit Trail Persistence: Both estimated and actual credit fields are recorded directly in generation_jobs, ensuring full relational reconciliation and auditability against the credit ledger history.",
+  "evidence_citations": "01_master/DATA_MODEL.md §2.3 (generation_jobs lines 74-75: estimated_cost_credits, actual_cost_credits); 02_contracts/domain-entities.schema.json lines 365-372; 03_repo_blueprints/R02_CORE_STATE.md §1, §6, §11.",
+  "capability_impact": "Protects CAP-01 (Canonical Core State) and CAP-08 (Resource & Cost Management), ensuring zero double-spending, accurate billing reconciliation, and transparent audit trails.",
+  "residual_risk": "Orphaned reservations resulting from ungraceful worker crashes require periodic reconciliation cron jobs (RECONCILED_TERMINAL after lease expiration) in avf-core-state. Fully covered by state machine lifecycle specs.",
+  "timestamp": "2026-08-15T21:28:30+07:00"
+}

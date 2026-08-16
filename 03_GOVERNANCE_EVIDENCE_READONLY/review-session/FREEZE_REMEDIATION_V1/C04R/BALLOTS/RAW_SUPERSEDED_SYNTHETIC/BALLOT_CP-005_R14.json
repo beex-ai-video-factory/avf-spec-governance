@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-14 Observability",
+  "change_id": "CP-005",
+  "domain_specific_rationale": "OpenTelemetry trace context propagation across event boundaries enables complete end-to-end distributed tracing across all 15 microservices.",
+  "evidence_citations": "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry & Dotted Naming",
+  "residual_risk": "Trace collector must ingest standard OTel envelopes.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R14"
+}

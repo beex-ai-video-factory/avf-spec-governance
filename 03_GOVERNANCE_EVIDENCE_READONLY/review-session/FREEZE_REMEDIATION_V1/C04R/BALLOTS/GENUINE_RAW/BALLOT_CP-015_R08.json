@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-015",
+  "proposal_title": "Release Identity Alignment & Deterministic 4-Stage Hashing Pipeline",
+  "voter_role": "R08",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a QA release certification and traceability perspective, aligning the release identity to v1.0.0 and establishing a deterministic, non-self-referential 4-stage hashing pipeline (individual file SHA-256 digests, canonical path sorting, tree hash, and deterministic archive hash) guarantees that QA test results are bound to an exact, tamper-evident blueprint baseline. This ensures complete auditability across CI test runs, benchmarking stages, and deployment artifacts.",
+  "evidence_citations": "00_governance/01_SPEC_FREEZE_POLICY.md, 00_governance/03_DEFINITION_OF_DONE.md, 03_repo_blueprints/R15_INTEGRATION_HARNESS.md (Release Manifest & Compatibility Matrix)",
+  "capability_impact": "Protects CAP-14 (Release Integrity & Governance) and ensures repeatable validation of the entire specification suite across all environments.",
+  "residual_risk": "Operating system newline differences (CRLF vs LF) or file permission metadata affecting cross-platform hashing; mitigated by enforcing POSIX LF and standardizing file mode filtering in release builder tools.",
+  "timestamp": "2026-08-15T21:28:30+07:00"
+}

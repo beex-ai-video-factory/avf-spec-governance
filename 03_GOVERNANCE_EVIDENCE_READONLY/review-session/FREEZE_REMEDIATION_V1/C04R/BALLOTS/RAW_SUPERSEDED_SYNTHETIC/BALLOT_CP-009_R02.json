@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 Billing Integrity",
+  "change_id": "CP-009",
+  "domain_specific_rationale": "Phase 1 reservation and Phase 2 settlement guarantees zero credit overspending and clean credit release on generation aborts.",
+  "evidence_citations": "01_master/DATA_MODEL.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Two-Phase Credit Settlement Protocol",
+  "residual_risk": "Core State must handle release timeouts.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

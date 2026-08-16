@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-021",
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "voter_role": "R11",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a platform infrastructure and operational architecture perspective, specification documents must strictly reflect realizable, normative system interfaces rather than unbacked hypothetical components. Previous handoff indices introduced extraneous, unvalidated infrastructure claims—such as a dedicated hardware 'SecretEnclave' module, unvoted gRPC endpoints on browser worker adapters, and non-standard raw WebSocket servers in core state. CP-021 purges all ungrounded claims from AGENT_BUILD_PACKET_INDEX.md and handoff metadata, realigning implementation requirements directly with normative repository blueprints (R01–R15), standard OS environment/Vault secret injection, and published JSON Schema draft-07 contracts.",
+  "evidence_citations": [
+    "09_agent_packets/AGENT_BUILD_PACKET_INDEX.md:L1-L24 (Unified packet index reflecting normative blueprints R01-R15 without extraneous subsystems)",
+    "REMEDIATION_FINDING_REGISTER.md:L223-L234 (TECH-009 root cause analysis and resolution requirements)",
+    "03_repo_blueprints/R01_CONTRACTS.md through R15_INTEGRATION_HARNESS.md (Normative interfaces and state boundary definitions)"
+  ],
+  "capability_impact": "Protects handoff trustworthiness and eliminates platform architectural drift, ensuring implementation agents build strictly against verified repo blueprints and contracts.",
+  "residual_risk": "Future implementation teams might attempt to reintroduce ad-hoc transport protocols without architectural review. Mitigated by CI contract conformance test suites rejecting non-standard ports and protocols.",
+  "timestamp": "2026-08-15T21:30:00+07:00"
+}

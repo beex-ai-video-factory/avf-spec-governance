@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-006",
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a high-availability and fault-tolerance perspective, the multi-tier fallback architecture (A1 MV3 ephemeral extension -> A2 MV3 active tab -> A3 Playwright dedicated persistent profile -> Track B FlowKit bridge) provides robust defense against browser automation brittleness. Specifying this explicit fallback hierarchy prevents single-point-of-failure browser crashes or MV3 service worker lifecycle suspensions from halting generation pipelines. Resolving SPK-001 empirical keepalive limits as non-blocking through documented escalation paths ensures system operational viability under realistic execution environments.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09A_R10_GOOGLE_FLOW_EXECUTION_OPTIONS.md:lines 1-120",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/06_adrs/ADR-004_DUAL_FLOW_EXECUTION.md:lines 1-50"
+  ],
+  "capability_impact": "Directly safeguards CAP-02 (Google Flow Adapter) and CAP-18 (Track A / Track B Port Equivalence), establishing deterministic failover paths for browser-based automation.",
+  "residual_risk": "Simultaneous upstream session invalidation or security challenge blocking all browser execution tiers. Mitigated by standardized error code mapping (SECURITY_CHALLENGE / AUTH_REQUIRED) immediately halting the fallback loop and triggering operator alerting via R13.",
+  "timestamp": "2026-08-15T21:29:30+07:00"
+}

@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-004",
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "voter_role": "R07",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a security engineering standpoint, CP-004 establishes critical boundaries by explicitly isolating synchronous transport statuses from asynchronous generation statuses and standardizing a 9-code error taxonomy. Specifically, categorizing AUTH_REQUIRED and SECURITY_CHALLENGE as POLICY_BLOCKED prevents automated bot loops from repeatedly slamming external provider endpoints, avoiding IP rate limits, automated account bans, and credential compromise. Furthermore, the contract strictly defines raw_provider_error handling, providing the structured foundation required for R14/R07 recursive telemetry redaction before logs or errors leave the privileged execution boundary.",
+  "evidence_citations": [
+    "02_contracts/provider-result.schema.json#properties/error/properties/code (AUTH_REQUIRED, SECURITY_CHALLENGE enum values)",
+    "02_contracts/provider-result.schema.json#properties/error/properties/retry_category (POLICY_BLOCKED classification)",
+    "04_integration/SECURITY_MODEL.md:Section 4 (Telemetry Redaction & security challenge handling)",
+    "06_adrs/ADR-007_BROWSER_SECURITY.md:Lines 6-8 (Security challenge policy containment)",
+    "03_repo_blueprints/R07_PROVIDER_SDK.md:Section 9 & Section 13 (Normalized error taxonomy and credential hygiene)"
+  ],
+  "capability_impact": "Directly preserves CAP-03 (Provider Abstraction) and CAP-07 (Security & Isolation) while upholding CAP-12 (Autonomous Error Recovery). Eliminates security anti-patterns without breaking downstream contract consumption.",
+  "residual_risk": "raw_provider_error can potentially capture unredacted HTTP response headers (e.g. Set-Cookie, Authorization) or DOM diagnostic payloads returned by third-party providers. Mitigation: R07 SDK and R14 Observability must recursively scrub all raw provider errors against the token masking filter prior to central persistence or telemetry emission.",
+  "timestamp": "2026-08-15T21:28:00+07:00"
+}

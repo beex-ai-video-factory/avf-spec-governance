@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 and CAP-03",
+  "change_id": "CP-001",
+  "domain_specific_rationale": "GenerationJob now contains the complete execution tuple including prompt_version_id and attempt_index, making job lifecycle tracking fully auditable in Core State.",
+  "evidence_citations": "03_repo_blueprints/R02_CORE_STATE.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

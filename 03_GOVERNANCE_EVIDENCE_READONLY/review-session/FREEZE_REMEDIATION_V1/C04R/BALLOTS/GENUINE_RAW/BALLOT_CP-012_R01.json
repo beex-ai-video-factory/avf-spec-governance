@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-012",
+  "proposal_title": "Asset Versioning & Character/Style Continuity Scoring Invariants",
+  "voter_role": "R01",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "CP-012 reinforces aggregate root integrity and immutable versioning for media assets and continuity artifacts. In our domain model, continuity across multi-shot video generation requires objective, repeatable evaluation. Treating AssetVersion, CharacterVersion, and StyleVersion as immutable domain entities with explicit SHA-256 checksums, URI provenance, and strict version numbering ensures that ShotVersion references maintain referential integrity over time. Furthermore, defining continuity scoring as objective mathematical invariants (facial feature distance vectors, color palette histograms, CLIP similarity metrics) decoupled from monolithic storage maintains high domain cohesion.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R04_ASSETS_CONTINUITY.md:lines 8-26",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/01_master/DATA_MODEL.md:lines 102-117",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 450-580"
+  ],
+  "capability_impact": "Preserves CAP-06 (Assets & Visual Continuity Verification) and ensures consistent cross-shot visual fidelity across video production pipelines.",
+  "residual_risk": "Large embedding vectors could cause relational performance overhead if stored uncompressed inline in relational entity tables. Mitigated by persisting heavy vector embeddings in dedicated vector stores or object storage while storing compact SHA256 checksums and reference URIs in the core domain entity.",
+  "timestamp": "2026-08-15T21:27:42+07:00"
+}

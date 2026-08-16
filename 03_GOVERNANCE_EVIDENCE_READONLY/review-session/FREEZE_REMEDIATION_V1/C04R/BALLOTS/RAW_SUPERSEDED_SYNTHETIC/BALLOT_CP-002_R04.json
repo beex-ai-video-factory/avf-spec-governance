@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 contracts",
+  "change_id": "CP-002",
+  "domain_specific_rationale": "Contracts overview and status state machines document the exact parent-child state mapping matrix, preventing undocumented state additions.",
+  "evidence_citations": "02_contracts/STATUS_STATE_MACHINES.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

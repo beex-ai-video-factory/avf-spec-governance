@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Security Alignment",
+  "change_id": "CP-021",
+  "domain_specific_rationale": "Removes unbacked SecretEnclave references from agent build packets.",
+  "evidence_citations": "04_integration/SECURITY_MODEL.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R07"
+}

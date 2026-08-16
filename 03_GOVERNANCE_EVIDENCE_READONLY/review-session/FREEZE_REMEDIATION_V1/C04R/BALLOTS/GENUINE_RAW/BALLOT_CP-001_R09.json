@@ -1,0 +1,19 @@
+{
+  "change_id": "CP-001",
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "voter_role": "R09",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From the AI and Prompt Engineering domain perspective, CP-001 correctly restores the immutable creative hierarchy: ShotVersion -> PromptVersion -> GenerationJob -> Take. In the flawed predecessor model, ShotVersion inverted this lineage by requiring prompt_version_id, which broke multi-model compilation paradigms where a single creative shot intent (action, camera motion, atmosphere) compiles into multiple provider-specific prompt variations (e.g. Runway, Sora, Luma, Veo). Crucially, CP-001 enriches ShotVersion with explicit creative intent fields (action_description, camera_motion, environment_settings, character_refs, style_refs, constraints, continuity_refs) which form the exact semantic inputs required by R05 Prompt Compiler to build the Layer 1 Semantic AST. Furthermore, making face_embedding_hash and lora_weights_uri optional in CharacterVersion and StyleVersion under custom_attributes removes rigid vendor assumptions, allowing modern diffusion, autoregressive, and reference-conditioned video models to be supported seamlessly.",
+  "evidence_citations": [
+    "02_contracts/domain-entities.schema.json#/$defs/ShotVersion (Lines 173-243: creative intent properties action_description, camera_motion, environment_settings, character_refs, style_refs, asset_refs, constraints, continuity_refs)",
+    "02_contracts/domain-entities.schema.json#/$defs/PromptVersion (Lines 244-293: requires shot_id and shot_version_id; includes positive_prompt, negative_prompt, parameters, ast_snapshot)",
+    "02_contracts/domain-entities.schema.json#/$defs/GenerationJob (Lines 294-390: links shot_version_id, prompt_version_id, provider_id, attempt_index, normalized_error)",
+    "02_contracts/domain-entities.schema.json#/$defs/CharacterVersion (Lines 529-569: face_embedding_hash optional, reference_asset_ids and custom_attributes added)",
+    "02_contracts/domain-entities.schema.json#/$defs/StyleVersion (Lines 570-607: lora_weights_uri optional, style_prompt_prefix and negative_prompt_additions added)",
+    "03_repo_blueprints/R05_PROMPT_COMPILER.md (Section 1: 3-layer compilation responsibility; Section 3: Invariant preservation)"
+  ],
+  "capability_impact": "Directly preserves and enhances CAP-01 (Canonical Core State), CAP-05 (Prompt Compiler), and CAP-06 (Assets & Continuity). Ensures prompt compilation pipelines have full semantic input fidelity and traceable end-to-end prompt-to-video provenance without capability degradation.",
+  "residual_risk": "As new generative AI video models emerge with novel multimodal conditioning (e.g., 3D camera splats, skeletal pose sequences, audio-driven lip sync), new parameters must be passed cleanly. Mitigation: The schema provides extensible dictionaries in PromptVersion.parameters, PromptVersion.ast_snapshot, and CharacterVersion/StyleVersion.custom_attributes, allowing R05 compiler plugins to handle new modalities without breaking base schemas.",
+  "timestamp": "2026-08-15T21:29:45+07:00"
+}

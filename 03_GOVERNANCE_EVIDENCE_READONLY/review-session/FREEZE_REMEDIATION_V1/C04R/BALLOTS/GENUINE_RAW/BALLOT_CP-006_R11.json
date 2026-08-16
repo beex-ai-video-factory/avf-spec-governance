@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-006",
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "voter_role": "R11",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a platform infrastructure and runtime reliability standpoint, browser automation in distributed environments presents significant process lifecycle challenges, particularly around Chrome Manifest V3 service worker keepalive unpredictability (as raised in SPK-001 / FA-007). CP-006 successfully addresses this risk by defining a resilient 3-tier browser execution fallback hierarchy (Tier A1 Chrome MV3 + Native Messaging, Tier A2 MV3 + Authenticated Loopback WebSocket, Tier A3 Playwright Dedicated Persistent Profile Context) backed by Tier B (FlowKit Compatibility Bridge). Crucially, all tiers adhere to the strict, frozen FlowExecutionPort discriminated union interface across 10 discrete operations. This encapsulates browser execution mechanics as interchangeable platform adapters without polluting core state, guaranteeing system survivability across varying host OS and container environments.",
+  "evidence_citations": [
+    "03_repo_blueprints/R09A_R10_GOOGLE_FLOW_EXECUTION_OPTIONS.md:L7-L23 (frozen FlowExecutionPort 10-operation interface contract)",
+    "03_repo_blueprints/R09A_R10_GOOGLE_FLOW_EXECUTION_OPTIONS.md:L27-L119 (Option A1 Native Messaging, Option A2 Loopback WS, Option A3 Playwright persistent context)",
+    "03_repo_blueprints/R09A_R10_GOOGLE_FLOW_EXECUTION_OPTIONS.md:L121-L159 (Option B FlowKit Bridge and isolation rules)",
+    "03_repo_blueprints/R09_BROWSER_WORKER.md:L8-L10, L48-L52 (worker responsibility, Playwright A3 fallback, and conformance testing requirements)"
+  ],
+  "capability_impact": "Preserves CAP-02 (Google Flow Adapter) and CAP-18 (Track A / Track B Interchangeability), ensuring that browser automation failures in one tier gracefully fall back to alternative execution runtimes without affecting core workflow orchestration.",
+  "residual_risk": "Persistent browser profile disk I/O and orphan process leaks during abrupt worker termination. Mitigated by R09 worker process supervisors executing automated cleanup, memory limit watchdogs, and 90-minute safety lease TTL fencing.",
+  "timestamp": "2026-08-15T21:29:15+07:00"
+}

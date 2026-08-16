@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-07 Security",
+  "change_id": "CP-020",
+  "domain_specific_rationale": "Formally ratifies the updated security prose detailing OS environment injection, memory buffer zeroing, and logging token redaction.",
+  "evidence_citations": "04_integration/SECURITY_MODEL.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Security Model Secret Handling Prose & Redaction Rules Formalization",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R07"
+}

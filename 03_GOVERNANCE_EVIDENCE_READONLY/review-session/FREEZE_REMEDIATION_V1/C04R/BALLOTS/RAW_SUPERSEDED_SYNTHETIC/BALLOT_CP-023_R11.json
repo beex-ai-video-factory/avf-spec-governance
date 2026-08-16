@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Platform Release",
+  "change_id": "CP-023",
+  "domain_specific_rationale": "Package manifests and distribution scripts consistently reference version 1.0.0.",
+  "evidence_citations": "KIT_MANIFEST.yaml",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Release Version 1.0.0 Synchronization Across All Candidate Files",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R11"
+}

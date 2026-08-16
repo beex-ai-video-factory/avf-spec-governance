@@ -1,0 +1,31 @@
+{
+  "project": "AI Video Factory",
+  "baseline_version": "1.0.0",
+  "status": "VERIFIED_IMPLEMENTATION_BASELINE",
+  "frozen": true,
+  "frozen_spec_path": "01_FROZEN_RELEASE/v1.0.0",
+  "release_archive_path": "01_FROZEN_RELEASE/distributable/AVF_FINAL_FREEZE_v1.0.0_REMEDIATED.zip",
+  "detached_sidecar_path": "01_FROZEN_RELEASE/distributable/AVF_FINAL_FREEZE_v1.0.0_REMEDIATED.zip.sha256",
+  "content_tree_sha256": "7258ee6eac6e4887739f137939d42960417e3da3926c1f560eb91cc8aa392846",
+  "final_zip_sha256": "3605c2068d6e2afd759a06257f4b52e6cf117d754fc2d544bcc025da3c97dd9c",
+  "external_forensic_result": "VERIFIED_IMPLEMENTATION_BASELINE",
+  "g18_status": "VERIFIED",
+  "mutable_implementation_root": "05_IMPLEMENTATION",
+  "total_normative_files": 60,
+  "hashing_algorithm": "SHA-256 of sorted relative_path\\tsha256\\n excluding self-referential manifests",
+  "lock_generated_at": "2026-08-16T10:37:00Z",
+  "protected_paths": [
+    "01_FROZEN_RELEASE",
+    "02_SOURCE_KITS_READONLY",
+    "03_GOVERNANCE_EVIDENCE_READONLY",
+    "90_ARCHIVE_READONLY"
+  ],
+  "writable_paths": [
+    "05_IMPLEMENTATION",
+    "00_PROJECT_ADMIN",
+    "04_TOOLING",
+    "99_TEMP",
+    ".agents"
+  ],
+  "canonical_release_copies": 1
+}

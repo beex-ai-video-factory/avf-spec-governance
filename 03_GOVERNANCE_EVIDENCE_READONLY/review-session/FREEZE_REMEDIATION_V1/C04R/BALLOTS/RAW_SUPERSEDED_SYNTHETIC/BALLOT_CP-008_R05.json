@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 Data Integrity",
+  "change_id": "CP-008",
+  "domain_specific_rationale": "PostgreSQL UNIQUE(provider_id, idempotency_key) guarantees database-level uniqueness across distributed workers.",
+  "evidence_citations": "01_master/DATA_MODEL.md \u00a73",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Idempotency Key Specification & Deterministic Construction",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R05"
+}

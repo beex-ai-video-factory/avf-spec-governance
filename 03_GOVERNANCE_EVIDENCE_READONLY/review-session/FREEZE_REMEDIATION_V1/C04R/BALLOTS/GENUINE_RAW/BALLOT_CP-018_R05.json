@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-018",
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "voter_role": "R05",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a data modeling, concurrency control, and distributed lease perspective: 1) Relational Model Schema Support: Incorporating attempt_index INT NOT NULL DEFAULT 1 directly into generation_jobs table schema and contract definitions provides explicit tracking of retry lineage and enables deterministic idempotency key computation per attempt; 2) Lease Semantics & Concurrency Safety: Setting a 90-minute safety lease TTL (lease_expires_at TIMESTAMPTZ) alongside 30-second worker heartbeats provides robust distributed fencing in PostgreSQL. This allows sufficient time for slow AI video generation pipelines while enabling reliable detection and cleanup of zombie workers via automated lease expiration.",
+  "evidence_citations": "01_master/DATA_MODEL.md §2.3 (generation_jobs: attempt_index, lease_token, lease_expires_at); 02_contracts/domain-entities.schema.json lines 305, 341-343, 360-364; 03_repo_blueprints/R02_CORE_STATE.md §1, §11.",
+  "capability_impact": "Protects CAP-01 (Canonical Core State) and CAP-04 (Generation Job Lifecycle), enabling safe distributed task leases, retry deduplication, and split-brain prevention.",
+  "residual_risk": "Database clock skew across distributed worker nodes could theoretically affect lease expiration evaluations; nodes must synchronize via NTP, and lease expiration checks must strictly evaluate against PostgreSQL server time (NOW()).",
+  "timestamp": "2026-08-15T21:28:30+07:00"
+}

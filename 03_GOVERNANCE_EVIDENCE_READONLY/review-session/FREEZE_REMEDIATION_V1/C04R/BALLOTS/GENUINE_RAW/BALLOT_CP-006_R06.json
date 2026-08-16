@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-006",
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "voter_role": "R06",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From the Flow Browser Specialist (R06) perspective, CP-006 provides the decisive architectural resolution to the browser automation lifecycle uncertainties that previously blocked freeze gate G18 (SPK-001 empirical keepalive uncertainty). By formalizing a clear 3-tier browser execution hierarchy—Tier A1 (Chrome MV3 + Native Messaging), Tier A2 (Chrome MV3 + loopback WebSocket), Tier A3 (Playwright with dedicated persistent Chrome profile), and Track B (FlowKit Compatibility Bridge)—the specification ensures that our production capabilities do not hinge on undocumented Chrome MV3 background service worker keepalive quirks during 5-15 minute video generations. Tier A3 (Playwright persistent profile) and Track B (FlowKit) provide robust, independently verified execution paths that bypass extension lifecycle constraints entirely. Moreover, CP-006 codifies stateless generation polling via READ_GENERATION_STATE and provider_job_id, allowing any replacement worker to re-attach to an in-flight generation job without prompt re-submission or duplicate billing. This multi-tiered fallback structure satisfies all operational reliability criteria for browser automation.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09A_R10_GOOGLE_FLOW_EXECUTION_OPTIONS.md:lines 1-185",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R10_FLOWKIT_BRIDGE.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/C03R/SOL_07_BROWSER_MV3_FALLBACK_RISK.md:lines 1-36"
+  ],
+  "capability_impact": "Directly preserves CAP-02 (Google Flow Adapter Execution) and CAP-18 (Track A / Track B Port Equivalence) by establishing an airtight, multi-tier fallback operational hierarchy that guarantees continuous generation workflow execution across development and production environments.",
+  "residual_risk": "Playwright persistent profile mode requires dedicated Chrome user-data directories to prevent file locking conflicts with active operator desktop Chrome instances. Mitigated by R09 specifying explicit profile directory isolation via profile_directory parameter in ENSURE_SESSION and strict filesystem path separation.",
+  "timestamp": "2026-08-15T21:28:20+07:00"
+}

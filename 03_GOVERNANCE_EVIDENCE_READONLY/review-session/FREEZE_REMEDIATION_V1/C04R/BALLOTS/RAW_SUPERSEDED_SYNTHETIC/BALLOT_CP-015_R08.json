@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-08 Verification",
+  "change_id": "CP-015",
+  "domain_specific_rationale": "QA automated verification script verify_package.py confirms all individual file and tree hashes in a single pass.",
+  "evidence_citations": "verify_package.py",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Release Identity Alignment & Deterministic 4-Stage Hashing Pipeline",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-004",
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "Separating synchronous transport status (SUCCESS, FAILED, PENDING, RUNNING) from asynchronous provider generation status (QUEUED, PROCESSING, SUCCEEDED, FAILED, CANCELLED) resolves fundamental ambiguities in polling loops, webhook receivers, and timeout managers. Furthermore, establishing the 9 normalized error codes (PROVIDER_RATE_LIMIT, AUTH_REQUIRED, SECURITY_CHALLENGE, UI_CHANGED, BUDGET_EXHAUSTED, UNSUPPORTED_CAPABILITY, NETWORK_TIMEOUT, BAD_REQUEST, PROVIDER_INTERNAL_ERROR) coupled with strict retry categories (TRANSIENT, PERMANENT, POLICY_BLOCKED, RESOURCE_EXHAUSTED) provides the exact deterministic control flow required by R02 and R06 for automated retry decisions, exponential backoff, and circuit-breaking.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/provider-result.schema.json:lines 30-125",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 46-105",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R07_PROVIDER_SDK.md:lines 33-38",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R02_CORE_STATE.md:lines 33-38"
+  ],
+  "capability_impact": "Directly enables CAP-03 (Provider Abstraction) and CAP-12 (Autonomous Error Recovery) by standardizing error classification and retry semantics across all provider adapters.",
+  "residual_risk": "Provider upstream introducing novel HTTP/JSON error formats not mapped to the 9 codes. Mitigated by defaulting unmapped errors to PROVIDER_INTERNAL_ERROR with TRANSIENT category and preserving full raw error details in raw_provider_error.",
+  "timestamp": "2026-08-15T21:29:20+07:00"
+}

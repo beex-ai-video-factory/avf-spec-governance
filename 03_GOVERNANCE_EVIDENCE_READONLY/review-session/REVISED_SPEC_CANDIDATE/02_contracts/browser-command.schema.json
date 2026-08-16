@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://avf.local/contracts/browser-command/1.0",
+  "title": "FlowExecutionCommand",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "command_id",
+    "method",
+    "deadline_at",
+    "correlation"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "command_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "ENSURE_SESSION",
+        "OPEN_FLOW",
+        "CREATE_OR_SELECT_PROJECT",
+        "ATTACH_ASSETS",
+        "SET_GENERATION_OPTIONS",
+        "SUBMIT_PROMPT",
+        "READ_GENERATION_STATE",
+        "DOWNLOAD_OUTPUT",
+        "CAPTURE_DIAGNOSTIC",
+        "CANCEL"
+      ]
+    },
+    "params": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "deadline_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "correlation": {
+      "type": "object",
+      "required": [
+        "trace_id",
+        "generation_job_id"
+      ],
+      "properties": {
+        "trace_id": {
+          "type": "string"
+        },
+        "generation_job_id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "attempt_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 and CAP-03",
+  "change_id": "CP-018",
+  "domain_specific_rationale": "Attempt index and 90-minute safety TTL with 30s heartbeats prevent duplicate submissions and allow safe recovery from worker crashes.",
+  "evidence_citations": "03_repo_blueprints/R02_CORE_STATE.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "residual_risk": "Workers must implement heartbeat loop.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-02 Reliability",
+  "change_id": "CP-003",
+  "domain_specific_rationale": "Strict operation result status and storage URI output passing prevents binary payload serialization bottlenecks during high-throughput generation runs.",
+  "evidence_citations": "02_contracts/flow-execution-result.schema.json",
+  "is_mandatory_signoff": true,
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "residual_risk": "Storage service must be accessible to both worker tracks.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R02"
+}

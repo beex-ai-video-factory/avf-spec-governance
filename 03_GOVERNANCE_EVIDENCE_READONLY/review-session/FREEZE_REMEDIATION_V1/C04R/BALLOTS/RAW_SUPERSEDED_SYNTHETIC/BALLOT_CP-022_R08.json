@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects QA Harness",
+  "change_id": "CP-022",
+  "domain_specific_rationale": "QA contract validation suite targets explicit schema fragment definitions.",
+  "evidence_citations": "03_repo_blueprints/R15_INTEGRATION_HARNESS.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "JSON Schema Root Packaging & Fragment Entrypoint Documentation",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

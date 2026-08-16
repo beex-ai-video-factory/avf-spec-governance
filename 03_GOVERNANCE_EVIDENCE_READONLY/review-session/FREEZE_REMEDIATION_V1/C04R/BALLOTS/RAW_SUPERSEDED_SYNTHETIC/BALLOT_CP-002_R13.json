@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-13 Operator Console",
+  "change_id": "CP-002",
+  "domain_specific_rationale": "Operator console UI can render live progress bars from execution_stage while using status for billing and queue metrics.",
+  "evidence_citations": "03_repo_blueprints/R13_OPERATOR_CONSOLE.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Hierarchical Two-Tier GenerationJob Lifecycle State Machine",
+  "residual_risk": "UI components must handle all 11 stages.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R13"
+}

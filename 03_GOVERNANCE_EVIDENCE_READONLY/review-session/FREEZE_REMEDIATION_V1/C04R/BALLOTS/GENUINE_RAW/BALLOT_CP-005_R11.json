@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-005",
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry Distributed Tracing & Topic Naming",
+  "voter_role": "R11",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a platform engineering and cross-cutting infrastructure perspective, standardized event envelope packaging and native OpenTelemetry distributed tracing context propagation are critical requirements. Prior specification artifacts contained structural contradictions between CONTRACTS_OVERVIEW.md and event-envelope.schema.json, along with inconsistent PascalCase and dotted naming conventions. CP-005 resolves these discrepancies by establishing a unified JSON schema draft-07 contract (event-envelope.schema.json) with strict UUID formats for event_id and correlation_id, formal 16-hex and 32-hex regex patterns for span_id and trace_id, schema_version semantics, and an explicit lowercase dotted regex (^avf\\.[a-z0-9_-]+(\\.[a-z0-9_-]+)+$) for topic routing. This enables robust asynchronous telemetry correlation across polyrepo microservices, browser automation workers, and workflow orchestrators without custom middleware hacks.",
+  "evidence_citations": [
+    "02_contracts/event-envelope.schema.json:L18-L60 (canonical properties: event_id, event_type regex, trace_id, span_id, correlation_id, workflow_run_id, aggregate_id, aggregate_version, payload)",
+    "04_integration/COMMAND_EVENT_CATALOG.md:L9-L25 (complete domain event catalog using avf.<entity>.<action> format)",
+    "02_contracts/CONTRACTS_OVERVIEW.md:L44-L50 (distributed event envelope standards and OTel context propagation rules)",
+    "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md:L9-L20 (OpenTelemetry telemetry ingestion and trace envelope enforcement)"
+  ],
+  "capability_impact": "Directly preserves and reinforces CAP-04 (Event-Driven Integration) and CAP-14 (Platform Observability), ensuring end-to-end trace correlation and deterministic topic routing across all 15 repositories.",
+  "residual_risk": "Producers at peripheral workers might omit optional trace_id/span_id headers under degraded execution contexts. Mitigated by R14 observability client middleware automatically generating or propagating root spans on publish.",
+  "timestamp": "2026-08-15T21:29:00+07:00"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-07 Security & Isolation",
+  "change_id": "CP-007",
+  "domain_specific_rationale": "Replacing fictitious SecretEnclave claims with OS environment secret injection, in-memory Buffer zeroing (buf.fill(0)), and telemetry redaction establishes an implementable security posture.",
+  "evidence_citations": "04_integration/SECURITY_MODEL.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "residual_risk": "CI must run secret leakage scanner.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R07"
+}

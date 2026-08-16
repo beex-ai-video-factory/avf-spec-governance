@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-006",
+  "proposal_title": "Browser Execution Architecture & Multi-Tier Fallback Hierarchy",
+  "voter_role": "R15",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a Red Team and Adversarial Robustness perspective, the 3-tier fallback architecture (A1 Native Messaging / A2 Loopback WS -> A3 Playwright dedicated persistent profile -> Track B FlowKit bridge) provides robust defense-in-depth against browser automation failure modes. Eliminating reliance on the operator's primary profile in Option A3 eliminates credential theft and session cross-talk attack vectors. Adhering to ADR-007's hard boundary preventing automated CAPTCHA bypass reduces provider ban risk. Failure injection scenarios (such as MV3 worker suspension, DOM structural shift, WebSocket dropped connection) can be cleanly caught and redirected across the hierarchy through the strictly typed FlowExecutionPort abstraction without leaking unvetted execution state upstream.",
+  "evidence_citations": [
+    "03_repo_blueprints/R09_BROWSER_WORKER.md:L8-L10",
+    "03_repo_blueprints/R09A_R10_GOOGLE_FLOW_EXECUTION_OPTIONS.md:L27-L119",
+    "06_adrs/ADR-004_DUAL_FLOW_EXECUTION.md:L7-L14",
+    "06_adrs/ADR-007_BROWSER_SECURITY.md:L6-L14"
+  ],
+  "capability_impact": "Preserves CAP-02 (Google Flow Adapter), CAP-07 (Security & Isolation), CAP-15 (Anti-Abuse Compliance), and CAP-18 (Track A / Track B Interchangeability).",
+  "residual_risk": "Residual Risk: DOM mutations on Google Flow web UI could trigger simultaneous failure across A1, A2, and A3 if selectors change; loopback WebSocket in A2 requires strict origin/token validation to prevent malicious local processes from connecting. Required Mitigation: Implement automated DOM regression canary tests in Phase 0 benchmark, enforce strict loopback authentication tokens with 127.0.0.1 binding for Option A2, and ensure automated fallback to operator console alert when SECURITY_CHALLENGE or UI_CHANGED error is returned.",
+  "timestamp": "2026-08-15T21:26:40+07:00"
+}

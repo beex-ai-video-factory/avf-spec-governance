@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects DB Integrity",
+  "change_id": "CP-018",
+  "domain_specific_rationale": "PostgreSQL schema incorporates attempt_index in compound unique constraint for idempotency.",
+  "evidence_citations": "01_master/DATA_MODEL.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Formal Addition of GenerationJob.attempt_index and 90-Minute Safety Lease TTL",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R05"
+}

@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-019",
+  "proposal_title": "Addition of attempt_index to provider-request.schema.json",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From an Inter-Service Contract and Idempotency perspective, CP-019 ensures schema symmetry between GenerationJob and ProviderRequest by adding attempt_index (integer >= 1, default: 1) to the required property list in provider-request.schema.json. Provider adapters require the attempt_index to compute distinct provider-side idempotency keys for consecutive retry attempts while guaranteeing deterministic deduplication for duplicate invocations of the same attempt. This eliminates contract mismatch between core orchestration and provider SDKs.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/provider-request.schema.json:lines 13, 63-67 (attempt_index required property and integer constraint)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 305, 340-343",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 13-14"
+  ],
+  "capability_impact": "Preserves CAP-03 (Provider Abstraction) and CAP-12 (Autonomous Error Recovery).",
+  "residual_risk": "Callers failing to supply attempt_index will be rejected by JSON schema validation. Mitigated by specifying default: 1 and verifying request generation in workflow orchestrator unit tests.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

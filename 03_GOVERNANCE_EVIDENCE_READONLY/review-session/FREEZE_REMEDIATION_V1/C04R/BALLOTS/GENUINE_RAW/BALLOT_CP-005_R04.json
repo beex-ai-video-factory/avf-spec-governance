@@ -1,0 +1,16 @@
+{
+  "change_id": "CP-005",
+  "proposal_title": "Event Envelope Standardization with OpenTelemetry Distributed Tracing & Topic Naming",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From a Contracts and Event-Driven Architecture perspective, CP-005 establishes a single, strongly-typed event envelope specification across all asynchronous message brokers. In event-envelope.schema.json, the event contract mandates essential distributed context fields: event_id (UUID), event_type (enforced via regex ^avf\\.[a-z0-9_-]+(\\.[a-z0-9_-]+)+$), aggregate_id, aggregate_version, timestamp_utc (date-time), correlation_id (UUID), trace_id (OpenTelemetry W3C trace regex), span_id (16 hex chars regex), schema_version (SemVer regex), and payload (object). This strict standardization guarantees end-to-end distributed tracing across microservices and eliminates brittle event routing caused by inconsistent casing or schema divergence.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/event-envelope.schema.json:lines 1-61 (AVF Common Event Envelope Schema)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 44-50 (Section 4: Distributed Event Envelope Standards)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/API_COMPATIBILITY_POLICY.md:lines 3-5 (Major.Minor version format at message/schema level)"
+  ],
+  "capability_impact": "Preserves CAP-04 (Event-Driven Integration) and CAP-14 (Platform Observability & Distributed Tracing).",
+  "residual_risk": "High-throughput events could incur serialization overhead with large metadata envelopes. Mitigated by lightweight JSON schema design and strict OTel header formatting.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

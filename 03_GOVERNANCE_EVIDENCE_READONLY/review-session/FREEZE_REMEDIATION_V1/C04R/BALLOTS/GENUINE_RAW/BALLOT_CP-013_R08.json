@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-013",
+  "proposal_title": "Two-Stage Automated QC Pipeline & Verification Metrics",
+  "voter_role": "R08",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "The two-stage automated QC pipeline is critical to QA operations and quality gating. Stage 1 executes fast, deterministic container and stream validation via FFprobe (codec compatibility, resolution matching, frame rate stability, container corruption checks), acting as a low-cost filter that prevents defective takes from reaching subsequent pipeline stages. Stage 2 applies versioned multimodal evaluations for visual artifact detection and continuity scoring with standardized issue taxonomy and normalized metrics. This structure establishes an objective, automatable quality gate that integrates directly into our integration and golden fixture test suites.",
+  "evidence_citations": "03_repo_blueprints/R11_QC.md (Test Strategy, Evaluation Lifecycle, Idempotency), 04_integration/TEST_STRATEGY.md (Take + QC profile golden fixtures, QC evaluator contract)",
+  "capability_impact": "Directly implements and preserves CAP-08 (Automated QC) and establishes prerequisite quality verification for CAP-09 (Media Assembly & Normalization).",
+  "residual_risk": "Evaluation non-determinism or score drift in Stage 2 MLLM evaluators; mitigated by fixed-version evaluator configs, golden labeled calibration datasets, zero-temperature prompts, and automated routing to HUMAN_REVIEW on low-confidence scores.",
+  "timestamp": "2026-08-15T21:28:10+07:00"
+}

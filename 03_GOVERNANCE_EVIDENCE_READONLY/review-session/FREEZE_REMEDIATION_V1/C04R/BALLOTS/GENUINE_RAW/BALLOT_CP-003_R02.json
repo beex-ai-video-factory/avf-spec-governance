@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-003",
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "voter_role": "R02",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From the Reliability standpoint, establishing strict discriminated command schemas (`browser-command.schema.json`) and formal typed results (`flow-execution-result.schema.json`) for all 10 FlowExecutionPort operations is mandatory to eliminate silent protocol failures and runtime type mismatch crashes. Explicit per-operation parameter contracts and standardized timeouts prevent hung browser automation sessions, unhandled promise rejections, and ambiguous socket aborts. Structured diagnostic result capturing (`CAPTURE_DIAGNOSTIC`) guarantees that automation failures provide forensically actionable DOM/screenshot evidence for root-cause analysis.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/browser-command.schema.json:lines 1-180",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/flow-execution-result.schema.json:lines 1-104",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md:lines 1-45",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 1-50"
+  ],
+  "capability_impact": "Directly preserves CAP-02 (Google Flow Adapter) and CAP-18 (Track A / Track B Port Equivalence), ensuring identical failure handling and timeout boundaries across browser worker implementations.",
+  "residual_risk": "Browser automation timing jitter or sudden UI DOM mutations during operation execution. Mitigated by explicit operation-level timeouts and structured NormalizedError payloads returned through the result envelope.",
+  "timestamp": "2026-08-15T21:29:15+07:00"
+}

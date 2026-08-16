@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-022",
+  "proposal_title": "JSON Schema Root Packaging & Fragment Entrypoint Documentation",
+  "voter_role": "R08",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "Clarifying that `domain-entities.schema.json` is a definitions container and providing clear documentation for URI fragment entrypoints (e.g., `#/$defs/Project`, `#/$defs/ShotVersion`) directly unblocks automated contract testing. Automated test suites in QA can now load schemas into standard JSON Schema validator engines without encountering spurious root validation failures, and test fixtures can assert type-specific conformance with zero ambiguity.",
+  "evidence_citations": "02_contracts/CONTRACTS_OVERVIEW.md (Fragment Entrypoints), 02_contracts/domain-entities.schema.json, 04_integration/TEST_STRATEGY.md (Contract suites)",
+  "capability_impact": "Protects CAP-01 (Canonical Domain Contracts) and CAP-13 (Automated Contract Conformance Testing).",
+  "residual_risk": "Validator library differences across languages (e.g. Python jsonschema vs TypeScript Ajv) in resolving relative URI fragments; mitigated by publishing bundled standalone schemas and automated test fixtures in avf-contracts.",
+  "timestamp": "2026-08-15T21:28:40+07:00"
+}

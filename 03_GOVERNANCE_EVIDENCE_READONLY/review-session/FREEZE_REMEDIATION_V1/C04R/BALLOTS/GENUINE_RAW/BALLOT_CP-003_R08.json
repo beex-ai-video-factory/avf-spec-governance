@@ -1,0 +1,12 @@
+{
+  "change_id": "CP-003",
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "voter_role": "R08",
+  "vote": "YES",
+  "is_mandatory_signoff": false,
+  "domain_specific_rationale": "From a QA and test harness engineering perspective, defining strict discriminated union schemas for all 10 FlowExecutionPort operations (ENSURE_SESSION, OPEN_FLOW, CREATE_OR_SELECT_PROJECT, ATTACH_ASSETS, SET_GENERATION_OPTIONS, SUBMIT_PROMPT, READ_GENERATION_STATE, DOWNLOAD_OUTPUT, CAPTURE_DIAGNOSTIC, CANCEL) along with explicit typed result schemas eliminates ambiguity in contract testing and mock creation. It enables deterministic fixture synthesis for R15 Integration Harness and guarantees that FakeVideoProvider can accurately simulate browser automation responses without behavioral drift between Track A and Track B execution paths.",
+  "evidence_citations": "04_integration/TEST_STRATEGY.md (Section 2 Contract suites & Golden fixtures), 02_contracts/browser-command.schema.json, 03_repo_blueprints/R15_INTEGRATION_HARNESS.md, 03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md",
+  "capability_impact": "Protects CAP-02 (Google Flow Adapter) and CAP-18 (Track A / Track B Port Equivalence); enables robust contract and failure scenario automation in CI.",
+  "residual_risk": "Runtime validation overhead on high-frequency state polling operations like READ_GENERATION_STATE; mitigated by pre-compiling schema validators (e.g. Ajv/fast-json-schema) in the test harness and worker runtime.",
+  "timestamp": "2026-08-15T21:28:00+07:00"
+}

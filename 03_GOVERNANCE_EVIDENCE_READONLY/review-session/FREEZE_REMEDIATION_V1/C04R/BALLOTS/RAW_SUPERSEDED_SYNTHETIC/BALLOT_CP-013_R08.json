@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-08 Automated QC",
+  "change_id": "CP-013",
+  "domain_specific_rationale": "Two-stage QC (technical container validation + visual continuity scoring) guarantees only defect-free takes reach the editor.",
+  "evidence_citations": "03_repo_blueprints/R11_QC.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Two-Stage Automated QC Pipeline & Verification Metrics",
+  "residual_risk": "QC worker requires FFprobe binary.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R08"
+}

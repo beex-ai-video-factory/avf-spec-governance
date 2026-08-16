@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-02 Flow Security",
+  "change_id": "CP-007",
+  "domain_specific_rationale": "Browser workers can securely inject cookies into session storage with chmod 700 OS directory protection.",
+  "evidence_citations": "03_repo_blueprints/R09_BROWSER_WORKER.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Security Credential Injection, Buffer Zeroing & Telemetry Redaction",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R06"
+}

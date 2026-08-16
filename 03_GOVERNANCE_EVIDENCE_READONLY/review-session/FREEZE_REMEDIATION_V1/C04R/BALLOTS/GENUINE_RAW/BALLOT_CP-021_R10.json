@@ -1,0 +1,18 @@
+{
+  "change_id": "CP-021",
+  "proposal_title": "Alignment of Handoff Index with Normative Repo Blueprints",
+  "voter_role": "R10",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As the Developer Experience and AI Handoff Architect with mandatory signoff authority, eliminating hallucinated or unbacked architectural claims from handoff documents is paramount. In prior candidate artifacts (FINAL_IMPLEMENTATION_HANDOFF_INDEX.md and AGENT_BUILD_PACKET_INDEX.md), phantom requirements were introduced that directly contradicted the normative architecture—such as claiming a dedicated 'SecretEnclave' hardware module (contradicting in-memory environment-variable secret handling in R07), a 'gRPC port on R10 FlowKit Bridge' (contradicting the internal HTTP/JSON-RPC IPC protocol), and a 'raw WebSocket server on R13 Operator Console' (contradicting HTTP REST + Server-Sent Events). These phantom claims poison the context window of independent coding agents, causing catastrophic implementation divergence and failed repo handoffs. CP-021 cleanses all unbacked claims, restoring strict 1:1 parity between agent build packets and normative repo blueprints, ensuring seamless, zero-guesswork handoffs for autonomous developers.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/09_agent_packets/AGENT_BUILD_PACKET_INDEX.md:lines 1-35",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R07_PROVIDER_SDK.md:lines 20-50",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R10_FLOWKIT_BRIDGE.md:lines 20-45",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R13_OPERATOR_CONSOLE.md:lines 20-55",
+    "review-session/FREEZE_REMEDIATION_V1/REMEDIATION_FINDING_REGISTER.md:lines 223-234"
+  ],
+  "capability_impact": "Directly safeguards Handoff Trustworthiness, Agent Task Isolation, and Developer Velocity across all capabilities (CAP-01 through CAP-19), preventing hallucinated implementation efforts and ensuring autonomous agents execute with 100% architectural fidelity.",
+  "residual_risk": "Future specification revisions might introduce documentation drift if agent build packets are updated out-of-sync with blueprints. Mitigated by automated CI verification scripts that cross-check agent packet API definitions against normative blueprint contracts.",
+  "timestamp": "2026-08-15T21:28:45+07:00"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Observability Security",
+  "change_id": "CP-020",
+  "domain_specific_rationale": "Platform telemetry libraries implement the specified token redaction regex rules.",
+  "evidence_citations": "03_repo_blueprints/R14_PLATFORM_OBSERVABILITY.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Security Model Secret Handling Prose & Redaction Rules Formalization",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R14"
+}

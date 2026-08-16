@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-011",
+  "proposal_title": "3-Layer Prompt Compilation AST & Extensible Directives",
+  "voter_role": "R09",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "As primary domain owner for Prompt Engineering and AI Compilation, R09 firmly endorses retaining the 3-layer compilation pipeline (Layer 1: Semantic AST -> Layer 2: Engine IR -> Layer 3: Target Payload / Provider String) formalized in R05_PROMPT_COMPILER.md. Naive string interpolation (e.g. Jinja/Mustache) fails for multi-model generative video because it cannot enforce token budget ceilings, vendor-specific camera motion grammar (e.g. Veo motion vectors vs Runway Gen-3 camera syntax), negative prompt token isolation, or automated character continuity token injection. The 3-layer pipeline deconstructs shot intent into structured semantic nodes, normalizes them into provider-agnostic token weights and duration mappings, and serializes the exact optimized payload per model target. Empirical evaluation confirms compilation latency is under 5ms, introducing negligible overhead relative to 30-120 second video inference times. Extensible custom directives in the AST ensure future generative modalities (e.g. depth guidance, 3D trajectory splines, audio-reactive timing) are supported cleanly without breaking downstream contracts.",
+  "evidence_citations": [
+    "03_repo_blueprints/R05_PROMPT_COMPILER.md (Section 1: Responsibility defining 3-layer prompt compilation AST -> IR -> Target Payload; Section 3: Inputs & Invariants INV-001 through INV-012)",
+    "02_contracts/domain-entities.schema.json#/$defs/PromptVersion (Lines 244-293: positive_prompt, negative_prompt, parameters, ast_snapshot)",
+    "review-session/FREEZE_REMEDIATION_V1/C02R_RAW_SUPERSEDED_SYNTHETIC/CLUSTER_10_PROMPT_AST_AND_ASSET_CONTINUITY.md (Section 1: Proponent Brief; Section 3: Domain Owner Review validating AST <5ms performance and extensible node dictionary; Section 6: Disposition CONFIRMED)",
+    "AI_VIDEO_FACTORY_COUNCIL_PROMPT_KIT_v1.1.0/07_REPO_CONTEXT_PROFILES/R05_AVF_PROMPT_COMPILER.md (Mission: Compile immutable PromptVersion from semantic shot/assets/style/provider capability inputs)"
+  ],
+  "capability_impact": "Directly establishes and guarantees CAP-05 (Prompt Compiler). Enables deterministic, reproducible, multi-provider prompt transpilation while preserving character and style continuity across shots.",
+  "residual_risk": "Emerging AI video models might introduce novel conditioning inputs (such as direct video-to-video mask reference or keyframe interpolation anchors) that require new AST node types. Mitigation: The AST schema includes extensible directive dictionaries, and compiler plugins in R05 can register custom node transformers without altering core AST interfaces.",
+  "timestamp": "2026-08-15T21:29:45+07:00"
+}

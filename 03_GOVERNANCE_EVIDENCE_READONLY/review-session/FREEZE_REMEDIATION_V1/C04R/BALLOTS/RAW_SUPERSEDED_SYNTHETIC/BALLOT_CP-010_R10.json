@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-10 Developer Experience",
+  "change_id": "CP-010",
+  "domain_specific_rationale": "DX is preserved with standalone repository checkouts and clean mock interfaces for integration testing.",
+  "evidence_citations": "03_repo_blueprints/R15_INTEGRATION_HARNESS.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Complete 15-Repository Acyclic Dependency DAG & Forbidden Matrix",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R10"
+}

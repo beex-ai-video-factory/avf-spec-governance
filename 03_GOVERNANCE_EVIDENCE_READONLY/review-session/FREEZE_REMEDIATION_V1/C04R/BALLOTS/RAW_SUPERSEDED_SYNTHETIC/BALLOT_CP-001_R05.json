@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 Core State DB",
+  "change_id": "CP-001",
+  "domain_specific_rationale": "Data relational mapping in PostgreSQL is now mathematically consistent with compound foreign keys (shot_id, shot_version_id) ensuring integrity across shots, versions, prompts, and takes.",
+  "evidence_citations": "01_master/DATA_MODEL.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "residual_risk": "Database migration script required for table constraints.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R05"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects Schema Tooling",
+  "change_id": "CP-022",
+  "domain_specific_rationale": "Clarifies domain-entities schema as a  library referenced via #//<Entity> in contract consumers and validators.",
+  "evidence_citations": "02_contracts/CONTRACTS_OVERVIEW.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "JSON Schema Root Packaging & Fragment Entrypoint Documentation",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R04"
+}

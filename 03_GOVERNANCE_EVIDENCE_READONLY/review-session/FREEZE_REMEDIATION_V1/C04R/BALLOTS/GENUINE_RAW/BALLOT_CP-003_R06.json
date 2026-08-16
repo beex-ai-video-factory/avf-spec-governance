@@ -1,0 +1,19 @@
+{
+  "change_id": "CP-003",
+  "proposal_title": "FlowExecutionPort Strict Discriminated Operations & Result Schema",
+  "voter_role": "R06",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From the Flow Browser Specialist (R06) perspective, CP-003 establishes the indispensable foundation for browser automation stability and interchangeability. Prior to this remediation, browser-command.schema.json suffered from unconstrained params and lacked a companion execution result schema, which made deterministic contract enforcement between R08 (Google Flow Adapter) and browser execution workers (R09 Browser Worker and R10 FlowKit Bridge) impossible. CP-003 freezes exact typed discriminated schemas (command_type) with additionalProperties: false across all 10 core operations: ENSURE_SESSION, OPEN_FLOW, CREATE_OR_SELECT_PROJECT, ATTACH_ASSETS, SET_GENERATION_OPTIONS, SUBMIT_PROMPT, READ_GENERATION_STATE, DOWNLOAD_OUTPUT, CAPTURE_DIAGNOSTIC, and CANCEL. The introduction of flow-execution-result.schema.json provides a normalized return envelope with typed status (SUCCESS, FAILED, PENDING, RUNNING) and structured NormalizedError taxonomies. Furthermore, the CAPTURE_DIAGNOSTIC operation (supporting HAR, screenshot, and console log capture) gives our browser automation infrastructure the observability needed to triage Google Flow UI changes, while strict URI-based payload passing prevents base64 binary bloat across the bridge. This enables 100% automated conformance testing and hot-swappability between Track A and Track B.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/browser-command.schema.json:lines 1-356",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/flow-execution-result.schema.json:lines 1-104",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R08_GOOGLE_FLOW_ADAPTER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R09_BROWSER_WORKER.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R10_FLOWKIT_BRIDGE.md:lines 1-60",
+    "review-session/FREEZE_REMEDIATION_V1/C03R/SOL_03_FLOW_EXECUTION_PORT_CONTRACT.md:lines 1-47"
+  ],
+  "capability_impact": "Directly preserves and enforces CAP-02 (Google Flow Adapter Execution) and CAP-18 (Track A / Track B Port Equivalence), guaranteeing complete functional hot-swappability and identical behavioral contracts across Playwright, Chrome MV3, and FlowKit execution engines.",
+  "residual_risk": "Upstream UI drift in Google Flow web application could invalidate DOM selector mappings within R09/R10 adapter implementations. Mitigated by CAPTURE_DIAGNOSTIC enabling automated HAR, screenshot, and console telemetry on failure, paired with R08 error classification mapping UI mutations to UI_CHANGED with retry_category: POLICY_BLOCKED.",
+  "timestamp": "2026-08-15T21:28:10+07:00"
+}

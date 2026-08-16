@@ -1,0 +1,17 @@
+{
+  "change_id": "CP-001",
+  "proposal_title": "Canonical Domain Model Provenance & Entity Completeness",
+  "voter_role": "R04",
+  "vote": "YES",
+  "is_mandatory_signoff": true,
+  "domain_specific_rationale": "From the Contracts, API, and Versioning perspective, CP-001 is essential for establishing a sound, type-safe canonical domain contract package. The previous draft's inverted dependency between ShotVersion and PromptVersion made recursive contract validation impossible and led to brittle code generation in downstream SDKs. Rectifying the lineage to ShotVersion -> PromptVersion -> GenerationJob -> Take guarantees strict unidirectional reference graphs. Furthermore, standardizing RFC 4122 UUID validation via format: 'uuid' and regex pattern, defining explicit field types and constraints for creative intent in ShotVersion (duration_ms >= 100, character_refs, style_refs, asset_refs, constraints), adding comprehensive provenance properties to GenerationJob (prompt_version_id, attempt_index, idempotency_key, execution_stage, normalized_error, timestamps), and enriching AssetVersion with cryptographic checksums (pattern: '^[0-9a-fA-F]{64}$') and media properties establishes a rigorous contract baseline across all service boundaries. Relaxing mandatory face embeddings and LoRA weights under custom_attributes prevents premature contract coupling to specific generative engines.",
+  "evidence_citations": [
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/domain-entities.schema.json:lines 3-7 (UUID format and pattern), lines 173-243 (ShotVersion definition), lines 244-293 (PromptVersion definition), lines 294-390 (GenerationJob definition), lines 470-520 (AssetVersion definition)",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/CONTRACTS_OVERVIEW.md:lines 7-28",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/02_contracts/API_COMPATIBILITY_POLICY.md:lines 1-25",
+    "review-session/FREEZE_REMEDIATION_V1/REVISED_SPEC_CANDIDATE/03_repo_blueprints/R01_CONTRACTS.md:lines 8-26"
+  ],
+  "capability_impact": "Preserves CAP-01 (Canonical Core State Management), CAP-05 (Prompt Compiler AST Synthesis), and CAP-06 (Assets & Continuity Invariants) with zero contract degradation.",
+  "residual_risk": "Downstream consumers referencing deprecated field names must update their schemas. Mitigated by automated contract conformance tests against domain-entities.schema.json in CI/CD pipeline.",
+  "timestamp": "2026-08-15T21:26:27+07:00"
+}

@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-03 Provider SDK",
+  "change_id": "CP-004",
+  "domain_specific_rationale": "AI adapters for future engines (Sora, Veo2, Runway) can map engine-specific rate limits and content filter flags to standard normalized error codes.",
+  "evidence_citations": "03_repo_blueprints/R07_PROVIDER_SDK.md",
+  "is_mandatory_signoff": false,
+  "proposal_title": "Provider Result Contract Separation & Normalized Error Taxonomy",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R09"
+}

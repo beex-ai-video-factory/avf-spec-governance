@@ -1,0 +1,12 @@
+{
+  "capability_impact": "Protects CAP-01 Domain Integrity",
+  "change_id": "CP-012",
+  "domain_specific_rationale": "Domain model ties asset versions to shot versions via immutable entity references.",
+  "evidence_citations": "01_master/DATA_MODEL.md",
+  "is_mandatory_signoff": true,
+  "proposal_title": "Asset Versioning & Character/Style Continuity Scoring Invariants",
+  "residual_risk": "None.",
+  "timestamp": "2026-08-15T12:00:00Z",
+  "vote": "YES",
+  "voter_role": "R01"
+}
