@@ -1,0 +1,2518 @@
+version: 1.0.0
+project: AI Video Factory
+total_prompts: 99
+prompts:
+- id: RESUME-01
+  path: RESUME_PROJECT.md
+  phase: SYSTEM_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Inspect current implementation runtime state, verify cryptographic baseline
+    integrity, and compute the exact next prompt command without modifying application
+    code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<2 min)
+  prerequisites: []
+  pass_next: Deterministic next prompt resolved from RUN_STATE.yaml
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_08_ENVIRONMENT_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: R10-01
+  path: 08_R10_FLOWKIT_BRIDGE/R10_01_PLAN.md
+  phase: 08_R10_FLOWKIT_BRIDGE
+  repo: R10_flowkit_bridge
+  purpose: Create the complete architectural implementation and test plan for R10_flowkit_bridge
+    (Track B Direct FlowKit Bridge) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R08-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R10_flowkit_bridge/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R10_flowkit_bridge )/**
+- id: R10-02
+  path: 08_R10_FLOWKIT_BRIDGE/R10_02_IMPLEMENT.md
+  phase: 08_R10_FLOWKIT_BRIDGE
+  repo: R10_flowkit_bridge
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R10_flowkit_bridge (Track B Direct FlowKit Bridge) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R10-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R10_flowkit_bridge/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R10_flowkit_bridge )/**
+- id: R10-03
+  path: 08_R10_FLOWKIT_BRIDGE/R10_03_TEST_AND_REVIEW.md
+  phase: 08_R10_FLOWKIT_BRIDGE
+  repo: R10_flowkit_bridge
+  purpose: Perform an independent technical audit of R10_flowkit_bridge (Track B Direct
+    FlowKit Bridge), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R10-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R10_flowkit_bridge/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R10_flowkit_bridge )/**
+- id: R10-04
+  path: 08_R10_FLOWKIT_BRIDGE/R10_04_ACCEPT_RELEASE.md
+  phase: 08_R10_FLOWKIT_BRIDGE
+  repo: R10_flowkit_bridge
+  purpose: Conduct formal acceptance signoff for R10_flowkit_bridge (Track B Direct
+    FlowKit Bridge), merge feature branch to main, apply annotated git release tag,
+    and unlock downstream dependency gates.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R10-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R10_flowkit_bridge/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R10_flowkit_bridge )/**
+- id: R10-REC
+  path: 08_R10_FLOWKIT_BRIDGE/R10_RECOVERY.md
+  phase: 08_R10_FLOWKIT_BRIDGE
+  repo: R10_flowkit_bridge
+  purpose: Triage failures occurring within R10_flowkit_bridge (Track B Direct FlowKit
+    Bridge), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R10_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R10_flowkit_bridge/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R05-01
+  path: 12_R05_PROMPT_COMPILER/R05_01_PLAN.md
+  phase: 12_R05_PROMPT_COMPILER
+  repo: R05_prompt_compiler
+  purpose: Create the complete architectural implementation and test plan for R05_prompt_compiler
+    (Provider-Aware Prompt Compiler) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R04-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R05_prompt_compiler/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R05_prompt_compiler )/**
+- id: R05-02
+  path: 12_R05_PROMPT_COMPILER/R05_02_IMPLEMENT.md
+  phase: 12_R05_PROMPT_COMPILER
+  repo: R05_prompt_compiler
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R05_prompt_compiler (Provider-Aware Prompt Compiler) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R05-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R05_prompt_compiler/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R05_prompt_compiler )/**
+- id: R05-03
+  path: 12_R05_PROMPT_COMPILER/R05_03_TEST_AND_REVIEW.md
+  phase: 12_R05_PROMPT_COMPILER
+  repo: R05_prompt_compiler
+  purpose: Perform an independent technical audit of R05_prompt_compiler (Provider-Aware
+    Prompt Compiler), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R05-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R05_prompt_compiler/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R05_prompt_compiler )/**
+- id: R05-04
+  path: 12_R05_PROMPT_COMPILER/R05_04_ACCEPT_RELEASE.md
+  phase: 12_R05_PROMPT_COMPILER
+  repo: R05_prompt_compiler
+  purpose: Conduct formal acceptance signoff for R05_prompt_compiler (Provider-Aware
+    Prompt Compiler), merge feature branch to main, apply annotated git release tag,
+    and unlock downstream dependency gates.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R05-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R05_prompt_compiler/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R05_prompt_compiler )/**
+- id: R05-REC
+  path: 12_R05_PROMPT_COMPILER/R05_RECOVERY.md
+  phase: 12_R05_PROMPT_COMPILER
+  repo: R05_prompt_compiler
+  purpose: Triage failures occurring within R05_prompt_compiler (Provider-Aware Prompt
+    Compiler), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R05_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R05_prompt_compiler/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R07-01
+  path: 04_R07_PROVIDER_SDK/R07_01_PLAN.md
+  phase: 04_R07_PROVIDER_SDK
+  repo: R07_provider_sdk
+  purpose: Create the complete architectural implementation and test plan for R07_provider_sdk
+    (Provider Neutral SDK & FakeProvider) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R02-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R07_provider_sdk/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R07_provider_sdk )/**
+- id: R07-02
+  path: 04_R07_PROVIDER_SDK/R07_02_IMPLEMENT.md
+  phase: 04_R07_PROVIDER_SDK
+  repo: R07_provider_sdk
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R07_provider_sdk (Provider Neutral SDK & FakeProvider) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R07-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R07_provider_sdk/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R07_provider_sdk )/**
+- id: R07-03
+  path: 04_R07_PROVIDER_SDK/R07_03_TEST_AND_REVIEW.md
+  phase: 04_R07_PROVIDER_SDK
+  repo: R07_provider_sdk
+  purpose: Perform an independent technical audit of R07_provider_sdk (Provider Neutral
+    SDK & FakeProvider), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R07-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R07_provider_sdk/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R07_provider_sdk )/**
+- id: R07-04
+  path: 04_R07_PROVIDER_SDK/R07_04_ACCEPT_RELEASE.md
+  phase: 04_R07_PROVIDER_SDK
+  repo: R07_provider_sdk
+  purpose: Conduct formal acceptance signoff for R07_provider_sdk (Provider Neutral
+    SDK & FakeProvider), merge feature branch to main, apply annotated git release
+    tag, and unlock downstream dependency gates.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R07-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_00_FOUNDATION_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R07_provider_sdk/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R07_provider_sdk )/**
+- id: R07-REC
+  path: 04_R07_PROVIDER_SDK/R07_RECOVERY.md
+  phase: 04_R07_PROVIDER_SDK
+  repo: R07_provider_sdk
+  purpose: Triage failures occurring within R07_provider_sdk (Provider Neutral SDK
+    & FakeProvider), categorize the defect class, and route to local remediation or
+    master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R07_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R07_provider_sdk/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R11-01
+  path: 13_R11_QC/R11_01_PLAN.md
+  phase: 13_R11_QC
+  repo: R11_qc
+  purpose: Create the complete architectural implementation and test plan for R11_qc
+    (Quality Control & Validation Service) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R05-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R11_qc/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R11_qc )/**
+- id: R11-02
+  path: 13_R11_QC/R11_02_IMPLEMENT.md
+  phase: 13_R11_QC
+  repo: R11_qc
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R11_qc (Quality Control & Validation Service) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R11-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R11_qc/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R11_qc )/**
+- id: R11-03
+  path: 13_R11_QC/R11_03_TEST_AND_REVIEW.md
+  phase: 13_R11_QC
+  repo: R11_qc
+  purpose: Perform an independent technical audit of R11_qc (Quality Control & Validation
+    Service), executing negative test suites, contract compatibility checks, secret
+    redaction validation, and dependency boundary verification.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R11-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R11_qc/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R11_qc )/**
+- id: R11-04
+  path: 13_R11_QC/R11_04_ACCEPT_RELEASE.md
+  phase: 13_R11_QC
+  repo: R11_qc
+  purpose: Conduct formal acceptance signoff for R11_qc (Quality Control & Validation
+    Service), merge feature branch to main, apply annotated git release tag, and unlock
+    downstream dependency gates.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R11-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/13_R11_QC/R11_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R11_qc/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R11_qc )/**
+- id: R11-REC
+  path: 13_R11_QC/R11_RECOVERY.md
+  phase: 13_R11_QC
+  repo: R11_qc
+  purpose: Triage failures occurring within R11_qc (Quality Control & Validation Service),
+    categorize the defect class, and route to local remediation or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R11_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R11_qc/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REL-01
+  path: 18_RELEASE/RELEASE_01_FINAL_PRE_RELEASE_AUDIT.md
+  phase: 18_RELEASE
+  repo: AVF_SPEC_REVIEW
+  purpose: Perform comprehensive forensic audit across all 15 repositories, all 6
+    integration gates, frozen baseline drift, and documentation before release tagging.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - GATE-05
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/18_RELEASE/RELEASE_02_TAG_AND_PUBLISH.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_04_TEST_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/FINAL_RELEASE_AUDIT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REL-02
+  path: 18_RELEASE/RELEASE_02_TAG_AND_PUBLISH.md
+  phase: 18_RELEASE
+  repo: AVF_SPEC_REVIEW
+  purpose: Apply the unified system git release tag v1.0.0, publish the R01 Contracts
+    npm package, and finalize release metadata.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - REL-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/18_RELEASE/RELEASE_03_POST_RELEASE_VERIFICATION.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_07_GIT_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  - 05_IMPLEMENTATION/repos/**
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REL-03
+  path: 18_RELEASE/RELEASE_03_POST_RELEASE_VERIFICATION.md
+  phase: 18_RELEASE
+  repo: AVF_SPEC_REVIEW
+  purpose: Execute post-release smoke tests, verify production health checks, and
+    finalize the operator implementation journey.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - REL-02
+  pass_next: TERMINAL_COMPLETE
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_04_TEST_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R01-01
+  path: 02_R01_CONTRACTS/R01_01_PLAN.md
+  phase: 02_R01_CONTRACTS
+  repo: R01_contracts
+  purpose: Create the complete architectural implementation and test plan for R01_contracts
+    (Contracts & Typed Schemas) adhering to all 16 blueprint sections without authoring
+    production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - PROV-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R01_contracts/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R01_contracts )/**
+- id: R01-02
+  path: 02_R01_CONTRACTS/R01_02_IMPLEMENT.md
+  phase: 02_R01_CONTRACTS
+  repo: R01_contracts
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R01_contracts (Contracts & Typed Schemas) according to the
+    approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R01-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R01_contracts/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R01_contracts )/**
+- id: R01-03
+  path: 02_R01_CONTRACTS/R01_03_TEST_AND_REVIEW.md
+  phase: 02_R01_CONTRACTS
+  repo: R01_contracts
+  purpose: Perform an independent technical audit of R01_contracts (Contracts & Typed
+    Schemas), executing negative test suites, contract compatibility checks, secret
+    redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R01-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R01_contracts/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R01_contracts )/**
+- id: R01-04
+  path: 02_R01_CONTRACTS/R01_04_ACCEPT_RELEASE.md
+  phase: 02_R01_CONTRACTS
+  repo: R01_contracts
+  purpose: Conduct formal acceptance signoff for R01_contracts (Contracts & Typed
+    Schemas), merge feature branch to main, apply annotated git release tag, and unlock
+    downstream dependency gates.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R01-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R01_contracts/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R01_contracts )/**
+- id: R01-REC
+  path: 02_R01_CONTRACTS/R01_RECOVERY.md
+  phase: 02_R01_CONTRACTS
+  repo: R01_contracts
+  purpose: Triage failures occurring within R01_contracts (Contracts & Typed Schemas),
+    categorize the defect class, and route to local remediation or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R01_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R01_contracts/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R15-01
+  path: 06_R15_INTEGRATION_HARNESS/R15_01_PLAN.md
+  phase: 06_R15_INTEGRATION_HARNESS
+  repo: R15_integration_harness
+  purpose: Create the complete architectural implementation and test plan for R15_integration_harness
+    (End-to-End Integration & Scenario Test Harness) adhering to all 16 blueprint
+    sections without authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R06-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R15_integration_harness/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R15_integration_harness )/**
+- id: R15-02
+  path: 06_R15_INTEGRATION_HARNESS/R15_02_IMPLEMENT.md
+  phase: 06_R15_INTEGRATION_HARNESS
+  repo: R15_integration_harness
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R15_integration_harness (End-to-End Integration & Scenario
+    Test Harness) according to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R15-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R15_integration_harness/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R15_integration_harness )/**
+- id: R15-03
+  path: 06_R15_INTEGRATION_HARNESS/R15_03_TEST_AND_REVIEW.md
+  phase: 06_R15_INTEGRATION_HARNESS
+  repo: R15_integration_harness
+  purpose: Perform an independent technical audit of R15_integration_harness (End-to-End
+    Integration & Scenario Test Harness), executing negative test suites, contract
+    compatibility checks, secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R15-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R15_integration_harness/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R15_integration_harness )/**
+- id: R15-04
+  path: 06_R15_INTEGRATION_HARNESS/R15_04_ACCEPT_RELEASE.md
+  phase: 06_R15_INTEGRATION_HARNESS
+  repo: R15_integration_harness
+  purpose: Conduct formal acceptance signoff for R15_integration_harness (End-to-End
+    Integration & Scenario Test Harness), merge feature branch to main, apply annotated
+    git release tag, and unlock downstream dependency gates.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R15-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_01_FAKEPROVIDER_E2E_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R15_integration_harness/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R15_integration_harness )/**
+- id: R15-REC
+  path: 06_R15_INTEGRATION_HARNESS/R15_RECOVERY.md
+  phase: 06_R15_INTEGRATION_HARNESS
+  repo: R15_integration_harness
+  purpose: Triage failures occurring within R15_integration_harness (End-to-End Integration
+    & Scenario Test Harness), categorize the defect class, and route to local remediation
+    or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R15_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R15_integration_harness/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R02-01
+  path: 03_R02_CORE_STATE/R02_01_PLAN.md
+  phase: 03_R02_CORE_STATE
+  repo: R02_core_state
+  purpose: Create the complete architectural implementation and test plan for R02_core_state
+    (Core State & Persistence Engine) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R14-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R02_core_state/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R02_core_state )/**
+- id: R02-02
+  path: 03_R02_CORE_STATE/R02_02_IMPLEMENT.md
+  phase: 03_R02_CORE_STATE
+  repo: R02_core_state
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R02_core_state (Core State & Persistence Engine) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R02-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R02_core_state/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R02_core_state )/**
+- id: R02-03
+  path: 03_R02_CORE_STATE/R02_03_TEST_AND_REVIEW.md
+  phase: 03_R02_CORE_STATE
+  repo: R02_core_state
+  purpose: Perform an independent technical audit of R02_core_state (Core State &
+    Persistence Engine), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R02-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R02_core_state/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R02_core_state )/**
+- id: R02-04
+  path: 03_R02_CORE_STATE/R02_04_ACCEPT_RELEASE.md
+  phase: 03_R02_CORE_STATE
+  repo: R02_core_state
+  purpose: Conduct formal acceptance signoff for R02_core_state (Core State & Persistence
+    Engine), merge feature branch to main, apply annotated git release tag, and unlock
+    downstream dependency gates.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R02-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/04_R07_PROVIDER_SDK/R07_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R02_core_state/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R02_core_state )/**
+- id: R02-REC
+  path: 03_R02_CORE_STATE/R02_RECOVERY.md
+  phase: 03_R02_CORE_STATE
+  repo: R02_core_state
+  purpose: Triage failures occurring within R02_core_state (Core State & Persistence
+    Engine), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R02_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R02_core_state/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R06-01
+  path: 05_R06_WORKFLOW/R06_01_PLAN.md
+  phase: 05_R06_WORKFLOW
+  repo: R06_workflow
+  purpose: Create the complete architectural implementation and test plan for R06_workflow
+    (Temporal Workflow Orchestrator) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - GATE-00
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R06_workflow/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R06_workflow )/**
+- id: R06-02
+  path: 05_R06_WORKFLOW/R06_02_IMPLEMENT.md
+  phase: 05_R06_WORKFLOW
+  repo: R06_workflow
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R06_workflow (Temporal Workflow Orchestrator) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R06-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R06_workflow/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R06_workflow )/**
+- id: R06-03
+  path: 05_R06_WORKFLOW/R06_03_TEST_AND_REVIEW.md
+  phase: 05_R06_WORKFLOW
+  repo: R06_workflow
+  purpose: Perform an independent technical audit of R06_workflow (Temporal Workflow
+    Orchestrator), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R06-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R06_workflow/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R06_workflow )/**
+- id: R06-04
+  path: 05_R06_WORKFLOW/R06_04_ACCEPT_RELEASE.md
+  phase: 05_R06_WORKFLOW
+  repo: R06_workflow
+  purpose: Conduct formal acceptance signoff for R06_workflow (Temporal Workflow Orchestrator),
+    merge feature branch to main, apply annotated git release tag, and unlock downstream
+    dependency gates.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R06-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/06_R15_INTEGRATION_HARNESS/R15_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R06_workflow/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R06_workflow )/**
+- id: R06-REC
+  path: 05_R06_WORKFLOW/R06_RECOVERY.md
+  phase: 05_R06_WORKFLOW
+  repo: R06_workflow
+  purpose: Triage failures occurring within R06_workflow (Temporal Workflow Orchestrator),
+    categorize the defect class, and route to local remediation or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R06_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R06_workflow/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R12-01
+  path: 14_R12_MEDIA/R12_01_PLAN.md
+  phase: 14_R12_MEDIA
+  repo: R12_media
+  purpose: Create the complete architectural implementation and test plan for R12_media
+    (Media Processing & Assembly Service) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R11-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R12_media/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R12_media )/**
+- id: R12-02
+  path: 14_R12_MEDIA/R12_02_IMPLEMENT.md
+  phase: 14_R12_MEDIA
+  repo: R12_media
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R12_media (Media Processing & Assembly Service) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R12-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R12_media/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R12_media )/**
+- id: R12-03
+  path: 14_R12_MEDIA/R12_03_TEST_AND_REVIEW.md
+  phase: 14_R12_MEDIA
+  repo: R12_media
+  purpose: Perform an independent technical audit of R12_media (Media Processing &
+    Assembly Service), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R12-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R12_media/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R12_media )/**
+- id: R12-04
+  path: 14_R12_MEDIA/R12_04_ACCEPT_RELEASE.md
+  phase: 14_R12_MEDIA
+  repo: R12_media
+  purpose: Conduct formal acceptance signoff for R12_media (Media Processing & Assembly
+    Service), merge feature branch to main, apply annotated git release tag, and unlock
+    downstream dependency gates.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R12-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_03_CREATIVE_MEDIA_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/14_R12_MEDIA/R12_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R12_media/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R12_media )/**
+- id: R12-REC
+  path: 14_R12_MEDIA/R12_RECOVERY.md
+  phase: 14_R12_MEDIA
+  repo: R12_media
+  purpose: Triage failures occurring within R12_media (Media Processing & Assembly
+    Service), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R12_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R12_media/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R08-01
+  path: 07_R08_GOOGLE_FLOW_ADAPTER/R08_01_PLAN.md
+  phase: 07_R08_GOOGLE_FLOW_ADAPTER
+  repo: R08_google_flow_adapter
+  purpose: Create the complete architectural implementation and test plan for R08_google_flow_adapter
+    (Google Flow Provider Adapter) adhering to all 16 blueprint sections without authoring
+    production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - GATE-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R08_google_flow_adapter/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R08_google_flow_adapter )/**
+- id: R08-02
+  path: 07_R08_GOOGLE_FLOW_ADAPTER/R08_02_IMPLEMENT.md
+  phase: 07_R08_GOOGLE_FLOW_ADAPTER
+  repo: R08_google_flow_adapter
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R08_google_flow_adapter (Google Flow Provider Adapter) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R08-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R08_google_flow_adapter/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R08_google_flow_adapter )/**
+- id: R08-03
+  path: 07_R08_GOOGLE_FLOW_ADAPTER/R08_03_TEST_AND_REVIEW.md
+  phase: 07_R08_GOOGLE_FLOW_ADAPTER
+  repo: R08_google_flow_adapter
+  purpose: Perform an independent technical audit of R08_google_flow_adapter (Google
+    Flow Provider Adapter), executing negative test suites, contract compatibility
+    checks, secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R08-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R08_google_flow_adapter/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R08_google_flow_adapter )/**
+- id: R08-04
+  path: 07_R08_GOOGLE_FLOW_ADAPTER/R08_04_ACCEPT_RELEASE.md
+  phase: 07_R08_GOOGLE_FLOW_ADAPTER
+  repo: R08_google_flow_adapter
+  purpose: Conduct formal acceptance signoff for R08_google_flow_adapter (Google Flow
+    Provider Adapter), merge feature branch to main, apply annotated git release tag,
+    and unlock downstream dependency gates.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R08-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/08_R10_FLOWKIT_BRIDGE/R10_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R08_google_flow_adapter/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R08_google_flow_adapter )/**
+- id: R08-REC
+  path: 07_R08_GOOGLE_FLOW_ADAPTER/R08_RECOVERY.md
+  phase: 07_R08_GOOGLE_FLOW_ADAPTER
+  repo: R08_google_flow_adapter
+  purpose: Triage failures occurring within R08_google_flow_adapter (Google Flow Provider
+    Adapter), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R08_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R08_google_flow_adapter/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R14-01
+  path: 15_R14_OBSERVABILITY/R14_01_PLAN.md
+  phase: 15_R14_OBSERVABILITY
+  repo: R14_platform_observability
+  purpose: Create the complete architectural implementation and test plan for R14_platform_observability
+    (Observability, Telemetry & Security) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R01-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R14_platform_observability/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R14_platform_observability )/**
+- id: R14-02
+  path: 15_R14_OBSERVABILITY/R14_02_IMPLEMENT.md
+  phase: 15_R14_OBSERVABILITY
+  repo: R14_platform_observability
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R14_platform_observability (Observability, Telemetry & Security)
+    according to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R14-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R14_platform_observability/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R14_platform_observability )/**
+- id: R14-03
+  path: 15_R14_OBSERVABILITY/R14_03_TEST_AND_REVIEW.md
+  phase: 15_R14_OBSERVABILITY
+  repo: R14_platform_observability
+  purpose: Perform an independent technical audit of R14_platform_observability (Observability,
+    Telemetry & Security), executing negative test suites, contract compatibility
+    checks, secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R14-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R14_platform_observability/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R14_platform_observability )/**
+- id: R14-04
+  path: 15_R14_OBSERVABILITY/R14_04_ACCEPT_RELEASE.md
+  phase: 15_R14_OBSERVABILITY
+  repo: R14_platform_observability
+  purpose: Conduct formal acceptance signoff for R14_platform_observability (Observability,
+    Telemetry & Security), merge feature branch to main, apply annotated git release
+    tag, and unlock downstream dependency gates.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R14-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/03_R02_CORE_STATE/R02_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/15_R14_OBSERVABILITY/R14_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R14_platform_observability/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R14_platform_observability )/**
+- id: R14-REC
+  path: 15_R14_OBSERVABILITY/R14_RECOVERY.md
+  phase: 15_R14_OBSERVABILITY
+  repo: R14_platform_observability
+  purpose: Triage failures occurring within R14_platform_observability (Observability,
+    Telemetry & Security), categorize the defect class, and route to local remediation
+    or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R14_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R14_platform_observability/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: PROV-01
+  path: 01_REPO_PROVISIONING/PROVISION_01_INSPECT_AND_PLAN.md
+  phase: 01_REPO_PROVISIONING
+  repo: AVF_SPEC_REVIEW
+  purpose: Inspect repo-registry.yaml and formulate the exact directory structure,
+    package manifests, and licensing/git configurations for all 15 independent repositories.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - CHK-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/01_REPO_PROVISIONING/PROVISION_02_LOCAL_POLYREPO_INIT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_07_GIT_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: PROV-02
+  path: 01_REPO_PROVISIONING/PROVISION_02_LOCAL_POLYREPO_INIT.md
+  phase: 01_REPO_PROVISIONING
+  repo: AVF_SPEC_REVIEW
+  purpose: Create local directory trees and initialize clean git repositories with
+    standard .gitignore, README.md, and configuration skeletons for all 15 independent
+    repositories under 05_IMPLEMENTATION/repos/.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - PROV-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/01_REPO_PROVISIONING/PROVISION_03_GITHUB_REPOS_PROVISION.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_07_GIT_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: PROV-03
+  path: 01_REPO_PROVISIONING/PROVISION_03_GITHUB_REPOS_PROVISION.md
+  phase: 01_REPO_PROVISIONING
+  repo: AVF_SPEC_REVIEW
+  purpose: Inspect GitHub CLI authentication and configure remote GitHub repositories
+    (avf-contracts, avf-core-state, etc.) with branch protection rules, or establish
+    local git remotes if operating in offline mode.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - PROV-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/02_R01_CONTRACTS/R01_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_07_GIT_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-01
+  path: 99_RECOVERY/RECOVERY_01_BLOCKED_DEPENDENCY.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Diagnose and resolve a situation where a downstream repository is blocked
+    by an unreleased or unbuilt upstream dependency without violating polyrepo isolation.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic upstream prompt resolved from RUN_STATE.yaml
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-02
+  path: 99_RECOVERY/RECOVERY_02_CONTRACT_BREAK.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Resolve a contract schema discrepancy or typing incompatibility between
+    two communicating repositories.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic consumer 02_IMPLEMENT.md or R01_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  - 05_IMPLEMENTATION/change-requests/**
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-03
+  path: 99_RECOVERY/RECOVERY_03_FROZEN_SPEC_DEFECT_CR.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Open and document a formal Change Request (CR) when an irreconcilable defect,
+    impossibility, or contradiction is discovered in the frozen v1.0.0 specification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/change-requests/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-04
+  path: 99_RECOVERY/RECOVERY_04_TEST_GATE_FAILURE.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Diagnose and repair failing unit tests, broken negative fixtures, or insufficient
+    code coverage in a repository.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic repo review prompt (<REPO>_03_TEST_AND_REVIEW.md)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-05
+  path: 99_RECOVERY/RECOVERY_05_INTEGRATION_GATE_FAILURE.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Triage and isolate failures occurring during cross-repository system integration
+    gates (GATE-00 through GATE-05).
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<5 min)
+  prerequisites: []
+  pass_next: Deterministic remediation prompt for isolated component
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-06
+  path: 99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Reset a stalled, looping, or hallucinating agent conversation, restoring
+    execution from clean git checkpoints without data loss.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<2 min)
+  prerequisites: []
+  pass_next: Deterministic restart prompt for uncompleted task from RUN_STATE.yaml
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_07_GIT_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-07
+  path: 99_RECOVERY/RECOVERY_07_GIT_RECOVERY.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Resolve git merge conflicts, detached HEAD states, dirty worktrees, or
+    corrupted repository indexes across polyrepos.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-08
+  path: 99_RECOVERY/RECOVERY_08_ENVIRONMENT_FAILURE.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Diagnose and recover from Docker container failures, PostgreSQL connection
+    outages, or missing runtime dependencies.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/00_CHECKPOINTS/CHECKPOINT_02_ENVIRONMENT_DOCTOR.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/00_CHECKPOINTS/CHECKPOINT_02_ENVIRONMENT_DOCTOR.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: REC-09
+  path: 99_RECOVERY/RECOVERY_09_EXTERNAL_PROVIDER_BLOCKER.md
+  phase: 99_RECOVERY
+  repo: AVF_SPEC_REVIEW
+  purpose: Handle Google Flow security challenges, bot detections, CAPTCHAs, or rate
+    limit blocks strictly through human operator escalation without unauthorized automation
+    bypass.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_05_CONTROLLED_LIVE_FLOW_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: CHK-01
+  path: 00_CHECKPOINTS/CHECKPOINT_01_PREFLIGHT_AND_SECURITY.md
+  phase: 00_CHECKPOINTS
+  repo: AVF_SPEC_REVIEW
+  purpose: Verify cryptographic baseline integrity against BASELINE.lock.json, confirm
+    zero frozen mutation drift, verify workspace cleanliness, and ensure zero unredacted
+    secrets exist before commencing implementation.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<2 min)
+  prerequisites: []
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/00_CHECKPOINTS/CHECKPOINT_02_ENVIRONMENT_DOCTOR.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_08_ENVIRONMENT_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: CHK-02
+  path: 00_CHECKPOINTS/CHECKPOINT_02_ENVIRONMENT_DOCTOR.md
+  phase: 00_CHECKPOINTS
+  repo: AVF_SPEC_REVIEW
+  purpose: Execute the implementation environment doctor script, validating that Node.js,
+    Python, Docker, Temporal CLI, FFmpeg, and Git toolchains satisfy all baseline
+    requirements.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - CHK-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/01_REPO_PROVISIONING/PROVISION_01_INSPECT_AND_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_08_ENVIRONMENT_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R04-01
+  path: 11_R04_ASSETS_CONTINUITY/R04_01_PLAN.md
+  phase: 11_R04_ASSETS_CONTINUITY
+  repo: R04_assets_continuity
+  purpose: Create the complete architectural implementation and test plan for R04_assets_continuity
+    (Assets & Character Continuity Service) adhering to all 16 blueprint sections
+    without authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R03-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R04_assets_continuity/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R04_assets_continuity )/**
+- id: R04-02
+  path: 11_R04_ASSETS_CONTINUITY/R04_02_IMPLEMENT.md
+  phase: 11_R04_ASSETS_CONTINUITY
+  repo: R04_assets_continuity
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R04_assets_continuity (Assets & Character Continuity Service)
+    according to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R04-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R04_assets_continuity/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R04_assets_continuity )/**
+- id: R04-03
+  path: 11_R04_ASSETS_CONTINUITY/R04_03_TEST_AND_REVIEW.md
+  phase: 11_R04_ASSETS_CONTINUITY
+  repo: R04_assets_continuity
+  purpose: Perform an independent technical audit of R04_assets_continuity (Assets
+    & Character Continuity Service), executing negative test suites, contract compatibility
+    checks, secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R04-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R04_assets_continuity/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R04_assets_continuity )/**
+- id: R04-04
+  path: 11_R04_ASSETS_CONTINUITY/R04_04_ACCEPT_RELEASE.md
+  phase: 11_R04_ASSETS_CONTINUITY
+  repo: R04_assets_continuity
+  purpose: Conduct formal acceptance signoff for R04_assets_continuity (Assets & Character
+    Continuity Service), merge feature branch to main, apply annotated git release
+    tag, and unlock downstream dependency gates.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R04-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/12_R05_PROMPT_COMPILER/R05_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R04_assets_continuity/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R04_assets_continuity )/**
+- id: R04-REC
+  path: 11_R04_ASSETS_CONTINUITY/R04_RECOVERY.md
+  phase: 11_R04_ASSETS_CONTINUITY
+  repo: R04_assets_continuity
+  purpose: Triage failures occurring within R04_assets_continuity (Assets & Character
+    Continuity Service), categorize the defect class, and route to local remediation
+    or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R04_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R04_assets_continuity/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R09-01
+  path: 09_R09_BROWSER_WORKER/R09_01_PLAN.md
+  phase: 09_R09_BROWSER_WORKER
+  repo: R09_browser_worker
+  purpose: Create the complete architectural implementation and test plan for R09_browser_worker
+    (Track A Browser Automation Worker) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R10-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R09_browser_worker/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R09_browser_worker )/**
+- id: R09-02
+  path: 09_R09_BROWSER_WORKER/R09_02_IMPLEMENT.md
+  phase: 09_R09_BROWSER_WORKER
+  repo: R09_browser_worker
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R09_browser_worker (Track A Browser Automation Worker) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R09-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R09_browser_worker/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R09_browser_worker )/**
+- id: R09-03
+  path: 09_R09_BROWSER_WORKER/R09_03_TEST_AND_REVIEW.md
+  phase: 09_R09_BROWSER_WORKER
+  repo: R09_browser_worker
+  purpose: Perform an independent technical audit of R09_browser_worker (Track A Browser
+    Automation Worker), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R09-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R09_browser_worker/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R09_browser_worker )/**
+- id: R09-04
+  path: 09_R09_BROWSER_WORKER/R09_04_ACCEPT_RELEASE.md
+  phase: 09_R09_BROWSER_WORKER
+  repo: R09_browser_worker
+  purpose: Conduct formal acceptance signoff for R09_browser_worker (Track A Browser
+    Automation Worker), merge feature branch to main, apply annotated git release
+    tag, and unlock downstream dependency gates.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R09-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_02_FLOW_EXECUTION_PORT_CONFORMANCE_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/09_R09_BROWSER_WORKER/R09_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R09_browser_worker/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R09_browser_worker )/**
+- id: R09-REC
+  path: 09_R09_BROWSER_WORKER/R09_RECOVERY.md
+  phase: 09_R09_BROWSER_WORKER
+  repo: R09_browser_worker
+  purpose: Triage failures occurring within R09_browser_worker (Track A Browser Automation
+    Worker), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R09_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R09_browser_worker/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: R13-01
+  path: 16_R13_OPERATOR_CONSOLE/R13_01_PLAN.md
+  phase: 16_R13_OPERATOR_CONSOLE
+  repo: R13_operator_console
+  purpose: Create the complete architectural implementation and test plan for R13_operator_console
+    (Human-in-the-Loop Operator Console) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - GATE-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R13_operator_console/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R13_operator_console )/**
+- id: R13-02
+  path: 16_R13_OPERATOR_CONSOLE/R13_02_IMPLEMENT.md
+  phase: 16_R13_OPERATOR_CONSOLE
+  repo: R13_operator_console
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R13_operator_console (Human-in-the-Loop Operator Console)
+    according to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R13-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R13_operator_console/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R13_operator_console )/**
+- id: R13-03
+  path: 16_R13_OPERATOR_CONSOLE/R13_03_TEST_AND_REVIEW.md
+  phase: 16_R13_OPERATOR_CONSOLE
+  repo: R13_operator_console
+  purpose: Perform an independent technical audit of R13_operator_console (Human-in-the-Loop
+    Operator Console), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R13-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R13_operator_console/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R13_operator_console )/**
+- id: R13-04
+  path: 16_R13_OPERATOR_CONSOLE/R13_04_ACCEPT_RELEASE.md
+  phase: 16_R13_OPERATOR_CONSOLE
+  repo: R13_operator_console
+  purpose: Conduct formal acceptance signoff for R13_operator_console (Human-in-the-Loop
+    Operator Console), merge feature branch to main, apply annotated git release tag,
+    and unlock downstream dependency gates.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R13-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_04_SYSTEM_INTEGRATION_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R13_operator_console/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R13_operator_console )/**
+- id: R13-REC
+  path: 16_R13_OPERATOR_CONSOLE/R13_RECOVERY.md
+  phase: 16_R13_OPERATOR_CONSOLE
+  repo: R13_operator_console
+  purpose: Triage failures occurring within R13_operator_console (Human-in-the-Loop
+    Operator Console), categorize the defect class, and route to local remediation
+    or master system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R13_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R13_operator_console/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+- id: GATE-00
+  path: 17_INTEGRATION_GATES/GATE_00_FOUNDATION_GATE.md
+  phase: 17_INTEGRATION_GATES
+  repo: AVF_SPEC_REVIEW
+  purpose: Validate cross-repository integration between R01 Contracts, R14 Platform
+    Observability, R02 Core State, and R07 Provider SDK in a clean environment before
+    orchestrator implementation.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: MEDIUM (5-8 min)
+  prerequisites:
+  - R07-04
+  - R02-04
+  - R14-04
+  - R01-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/05_R06_WORKFLOW/R06_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_05_INTEGRATION_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: GATE-01
+  path: 17_INTEGRATION_GATES/GATE_01_FAKEPROVIDER_E2E_GATE.md
+  phase: 17_INTEGRATION_GATES
+  repo: AVF_SPEC_REVIEW
+  purpose: Verify deterministic single-shot video generation workflow execution, Temporal
+    replay safety, retry policies, and fault injection scenarios using FakeVideoProvider
+    and R15 Integration Harness.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R15-04
+  - R06-04
+  - GATE-00
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/07_R08_GOOGLE_FLOW_ADAPTER/R08_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_05_INTEGRATION_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: GATE-02
+  path: 17_INTEGRATION_GATES/GATE_02_FLOW_EXECUTION_PORT_CONFORMANCE_GATE.md
+  phase: 17_INTEGRATION_GATES
+  repo: AVF_SPEC_REVIEW
+  purpose: Run comparative 10-operation FlowExecutionPort benchmark testing Track
+    A (R09 Browser Worker) and Track B (R10 FlowKit Bridge) via R08 Google Flow Adapter
+    to verify semantic equivalence.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R09-04
+  - R10-04
+  - R08-04
+  - GATE-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_05_INTEGRATION_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: GATE-03
+  path: 17_INTEGRATION_GATES/GATE_03_CREATIVE_MEDIA_GATE.md
+  phase: 17_INTEGRATION_GATES
+  repo: AVF_SPEC_REVIEW
+  purpose: 'Verify the integration of the creative automation pipeline: R03 Creative
+    -> R04 Assets Continuity -> R05 Prompt Compiler -> R11 QC -> R12 Media Processing.'
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-8 min)
+  prerequisites:
+  - R12-04
+  - R11-04
+  - R05-04
+  - R04-04
+  - R03-04
+  - GATE-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/16_R13_OPERATOR_CONSOLE/R13_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_05_INTEGRATION_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: GATE-04
+  path: 17_INTEGRATION_GATES/GATE_04_SYSTEM_INTEGRATION_GATE.md
+  phase: 17_INTEGRATION_GATES
+  repo: AVF_SPEC_REVIEW
+  purpose: Execute full-system end-to-end integration across all 15 repositories (R01
+    through R15) in local docker environment with human-in-the-loop Operator Console
+    review.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R13-04
+  - GATE-03
+  - GATE-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/17_INTEGRATION_GATES/GATE_05_CONTROLLED_LIVE_FLOW_GATE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_05_INTEGRATION_GATE_FAILURE.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: GATE-05
+  path: 17_INTEGRATION_GATES/GATE_05_CONTROLLED_LIVE_FLOW_GATE.md
+  phase: 17_INTEGRATION_GATES
+  repo: AVF_SPEC_REVIEW
+  purpose: Execute a controlled, bounded live video generation smoke test against
+    the live Google Flow provider, verifying session management, anti-abuse safety,
+    and download pipelines.
+  model: Claude Opus 4.6 Thinking
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_REQUIRED
+  duration_class: FAST (<5 min)
+  prerequisites:
+  - GATE-04
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/18_RELEASE/RELEASE_01_FINAL_PRE_RELEASE_AUDIT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_09_EXTERNAL_PROVIDER_BLOCKER.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/**
+- id: R03-01
+  path: 10_R03_CREATIVE/R03_01_PLAN.md
+  phase: 10_R03_CREATIVE
+  repo: R03_creative
+  purpose: Create the complete architectural implementation and test plan for R03_creative
+    (Creative & Script Generation Engine) adhering to all 16 blueprint sections without
+    authoring production code.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - GATE-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_02_IMPLEMENT.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R03_creative/PLAN.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R03_creative )/**
+- id: R03-02
+  path: 10_R03_CREATIVE/R03_02_IMPLEMENT.md
+  phase: 10_R03_CREATIVE
+  repo: R03_creative
+  purpose: Implement all production source code, build toolchains, unit tests, and
+    contract fixtures for R03_creative (Creative & Script Generation Engine) according
+    to the approved PLAN.md.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (5-10 min)
+  prerequisites:
+  - R03-01
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_03_TEST_AND_REVIEW.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R03_creative/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R03_creative )/**
+- id: R03-03
+  path: 10_R03_CREATIVE/R03_03_TEST_AND_REVIEW.md
+  phase: 10_R03_CREATIVE
+  repo: R03_creative
+  purpose: Perform an independent technical audit of R03_creative (Creative & Script
+    Generation Engine), executing negative test suites, contract compatibility checks,
+    secret redaction validation, and dependency boundary verification.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: MEDIUM (3-5 min)
+  prerequisites:
+  - R03-02
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_04_ACCEPT_RELEASE.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R03_creative/AUDIT_REPORT.md
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R03_creative )/**
+- id: R03-04
+  path: 10_R03_CREATIVE/R03_04_ACCEPT_RELEASE.md
+  phase: 10_R03_CREATIVE
+  repo: R03_creative
+  purpose: Conduct formal acceptance signoff for R03_creative (Creative & Script Generation
+    Engine), merge feature branch to main, apply annotated git release tag, and unlock
+    downstream dependency gates.
+  model: Gemini 3.7 Flash High
+  model_fallback: Gemini 3.1 Pro High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites:
+  - R03-03
+  pass_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/11_R04_ASSETS_CONTINUITY/R04_01_PLAN.md
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/10_R03_CREATIVE/R03_RECOVERY.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R03_creative/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**
+  - 05_IMPLEMENTATION/repos/!( R03_creative )/**
+- id: R03-REC
+  path: 10_R03_CREATIVE/R03_RECOVERY.md
+  phase: 10_R03_CREATIVE
+  repo: R03_creative
+  purpose: Triage failures occurring within R03_creative (Creative & Script Generation
+    Engine), categorize the defect class, and route to local remediation or master
+    system recovery.
+  model: Gemini 3.1 Pro High
+  model_fallback: Gemini 3.7 Flash High
+  mode: Local workspace
+  conversation_type: NEW_OR_EXISTING
+  duration_class: FAST (<3 min)
+  prerequisites: []
+  pass_next: Deterministic routing via Defect Classification Matrix (R03_02_IMPLEMENT.md,
+    REC-01, REC-02, REC-03, REC-07, REC-08, REC-09)
+  fail_next: 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/99_RECOVERY/RECOVERY_06_STALLED_AGENT.md
+  parallel_group: NONE
+  writes_to:
+  - 05_IMPLEMENTATION/repos/R03_creative/**
+  - 05_IMPLEMENTATION/operator-state/RUN_STATE.yaml
+  forbidden_writes:
+  - 01_FROZEN_RELEASE/**
+  - 02_SOURCE_KITS_READONLY/**
+  - 03_GOVERNANCE_EVIDENCE_READONLY/**
+  - 90_ARCHIVE_READONLY/**

@@ -1,0 +1,38 @@
+{
+  "project": "AI Video Factory",
+  "runbook_version": "1.0.0",
+  "baseline_version": "1.0.0",
+  "status": "VERIFIED_OPERATOR_RUNBOOK",
+  "frozen": true,
+  "frozen_spec_path": "01_FROZEN_RELEASE/v1.0.0",
+  "frozen_spec_tree_sha256": "7258ee6eac6e4887739f137939d42960417e3da3926c1f560eb91cc8aa392846",
+  "total_prompts": 99,
+  "repos_covered": 15,
+  "manifest_path": "04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RUNBOOK_MANIFEST.yaml",
+  "manifest_sha256": "41e04d7dc3a5c0ba3bdb0177ac0b6ede8811e57cf2dae534bc82b89e20add9f9",
+  "runbook_root": "04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0",
+  "runbook_tree_sha256": "737a3f00ea8e5b35263a6f24096c1eafeaf0d2e0b3821f67ecb906aa8af2e327",
+  "total_runbook_files": 129,
+  "audit_result": "VERIFIED_OPERATOR_RUNBOOK",
+  "audit_date": "2026-08-16",
+  "audit_directory": "04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/_AUDIT",
+  "first_operator_prompt": {
+    "prompt_id": "CHK-01",
+    "path": "04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/00_CHECKPOINTS/CHECKPOINT_01_PREFLIGHT_AND_SECURITY.md",
+    "model": "Gemini 3.7 Flash High",
+    "mode": "Local workspace",
+    "workspace": "AVF_SPEC_REVIEW/",
+    "command": "/goal Read 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/00_CHECKPOINTS/CHECKPOINT_01_PREFLIGHT_AND_SECURITY.md and execute it completely."
+  },
+  "resumption_prompt": {
+    "prompt_id": "RESUME-01",
+    "path": "04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md",
+    "model": "Gemini 3.7 Flash High",
+    "mode": "Local workspace",
+    "workspace": "AVF_SPEC_REVIEW/",
+    "command": "/goal Read 04_TOOLING/prompts/implementation/AVF_OPERATOR_RUNBOOK_v1.0.0/RESUME_PROJECT.md and execute it completely."
+  },
+  "runtime_state_path": "05_IMPLEMENTATION/operator-state/RUN_STATE.yaml",
+  "hashing_algorithm": "SHA-256 of sorted relative_path\\tsha256\\n excluding self-referential manifests",
+  "lock_generated_at": "2026-08-16T16:50:00Z"
+}
