@@ -62,6 +62,7 @@ wheels/
 *.key
 *.cert
 05_IMPLEMENTATION/environment/tmp_data/
+05_IMPLEMENTATION/repos/*/
 postgres_data/
 minio_data/
 

@@ -6,12 +6,12 @@ project: "AI Video Factory"
 baseline_version: "1.0.0"
 baseline_content_hash: "7258ee6eac6e4887739f137939d42960417e3da3926c1f560eb91cc8aa392846"
 created_at: "2026-08-16T00:00:00Z"
-updated_at: "2026-08-16T00:00:00Z"
+updated_at: "2026-08-17T15:51:00Z"
 
 current_execution:
-  phase: "00_CHECKPOINTS"
-  current_prompt_id: "CHK-01"
-  last_passed_prompt_id: null
+  phase: "01_REPO_PROVISIONING"
+  current_prompt_id: "PROV-03"
+  last_passed_prompt_id: "PROV-03"
   # Allowed statuses: NOT_STARTED, IN_PROGRESS, PAUSED, BLOCKED, HUMAN_ACTION_REQUIRED, COMPLETE
   status: "IN_PROGRESS"
   blocked_reason: null
@@ -26,21 +26,21 @@ system_gates:
   GATE_05_CONTROLLED_LIVE_FLOW_GATE: { status: "PENDING", passed_at: null, commit_sha: null }
 
 repositories:
-  R01_contracts: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R14_platform_observability: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R02_core_state: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R07_provider_sdk: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R06_workflow: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R15_integration_harness: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R08_google_flow_adapter: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R10_flowkit_bridge: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R09_browser_worker: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R03_creative: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R04_assets_continuity: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R05_prompt_compiler: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R11_qc: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R12_media: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
-  R13_operator_console: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: null, tag: null }
+  R01_contracts: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "b320cd42c8fdf01b1a337b752bc86cacca95755b", tag: null }
+  R14_platform_observability: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "4dac76ae1de77eef39b3dcda557651637b1b077d", tag: null }
+  R02_core_state: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "dabd25dd97110d95e694684dea4b2998cbedc9f2", tag: null }
+  R07_provider_sdk: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "eceb76e97b743025d8309df5af6d5c8ab197073b", tag: null }
+  R06_workflow: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "a336cd60ec4396800a3cc759591f5a5cf59da3fc", tag: null }
+  R15_integration_harness: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "dc6eccc437e9d012dac04b411448b435a40885b9", tag: null }
+  R08_google_flow_adapter: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "9184995afd1639e9c2f6cce50848a8a7237d4586", tag: null }
+  R10_flowkit_bridge: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "d5f308f958ffbbd672bc9e5df46a97e2f8699c9e", tag: null }
+  R09_browser_worker: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "3c0e3de0072981510ccf5984ccae6bbf46fb1a80", tag: null }
+  R03_creative: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "d74a9e706d59d14fed6df86598d7c7c011dc37f3", tag: null }
+  R04_assets_continuity: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "1df84595b639b424163d83d6fbe768aec4fdda81", tag: null }
+  R05_prompt_compiler: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "1ff2a3383a16515c66fc0c7732f1d6be6a1ad3ef", tag: null }
+  R11_qc: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "cb936e30eed5287650529eb645de9aa2708da5ea", tag: null }
+  R12_media: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "c6c2c661937ab7c670421ea9d940374c8736de06", tag: null }
+  R13_operator_console: { status: "NOT_STARTED", current_step: "01_PLAN", version: "0.0.0", branch: "main", commit_sha: "f489b09d407e393e08ed177e2dd6637ea63d49ec", tag: null }
 
 active_blockers: []
 change_requests: []
